@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="7b968f44-d99c-4452-8024-a3ae5d5965d6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +22,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Script/CaveDotweenTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -97,6 +103,13 @@
       <workItem from="1752159386676" duration="5909000" />
       <workItem from="1752559592143" duration="310000" />
       <workItem from="1752671286386" duration="1351000" />
+      <workItem from="1752732280367" duration="3291000" />
+      <workItem from="1752743709569" duration="5569000" />
+      <workItem from="1752819384979" duration="871000" />
+      <workItem from="1752981584309" duration="1361000" />
+      <workItem from="1753020677465" duration="627000" />
+      <workItem from="1753021491832" duration="1707000" />
+      <workItem from="1753064006162" duration="3875000" />
     </task>
     <servers />
   </component>

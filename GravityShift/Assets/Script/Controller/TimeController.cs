@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class TimeController : MonoBehaviour
+public static class TimeController
 {
-    public void ChangeTimeScale(float _timeScale)
+    public static void ChangeTimeScale(float _timeScale)
     {
         Time.timeScale = _timeScale;
         Time.fixedDeltaTime = 0.02f * _timeScale;
