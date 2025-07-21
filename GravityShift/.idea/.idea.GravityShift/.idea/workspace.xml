@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="7b968f44-d99c-4452-8024-a3ae5d5965d6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Button.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/ButtonEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Button.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/ButtonEffect.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,20 +32,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "KimJaeWan",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Unity.exe" />
@@ -109,7 +108,7 @@
       <workItem from="1752981584309" duration="1361000" />
       <workItem from="1753020677465" duration="627000" />
       <workItem from="1753021491832" duration="1707000" />
-      <workItem from="1753064006162" duration="3875000" />
+      <workItem from="1753064006162" duration="5493000" />
     </task>
     <servers />
   </component>

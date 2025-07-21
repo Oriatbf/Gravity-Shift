@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Color = UnityEngine.Color;
 
-public class Button : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class ButtonEffect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     private RectTransform rect;
     private Image image;

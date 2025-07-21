@@ -3,19 +3,35 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+using VInspector;
 
 public class SettingController : MonoBehaviour
 {
-    [SerializeField] private Panel settingPanel,countPanel;
-    [SerializeField] private RectTransform leftPanel,rightPanel;
-    [SerializeField] private Button soundSettingBtn;
+    
+
+    [Foldout("Rect,Panel")]
+    [SerializeField] private Panel pausePanel;
+    [SerializeField] private Panel countPanel;
+
+    [SerializeField] private RectTransform leftPanel,rightPanel,settingPanel;
+    [Foldout("UI")]
+    [SerializeField] private Button settingBtn,resumeBtn,menuBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
     private bool isShow = false;
+    
+    private const float leftPanelShow = 50, rightPanelShow = -50,leftPanelHide = -1000,rightPanelHide = 1500,settingPanelHide = 2000;
 
     private void Start()
     {
-        leftPanel.DOAnchorPos(new Vector2(-1000,0),0f).SetUpdate(true);
-        rightPanel.DOAnchorPos(new Vector2(1500,0),0f).SetUpdate(true);
+        BtnSetting();
+        HidePanels();
+    }
+
+    private void BtnSetting()
+    {
+        resumeBtn.onClick.AddListener(()=>Hide());
+        settingBtn.onClick.AddListener(()=>ShowSettingPanel());
     }
 
     // Update is called once per frame
@@ -30,21 +46,35 @@ public class SettingController : MonoBehaviour
         else Show();
     }
 
+    private void ShowSettingPanel()
+    {
+        settingPanel.DOAnchorPos(Vector2.zero, 0.5f).SetUpdate(true);
+    }
+
     private void Show()
     {
         TimeController.ChangeTimeScale(0);
-        settingPanel.SetPosition(PanelStates.Show,true);
-        leftPanel.DOAnchorPos(new Vector2(50,0),0.5f).SetUpdate(true).SetEase(Ease.OutSine);
-        rightPanel.DOAnchorPos(new Vector2(-50,0),0.5f).SetUpdate(true).SetEase(Ease.OutSine);
+        pausePanel.SetPosition(PanelStates.Show,true);
+        
+        leftPanel.DOAnchorPos(new Vector2(leftPanelShow,0),0.5f).SetUpdate(true).SetEase(Ease.OutSine);
+        rightPanel.DOAnchorPos(new Vector2(rightPanelShow,0),0.5f).SetUpdate(true).SetEase(Ease.OutSine);
+        
         isShow = true;
+    }
+
+    private void HidePanels()
+    {
+        leftPanel.DOAnchorPos(new Vector2(leftPanelHide,0),0.5f).SetUpdate(true);
+        rightPanel.DOAnchorPos(new Vector2(rightPanelHide,0),0.5f).SetUpdate(true);
+        settingPanel.DOAnchorPos(new Vector2(settingPanelHide,0),0.5f).SetUpdate(true);
     }
 
     private void Hide()
     {
-        settingPanel.SetPosition(PanelStates.Hide,true);
-        leftPanel.DOAnchorPos(new Vector2(-1000,0),0.5f).SetUpdate(true);
-        rightPanel.DOAnchorPos(new Vector2(1500,0),0.5f).SetUpdate(true);
+        pausePanel.SetPosition(PanelStates.Hide,true);
         countPanel.SetPosition(PanelStates.Show,true);
+        
+        HidePanels();
         
         Sequence countSeq = DOTween.Sequence();
         countSeq.SetUpdate(true);
