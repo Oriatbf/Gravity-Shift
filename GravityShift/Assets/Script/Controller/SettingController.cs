@@ -18,7 +18,7 @@ public class SettingController : MonoBehaviour
     [Foldout("UI")]
     [SerializeField] private Button settingBtn,resumeBtn,menuBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
-    private bool isShow = false;
+    private bool isShow = false,isCounting = false;
     
     private const float leftPanelShow = 50, rightPanelShow = -50,leftPanelHide = -1000,rightPanelHide = 1500,settingPanelHide = 2000;
 
@@ -37,7 +37,7 @@ public class SettingController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))SetUI();
+        if(Input.GetKeyDown(KeyCode.Escape) && !isCounting)SetUI();
     }
 
     private void SetUI()
@@ -77,6 +77,7 @@ public class SettingController : MonoBehaviour
         HidePanels();
         
         Sequence countSeq = DOTween.Sequence();
+        isCounting = true;
         countSeq.SetUpdate(true);
         countSeq.AppendCallback(() => countTxt.text = "3").AppendInterval(1f);
         countSeq.AppendCallback(() => countTxt.text = "2").AppendInterval(1f);
@@ -86,6 +87,7 @@ public class SettingController : MonoBehaviour
             countPanel.SetPosition(PanelStates.Hide,true,0.1f);
             TimeController.ChangeTimeScale(1);
             isShow = false;
+            isCounting = false;
         });
         
         countSeq.Play();

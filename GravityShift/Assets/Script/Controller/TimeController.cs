@@ -6,5 +6,6 @@ public static class TimeController
     {
         Time.timeScale = _timeScale;
         Time.fixedDeltaTime = 0.02f * _timeScale;
+        Debug.Log("현재 타일스케일 : "+Time.timeScale);
     }
 }
