@@ -7,20 +7,9 @@
     <list default="true" id="7b968f44-d99c-4452-8024-a3ae5d5965d6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cube.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/CaveStructureEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/CaveStructureEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimjaeWanNewScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Yuri.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Yuri.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/UIController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/UIController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/VolumeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/VolumeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Utility/FadeInFadeOutManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Utility/FadeInFadeOutManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +121,7 @@
       <workItem from="1753310136662" duration="2024000" />
       <workItem from="1753441559254" duration="3573000" />
       <workItem from="1753513556680" duration="1714000" />
+      <workItem from="1753532284848" duration="760000" />
     </task>
     <servers />
   </component>
