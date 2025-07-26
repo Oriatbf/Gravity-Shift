@@ -1920,7 +1920,7 @@ MonoBehaviour:
   - {fileID: 1146627974}
   idx: 0
   gravity: {x: 0, y: -10, z: 0}
-  gravityStrength: 10
+  gravityStrength: 1
 --- !u!23 &1702593746
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2054,7 +2054,7 @@ MonoBehaviour:
   gravity: {x: 0, y: -10, z: 0}
   gravityStrength: 10
   OnShift: 0
-  cooltime: 10
+  cooltime: 1
   isCoolTime: 0
 --- !u!1 &1735918373
 GameObject:

@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VInspector;
@@ -16,7 +17,7 @@ public class SettingController : MonoBehaviour
 
     [SerializeField] private RectTransform leftPanel,rightPanel,settingPanel;
     [Foldout("UI")]
-    [SerializeField] private Button settingBtn,resumeBtn,menuBtn;
+    [SerializeField] private Button settingBtn,resumeBtn,menuBtn,restartBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
     private bool isShow = false,isCounting = false;
     
@@ -32,6 +33,7 @@ public class SettingController : MonoBehaviour
     {
         resumeBtn.onClick.AddListener(()=>Hide());
         settingBtn.onClick.AddListener(()=>ShowSettingPanel());
+        restartBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut(SceneManager.GetActiveScene().buildIndex,true));
     }
 
     // Update is called once per frame

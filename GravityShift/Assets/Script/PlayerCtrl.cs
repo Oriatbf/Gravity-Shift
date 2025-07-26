@@ -1,5 +1,7 @@
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -15,6 +17,8 @@ public class PlayerCtrl : MonoBehaviour
     public Vector3 gravity = new Vector3(0, -10, 0);
     public int gravityStrength = 10;
     
+    bool isInGravity = false;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,8 +29,19 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
+        Move();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isInGravity = !isInGravity;
+            TimeController.ChangeTimeScale(isInGravity?0.25f:1, isInGravity?0.35f:0.15f);
+            VolumeController.Inst.GravityProduction(isInGravity);
+           
+        }
+    }
 
-        // 캐릭터 중력 방향 전환
+    private void Move()
+    {
+         // 캐릭터 중력 방향 전환
         if (Input.GetKey(KeyCode.LeftShift))
         {
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동

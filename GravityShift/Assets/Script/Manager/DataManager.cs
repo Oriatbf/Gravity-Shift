@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using UnityEditor.Overlays;
+using UnityEngine;
+
+[Serializable]
+public class GameData
+{
+    public List<float> stageTimes = new List<float>();
+}
+public class DataManager : SingletonDontDestroyOnLoad<DataManager>
+{
+    string path;
+    [SerializeField]private GameData Data;
+    private string fileName = "GameData.json";
+
+
+    private void Awake()
+    {
+        path = Path.Combine(Application.persistentDataPath, fileName);
+        JsonLoad();
+    }
+
+
+    private void JsonLoad()
+    {
+        if (!File.Exists(path))
+        {
+            Data = new GameData();
+            JsonSave();
+        }
+        else
+        {
+            string loadJson = File.ReadAllText(path);
+            Data = JsonUtility.FromJson<GameData>(loadJson);
+        }
+    }
+
+    private void JsonSave()
+    {
+        string json = JsonUtility.ToJson(Data, true);
+        File.WriteAllText(path, json);
+    }
+
+    public void AddStageTime(float value)
+    {
+        Data.stageTimes.Add(value);
+        JsonSave();
+    }
+
+    private void OnApplicationQuit() => JsonSave();
+    private void OnApplicationFocus(bool focus) => JsonSave();
+}

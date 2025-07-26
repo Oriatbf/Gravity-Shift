@@ -19,6 +19,7 @@ public class FadeInFadeOutManager : SingletonDontDestroyOnLoad<FadeInFadeOutMana
     //검은색 화면 해제
     public void FadeIn(bool useDotween = false, float dotweenTime = 0.2f, Action action = null)
     {
+        Debug.Log("FadeIn");
         fadeImage.DOComplete();
         if (!useDotween)
         {
@@ -42,15 +43,16 @@ public class FadeInFadeOutManager : SingletonDontDestroyOnLoad<FadeInFadeOutMana
 
     private void FadeOutInternal(bool useDotween,float dotweenTime,Action action = null)
     {
+        Debug.Log("FadeOut");
         fadeImage.DOComplete();
         if (!useDotween)
         {
-            fadeImage.DOFade(1, 0).OnComplete(()=>action?.Invoke());
+            fadeImage.DOFade(1, 0).OnComplete(()=>action?.Invoke()).SetUpdate(true);
             return;
         }
         
         fadeImage.DOFade(1,dotweenTime)
-            .OnComplete(()=>action?.Invoke());
+            .OnComplete(()=>action?.Invoke()).SetUpdate(true);
     }
 
     #endregion

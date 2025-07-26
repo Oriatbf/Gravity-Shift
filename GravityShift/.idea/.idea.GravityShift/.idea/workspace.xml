@@ -6,7 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="7b968f44-d99c-4452-8024-a3ae5d5965d6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimjaeWanNewScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Yuri.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Yuri.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/TimeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/UIController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/UIController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/VolumeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/VolumeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Utility/FadeInFadeOutManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Utility/FadeInFadeOutManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +31,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/470d5ee51c814705aed43c16dbcfc0999e4a00/4d/3d5200a5/SaveData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/CaveDotweenTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Controller/ProgressController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Manager/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Utility/SingletonDontDestroyOnLoad.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -37,7 +54,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;KimJaeWan&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -53,9 +70,6 @@
       <option name="WORKING_DIRECTORY" value="C:\GravityShift\Gravity-Shift\GravityShift" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
     <configuration name="Unity 시작" type="RunUnityExe" factoryName="Unity Executable">
@@ -64,9 +78,6 @@
       <option name="WORKING_DIRECTORY" value="C:\GravityShift\Gravity-Shift\GravityShift" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
     <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -80,7 +91,6 @@
       <option name="selectedOptions">
         <list />
       </option>
-      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="Unreal 에디터에 연결 후 재생" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -94,7 +104,6 @@
       <option name="selectedOptions">
         <list />
       </option>
-      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
   </component>
@@ -120,6 +129,9 @@
       <workItem from="1753087451998" duration="371000" />
       <workItem from="1753088106815" duration="14059000" />
       <workItem from="1753185669174" duration="3083000" />
+      <workItem from="1753310136662" duration="2024000" />
+      <workItem from="1753441559254" duration="3573000" />
+      <workItem from="1753513556680" duration="1714000" />
     </task>
     <servers />
   </component>
