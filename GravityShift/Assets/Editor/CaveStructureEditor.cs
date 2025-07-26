@@ -69,6 +69,17 @@ public class CaveStructureEditor : EditorWindow
         }
     }
     
+    // 랜덤 90도 회전을 생성하는 함수
+    private Quaternion GetRandomRotation()
+    {
+        // 각 축에서 0, 90, 180, 270도 중 랜덤 선택
+        float xRotation = Random.Range(0, 4) * 90f;
+        float yRotation = Random.Range(0, 4) * 90f;
+        float zRotation = Random.Range(0, 4) * 90f;
+        
+        return Quaternion.Euler(xRotation, yRotation, zRotation);
+    }
+    
     private void GenerateCaveStructure()
     {
         // 유효성 검사
@@ -90,45 +101,38 @@ public class CaveStructureEditor : EditorWindow
         // 부모 오브젝트 생성
         GameObject parentObject = new GameObject("Cave Structure");
         
-        // Z축 방향으로 도넛처럼 뚫린 구조
-        List<Vector3> wallPositions = new List<Vector3>();
+        // Z축 레이어별로 벽 위치 생성
+        Dictionary<int, List<Vector3>> layerPositions = new Dictionary<int, List<Vector3>>();
         
-        for (int i = 0; i < x; i++)
+        for (int k = 0; k < z; k++)
         {
-            for (int j = 0; j < y; j++)
+            layerPositions[k] = new List<Vector3>();
+            
+            for (int i = 0; i < x; i++)
             {
-                for (int k = 0; k < z; k++)
+                for (int j = 0; j < y; j++)
                 {
-                    // X, Y축 가장자리에만 벽 생성 (Z축은 모든 레이어에서 뚫림)
+                    // X, Y축 가장자리에만 벽 생성
                     bool isEdge = (i == 0 || i == x - 1) || (j == 0 || j == y - 1);
                     
                     if (isEdge)
                     {
                         Vector3 position = new Vector3(i * size, j * size, k * size);
-                        wallPositions.Add(position);
+                        layerPositions[k].Add(position);
                     }
                 }
             }
         }
         
-        // 홀 생성 (랜덤으로 벽면 오브젝트 제거)
-        List<Vector3> finalPositions = new List<Vector3>(wallPositions);
-        int actualHoleCount = Mathf.Min(holeCount, wallPositions.Count);
+        // 연결성을 유지하며 홀 생성
+        List<Vector3> finalPositions = CreateHolesWithConnectivity(layerPositions);
         
-        for (int i = 0; i < actualHoleCount; i++)
-        {
-            if (finalPositions.Count > 0)
-            {
-                int randomIndex = Random.Range(0, finalPositions.Count);
-                finalPositions.RemoveAt(randomIndex);
-            }
-        }
-        
-        // 실제 오브젝트 생성
+        // 실제 오브젝트 생성 (랜덤 회전 적용)
         foreach (Vector3 position in finalPositions)
         {
             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(targetObject);
             instance.transform.position = position;
+            instance.transform.rotation = GetRandomRotation(); // 랜덤 90도 회전 적용
             instance.transform.SetParent(parentObject.transform);
             generatedObjects.Add(instance);
         }
@@ -139,7 +143,101 @@ public class CaveStructureEditor : EditorWindow
         // 씬 저장 알림
         EditorUtility.SetDirty(parentObject);
         
-        Debug.Log($"Cave structure generated! Objects: {finalPositions.Count}, Holes: {actualHoleCount}");
+        int totalWalls = 0;
+        foreach (var layer in layerPositions.Values)
+            totalWalls += layer.Count;
+        
+        Debug.Log($"Cave structure generated! Objects: {finalPositions.Count}/{totalWalls}, Holes: {totalWalls - finalPositions.Count}");
+    }
+    
+    // 연결성을 유지하며 홀을 생성하는 함수
+    private List<Vector3> CreateHolesWithConnectivity(Dictionary<int, List<Vector3>> layerPositions)
+    {
+        List<Vector3> result = new List<Vector3>();
+        Dictionary<int, List<Vector3>> remainingPositions = new Dictionary<int, List<Vector3>>();
+        
+        // 각 레이어의 위치들을 복사
+        foreach (var kvp in layerPositions)
+        {
+            remainingPositions[kvp.Key] = new List<Vector3>(kvp.Value);
+        }
+        
+        // 각 레이어에서 최소 1개의 연결점 보장
+        List<Vector3> connectionPoints = new List<Vector3>();
+        
+        for (int k = 0; k < z; k++)
+        {
+            if (remainingPositions[k].Count > 0)
+            {
+                // 현재 레이어에서 랜덤하게 연결점 선택
+                Vector3 connectionPoint = remainingPositions[k][Random.Range(0, remainingPositions[k].Count)];
+                connectionPoints.Add(connectionPoint);
+                
+                // 다음 레이어와의 연결성 확인 및 보장
+                if (k < z - 1 && remainingPositions[k + 1].Count > 0)
+                {
+                    // 현재 연결점과 가장 가까운 다음 레이어의 점을 찾아서 보존
+                    Vector3 closestNextPoint = FindClosestPoint(connectionPoint, remainingPositions[k + 1]);
+                    if (!connectionPoints.Contains(closestNextPoint))
+                    {
+                        connectionPoints.Add(closestNextPoint);
+                    }
+                }
+            }
+        }
+        
+        // 연결점들을 결과에 추가 (삭제되지 않도록)
+        foreach (Vector3 point in connectionPoints)
+        {
+            result.Add(point);
+            // 해당 레이어에서 연결점 제거 (중복 방지)
+            int layerIndex = Mathf.RoundToInt(point.z / size);
+            remainingPositions[layerIndex].Remove(point);
+        }
+        
+        // 나머지 블럭들에서 홀 생성
+        List<Vector3> allRemainingPositions = new List<Vector3>();
+        foreach (var layer in remainingPositions.Values)
+        {
+            allRemainingPositions.AddRange(layer);
+        }
+        
+        // 홀 개수 계산 (연결점을 제외한 나머지에서)
+        int remainingHoleCount = Mathf.Min(holeCount, allRemainingPositions.Count);
+        
+        // 랜덤하게 홀 생성
+        for (int i = 0; i < remainingHoleCount; i++)
+        {
+            if (allRemainingPositions.Count > 0)
+            {
+                int randomIndex = Random.Range(0, allRemainingPositions.Count);
+                allRemainingPositions.RemoveAt(randomIndex);
+            }
+        }
+        
+        // 남은 블럭들을 결과에 추가
+        result.AddRange(allRemainingPositions);
+        
+        return result;
+    }
+    
+    // 가장 가까운 점을 찾는 함수
+    private Vector3 FindClosestPoint(Vector3 target, List<Vector3> points)
+    {
+        Vector3 closest = points[0];
+        float minDistance = Vector3.Distance(target, closest);
+        
+        foreach (Vector3 point in points)
+        {
+            float distance = Vector3.Distance(target, point);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = point;
+            }
+        }
+        
+        return closest;
     }
     
     private void ClearGeneratedObjects()

@@ -50,13 +50,13 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.99709564, y: 1, z: 0.99419236, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9105457, y: 0.9466942, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.9924855, z: 0.98050714, w: 0.091743104}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.9788602, y: 0.99438196, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
 --- !u!114 &5272332116487166225
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -119,7 +119,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.4
+    m_Value: 1.5
   contrast:
     m_OverrideState: 1
     m_Value: 0
@@ -172,16 +172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 1
   gaussianStart:
-    m_OverrideState: 0
-    m_Value: 10
+    m_OverrideState: 1
+    m_Value: 107.9
   gaussianEnd:
-    m_OverrideState: 0
-    m_Value: 30
+    m_OverrideState: 1
+    m_Value: 306.9
   gaussianMaxRadius:
     m_OverrideState: 0
     m_Value: 1
