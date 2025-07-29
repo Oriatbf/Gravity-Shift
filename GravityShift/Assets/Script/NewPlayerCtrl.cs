@@ -11,6 +11,8 @@ public class NewPlayerCtrl : MonoBehaviour
     public bool OnShift;
     public float cooltime;
     public bool isCoolTime;
+    public bool isleftwall;
+    public bool isrightwall;
     
     void Start()
     {
@@ -158,6 +160,84 @@ public class NewPlayerCtrl : MonoBehaviour
             }
             
             transform.position = pos;
+        }
+
+        RaycastHit hitinfo;
+        
+        if ((Physics.Raycast(this.transform.position, -this.transform.right, out hitinfo, 2f)))
+        {
+            isleftwall = false;
+        }
+        else
+        {
+            isleftwall = true;
+        }
+        
+        if (Physics.Raycast(this.transform.position, this.transform.right, out hitinfo, 2f))
+        {
+            isrightwall = false;
+        }
+        else
+        {
+            isrightwall = true;
+        }
+        
+      
+        // 왼쪽으로 이동
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (isleftwall)
+            {
+                if (gravity.y == -10) //bottom일 때
+                {
+                    pos.x -= 3;
+                }
+
+                if (gravity.x == -10) //left일 때
+                {
+                    pos.y += 3;
+                }
+
+                if (gravity.y == 10) // top일 때
+                {
+                    pos.x += 3;
+                }
+
+                if (gravity.x == 10) // right일 때
+                {
+                    pos.y -= 3;
+                }
+                transform.position = pos;
+            }
+        }
+        
+        // 오른쪽으로 이동
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (isrightwall)
+            {
+                if (gravity.y == -10) //bottom일 때
+                {
+                    pos.x += 3;
+                }
+
+                if (gravity.x == -10) //left일 때
+                {
+                    pos.y -= 3;
+                }
+
+                if (gravity.y == 10) // top일 때
+                {
+                    pos.x -= 3;
+                }
+
+                if (gravity.x == 10) // right일 때
+                {
+                    pos.y += 3;
+                }
+                transform.position = pos;
+            }
+           
         }
         
         rb.AddForce(gravity, ForceMode.Acceleration); //지정한 중력 방향으로 계속 힘 받기
