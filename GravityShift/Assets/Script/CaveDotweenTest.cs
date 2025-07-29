@@ -12,9 +12,12 @@ public class CaveDotweenTest : MonoBehaviour
     private float count;
 
     private const float AnimPos = 14;
+    private float spawnTransZ;
+    public bool spawnBool;
 
     private void Start()
     {
+        spawnBool = true;
         foreach (Transform child in transform)
         {
             childs.Add(child);
@@ -25,6 +28,21 @@ public class CaveDotweenTest : MonoBehaviour
         Up();
     }
 
+    private void Update()
+    {
+        if(spawnBool)
+            spawnTransZ = spawnTrans.transform.position.z;
+        
+        if (spawnTransZ < 0)
+        {
+            Debug.Log("0보다 작아짐");
+            MapSpawnController.Inst.SpawnMap();
+            spawnBool = false;
+            spawnTransZ = 1;
+        }
+            
+    }
+
     [Button]
     private void Up()
     { 
@@ -33,8 +51,8 @@ public class CaveDotweenTest : MonoBehaviour
         {
             Transform child = childs[i];
             Vector3 newPos = child.position + new Vector3(0, AnimPos, 0);
-            float delay = i * delayBetween;
-            child.DOMoveY(newPos.y, 0.35f).SetDelay(delay);
+            float delay = 0;//i * delayBetween;
+            child.DOMoveY(newPos.y, 0).SetDelay(delay);
         }
     }
 }

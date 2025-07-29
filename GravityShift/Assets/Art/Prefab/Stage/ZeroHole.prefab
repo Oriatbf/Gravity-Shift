@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2772459156091178469}
-  - component: {fileID: -6927312708901533269}
+  - component: {fileID: 5399501554832757086}
   m_Layer: 0
   m_Name: ZeroHole
   m_TagString: Untagged
@@ -514,7 +514,7 @@ Transform:
   - {fileID: 769650474858080106}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6927312708901533269
+--- !u!114 &5399501554832757086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTrans: {fileID: 769650474858080106}
-  secPerRatio: 30
+  secPerRatio: 100
 --- !u!1 &7957684214723458406
 GameObject:
   m_ObjectHideFlags: 0
