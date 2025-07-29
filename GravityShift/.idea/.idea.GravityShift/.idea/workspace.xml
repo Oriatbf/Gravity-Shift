@@ -7,9 +7,13 @@
     <list default="true" id="7b968f44-d99c-4452-8024-a3ae5d5965d6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/PostProcessing/Global Volume Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cube.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Editor/CaveStructureEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/CaveStructureEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/CaveDotweenTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/CaveDotweenTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/ProgressController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/ProgressController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +26,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/470d5ee51c814705aed43c16dbcfc0999e4a00/4d/3d5200a5/SaveData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/CaveDotweenTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Controller/MapSpawnController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Controller/ProgressController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Manager/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" root0="FORCE_HIGHLIGHTING" />
@@ -122,6 +127,9 @@
       <workItem from="1753441559254" duration="3573000" />
       <workItem from="1753513556680" duration="1714000" />
       <workItem from="1753532284848" duration="760000" />
+      <workItem from="1753543758073" duration="1178000" />
+      <workItem from="1753575124756" duration="1689000" />
+      <workItem from="1753761894566" duration="757000" />
     </task>
     <servers />
   </component>

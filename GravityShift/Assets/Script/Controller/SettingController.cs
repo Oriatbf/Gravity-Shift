@@ -17,6 +17,7 @@ public class SettingController : MonoBehaviour
 
     [SerializeField] private RectTransform leftPanel,rightPanel,settingPanel;
     [Foldout("UI")]
+    [SerializeField] private Ease ease;
     [SerializeField] private Button settingBtn,resumeBtn,menuBtn,restartBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
     private bool isShow = false,isCounting = false;
@@ -50,25 +51,25 @@ public class SettingController : MonoBehaviour
 
     private void ShowSettingPanel()
     {
-        settingPanel.DOAnchorPos(Vector2.zero, 0.5f).SetUpdate(true);
+        settingPanel.DOAnchorPos(Vector2.zero, 0.5f).SetUpdate(true).SetEase(ease);
     }
 
     private void Show()
     {
         TimeController.ChangeTimeScale(0);
         pausePanel.SetPosition(PanelStates.Show,true);
-        
-        leftPanel.DOAnchorPos(new Vector2(leftPanelShow,0),0.5f).SetUpdate(true).SetEase(Ease.OutSine);
-        rightPanel.DOAnchorPos(new Vector2(rightPanelShow,0),0.5f).SetUpdate(true).SetEase(Ease.OutSine);
+
+        leftPanel.DOAnchorPos(new Vector2(leftPanelShow, 0), 0.5f).SetUpdate(true).SetEase(ease);
+        rightPanel.DOAnchorPos(new Vector2(rightPanelShow,0),0.5f).SetUpdate(true).SetEase(ease);
         
         isShow = true;
     }
 
     private void HidePanels()
     {
-        leftPanel.DOAnchorPos(new Vector2(leftPanelHide,0),0.5f).SetUpdate(true);
-        rightPanel.DOAnchorPos(new Vector2(rightPanelHide,0),0.5f).SetUpdate(true);
-        settingPanel.DOAnchorPos(new Vector2(settingPanelHide,0),0.5f).SetUpdate(true);
+        leftPanel.DOAnchorPos(new Vector2(leftPanelHide,0),0.5f).SetUpdate(true).SetEase(ease);
+        rightPanel.DOAnchorPos(new Vector2(rightPanelHide,0),0.5f).SetUpdate(true).SetEase(ease);
+        settingPanel.DOAnchorPos(new Vector2(settingPanelHide,0),0.5f).SetUpdate(true).SetEase(ease);
     }
 
     private void Hide()

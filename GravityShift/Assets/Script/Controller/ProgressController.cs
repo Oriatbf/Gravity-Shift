@@ -10,6 +10,7 @@ public class ProgressController : MonoBehaviour
     [SerializeField]private float curTimer;
     [SerializeField]private float maxTimer;
     [SerializeField] private Scrollbar progressBar;
+    [SerializeField] private Image progressImage;
 
     private bool inTimer = true;
 
@@ -21,6 +22,7 @@ public class ProgressController : MonoBehaviour
             if (!checkingFinshTimer)
             {
                 progressBar.value = curTimer / maxTimer;
+                progressImage.fillAmount = curTimer / maxTimer;
                 if(curTimer >= maxTimer)StopTimer();   
             }
         }

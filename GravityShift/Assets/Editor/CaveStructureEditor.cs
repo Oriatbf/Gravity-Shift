@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class CaveStructureEditor : EditorWindow
 {
     // 파라미터 변수들
-    private int x = 10;  // 가로 길이
+    private int x = 5;  // 가로 길이
     private int y = 5;   // 높이
-    private int z = 10;  // 세로 길이
+    private int z = 20;  // 세로 길이
     private GameObject targetObject;
     private float size = 1f;
-    private int holeCount = 5;
+    private int holeCount = 84;
     
     // 생성된 오브젝트들을 관리하기 위한 리스트
     private List<GameObject> generatedObjects = new List<GameObject>();
