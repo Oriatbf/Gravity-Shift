@@ -13,6 +13,10 @@ public class NewPlayerCtrl : MonoBehaviour
     public bool isCoolTime;
     public bool isleftwall;
     public bool isrightwall;
+
+    public Vector2 left;
+    public Vector2 middle;
+    public Vector2 right;
     
     void Start()
     {
