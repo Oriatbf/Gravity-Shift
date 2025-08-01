@@ -7,8 +7,8 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField] protected List<KeyCode> useKeycodes;
     [SerializeField] private Panel panel;
-    bool isActive = false;
-    [SerializeField] protected TutorialController _tutorialController;
+    protected bool isActive = false;
+     protected TutorialController _tutorialController;
     [SerializeField] private PlayerState _playerState;
 
 
@@ -20,6 +20,11 @@ public class Tutorial : MonoBehaviour
     protected virtual void Start()
     {
         isActive = true;
+        StartSet();
+    }
+
+    protected void StartSet()
+    {
         panel.SetPosition(PanelStates.Show,true,0.8f);
         _tutorialController.ChanagePlayerState(_playerState);
     }
@@ -32,10 +37,15 @@ public class Tutorial : MonoBehaviour
             if (Input.GetKeyDown(key))
             {
                 isActive = false;
-                panel.SetPosition(PanelStates.Hide,true,0.8f);
-                _tutorialController.EndTutorial();
-                Destroy(gameObject,1f);
+                FinishTutorial();
             }
         }
+    }
+
+    protected void FinishTutorial()
+    {
+        panel.SetPosition(PanelStates.Hide,true,0.8f);
+        _tutorialController.EndTutorial();
+        Destroy(gameObject,1f);
     }
 }

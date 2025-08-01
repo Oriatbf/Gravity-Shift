@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3881388386154846572, guid: 18d6dcca19f2c504fa3efac6a61b7440, type: 3}
+      propertyPath: m_text
+      value: "A/D\uB97C \uB20C\uB7EC \uAC00\uC2DC \uD68C\uD53C"
+      objectReference: {fileID: 0}
     - target: {fileID: 4026023363397737780, guid: 18d6dcca19f2c504fa3efac6a61b7440, type: 3}
       propertyPath: m_Name
       value: InstanceTutorial Variant 1
@@ -80,11 +84,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useKeycodes: 
   panel: {fileID: 8002018556210871008}
-  _tutorialController: {fileID: 0}
   _playerState: 1
   InstanceInfos:
-  - position: {x: 0, y: 0, z: 30}
-    instance: {fileID: 2036308568626216993, guid: 3070d272f251aa14c88b0561343e5823, type: 3}
+  - position: {x: 0, y: 0, z: 60}
+    instance: {fileID: 8629527660439969769, guid: 9a24d2217fc40424eb0bc84cf3c24f5a, type: 3}
+    delay: 1
+  - position: {x: 3, y: 0, z: 60}
+    instance: {fileID: 8629527660439969769, guid: 9a24d2217fc40424eb0bc84cf3c24f5a, type: 3}
     delay: 1
 --- !u!114 &8002018556210871008 stripped
 MonoBehaviour:

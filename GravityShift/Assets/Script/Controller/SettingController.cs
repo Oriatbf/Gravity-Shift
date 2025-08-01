@@ -7,13 +7,14 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VInspector;
 
-public class SettingController : MonoBehaviour
+public class SettingController : Singleton<SettingController>
 {
     
 
     [Foldout("Rect,Panel")]
     [SerializeField] private Panel pausePanel;
     [SerializeField] private Panel countPanel;
+    [SerializeField] private EndPanel endPanel;
 
     [SerializeField] private RectTransform leftPanel,rightPanel,settingPanel;
     [Foldout("UI")]
@@ -30,6 +31,14 @@ public class SettingController : MonoBehaviour
         HidePanels();
     }
 
+    public void EndingUI(bool isWin)
+    {
+        Show();
+        endPanel.Show(isWin);
+        if(!isWin)SetFailBtn();
+        else SetWinBtn();
+    }
+
     private void BtnSetting()
     {
         resumeBtn.onClick.AddListener(()=>Hide());
@@ -43,10 +52,38 @@ public class SettingController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape) && !isCounting)SetUI();
     }
 
+    void SetAllBtn()
+    {
+        settingBtn.gameObject.SetActive(true);
+        resumeBtn.gameObject.SetActive(true);
+        menuBtn.gameObject.SetActive(true);
+        restartBtn.gameObject.SetActive(true);
+    }
+
+    void SetFailBtn()
+    {
+        settingBtn.gameObject.SetActive(false);
+        resumeBtn.gameObject.SetActive(false);
+        menuBtn.gameObject.SetActive(true);
+        restartBtn.gameObject.SetActive(true);
+    }
+
+    void SetWinBtn()
+    {
+        settingBtn.gameObject.SetActive(false);
+        resumeBtn.gameObject.SetActive(false);
+        menuBtn.gameObject.SetActive(true);
+        restartBtn.gameObject.SetActive(true);
+    }
+
     private void SetUI()
     {
         if (isShow) Hide();
-        else Show();
+        else
+        {
+            Show();
+            SetAllBtn();
+        }
     }
 
     private void ShowSettingPanel()

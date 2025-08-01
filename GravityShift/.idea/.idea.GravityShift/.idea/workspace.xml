@@ -7,12 +7,23 @@
     <list default="true" id="7b968f44-d99c-4452-8024-a3ae5d5965d6" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GravityShift/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Art/Font/Cafe24Ohsquare-v2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Font/Cafe24Ohsquare-v2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Prefab/Stage/1WayFront.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Prefab/Stage/1WayFront.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KimJaeWan 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Tutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Tutorial.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/Tutorial.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/Tutorial.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/NewPlayerCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/NewPlayerCtrl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Coin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Coin.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controller/SettingController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/ButtonEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/ButtonEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Prefab/A_D_Tutorial Variant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Prefab/A_D_Tutorial Variant.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Prefab/InstanceTutorial Variant 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Prefab/InstanceTutorial Variant 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Prefab/Shift_Tutorial Variant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Prefab/Shift_Tutorial Variant.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Prefab/TutorialBase.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Prefab/TutorialBase.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Thorn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Thorn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Tutorial/InstantiateTutorial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Tutorial/InstantiateTutorial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Tutorial/Tutorial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Tutorial/Tutorial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Tutorial/TutorialController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Tutorial/TutorialController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Utility/FadeInFadeOutManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Utility/FadeInFadeOutManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/cameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/cameraController.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +36,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2c271b216ff84328b73d1d7f2333e7ab1eac00/f2/d4932545/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/470d5ee51c814705aed43c16dbcfc0999e4a00/4d/3d5200a5/SaveData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/PrafabGridGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/CaveDotweenTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Controller/MapSpawnController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Controller/PlayerKeyController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -32,6 +44,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/Manager/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/PlayerCtrl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Tutorial/InstantiateTutorial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/UI/EndPanel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Utility/SingletonDontDestroyOnLoad.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
@@ -135,6 +148,11 @@
       <workItem from="1753763684458" duration="2978000" />
       <workItem from="1753766738830" duration="6678000" />
       <workItem from="1753862813886" duration="4080000" />
+      <workItem from="1753870767444" duration="386000" />
+      <workItem from="1753939489992" duration="7985000" />
+      <workItem from="1753970968665" duration="1556000" />
+      <workItem from="1754039316447" duration="644000" />
+      <workItem from="1754066496007" duration="3559000" />
     </task>
     <servers />
   </component>

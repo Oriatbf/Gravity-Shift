@@ -5,7 +5,6 @@ using DG.Tweening;
 public class Coin : MonoBehaviour
 {
     public int coin;
-     [SerializeField] private UImanager uImanager;
     private void Start()
     {
         transform.DOLocalMoveY(0.5f, 2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic);
@@ -22,9 +21,8 @@ public class Coin : MonoBehaviour
         if (obj.gameObject.tag == "Player")
         {
             Debug.Log("코인디버그");
-            uImanager.SetCoinUI();
-            //UImanager.Inst.SetCoinUI();
-            Destroy(obj.gameObject);
+            UImanager.Inst.SetCoinUI();
+            Destroy(gameObject);
             coin += 1;
 
             GameManager.Inst.AddCoin();

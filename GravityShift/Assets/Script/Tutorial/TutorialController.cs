@@ -10,14 +10,7 @@ public class TutorialController : MonoBehaviour
    [SerializeField] private int tutorialIndex = 0;
    [SerializeField] private PlayerKeyController _playerKeyController;
    public Transform map;
-
-   private void Start()
-   {
-      foreach (var tutorial in tutorials)
-      {
-         tutorial.Inject(this);
-      }
-   }
+   
 
    [Button]
    public void SpawnTutorial()
@@ -25,7 +18,8 @@ public class TutorialController : MonoBehaviour
       if (tutorialIndex < tutorials.Count)
       {
          Tutorial _tutorial = tutorials[tutorialIndex];
-         Instantiate(_tutorial, transform.position, Quaternion.identity);
+         var t =Instantiate(_tutorial, transform.position, Quaternion.identity);
+         t.Inject(this);
          tutorialIndex++;
       }
    }

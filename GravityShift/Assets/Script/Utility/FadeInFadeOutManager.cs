@@ -27,7 +27,7 @@ public class FadeInFadeOutManager : SingletonDontDestroyOnLoad<FadeInFadeOutMana
             fadeImage.DOFade(0, 0).SetUpdate(true);
             return;
         }
-        fadeImage.DOFade(0, dotweenTime).OnComplete(()=>action?.Invoke());
+        fadeImage.DOFade(0, dotweenTime).OnComplete(()=>action?.Invoke()).SetUpdate(true);
     }
 
     //검은색 화면 진입
