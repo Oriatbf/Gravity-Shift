@@ -13,15 +13,26 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] private float duration;
     [SerializeField] private Transform downTrans, upTrans, leftTrans, rightTrans;
     private Camera _camera;
+    private bool isZoomIn = true;
 
     private void Awake()
     {
         _camera = Camera.main;
     }
+    
+
+    [Button]
+    public void Zoom()
+    {
+        float endValue = isZoomIn ? 75f : 50f;
+        isZoomIn = !isZoomIn;
+        DOTween.To(()=>_camera.fieldOfView,x=>_camera.fieldOfView = x,endValue,2f);
+    }
 
     [Button]
     public void MoveCamera(PlayerGravity gravity)
     {
+        //wadadawdawdawdawdaw
         Transform trans = downTrans;
         Vector3 rot = trans.localEulerAngles;
         switch (gravity)

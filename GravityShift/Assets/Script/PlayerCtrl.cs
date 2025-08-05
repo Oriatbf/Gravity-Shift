@@ -1,4 +1,5 @@
 using System.Numerics;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -18,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     public int gravityStrength = 10;
     
     bool isInGravity = false;
+    [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
     
     
     void Start()
@@ -113,7 +115,12 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     idx -= 1;
                     if (gravity.y == -10) //중력 방향 Bottom
-                        transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                    {
+                        transform.DOMove(new Vector3(bottom[idx].transform.position.x, transform.position.y, 0), moveDuration);
+                        transform.DOLocalRotate(new Vector3(0,0,rotValue),rotDuration)
+                            .OnComplete(()=>transform.DOLocalRotate(Vector3.zero, rotDuration));
+                    }
+                        //transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
                         transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
                     else if (gravity.y == 10) //중력 방향 Top
@@ -129,7 +136,12 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     idx += 1;
                     if (gravity.y == -10) //중력 방향 Bottom
-                        transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                    {
+                        transform.DOMove(new Vector3(bottom[idx].transform.position.x, transform.position.y, 0), moveDuration);
+                        transform.DOLocalRotate(new Vector3(0,0,-rotValue),rotDuration)
+                            .OnComplete(()=>transform.DOLocalRotate(Vector3.zero, rotDuration));
+                    }
+                        //transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
                         transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
                     else if (gravity.y == 10) //중력 방향 Top
