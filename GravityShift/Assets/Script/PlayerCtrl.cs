@@ -20,18 +20,13 @@ public class PlayerCtrl : MonoBehaviour
     public int gravityStrength = 10;
     
     bool isInGravity = false;
-<<<<<<< Updated upstream
     [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
-=======
 
     public bool OnShift;
     public float cooltime;
     public bool isCoolTime;
     public bool isleftwall;
     public bool isrightwall;
-
->>>>>>> Stashed changes
-    
     
     void Start()
     {
@@ -46,7 +41,7 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         Move();
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (OnShift)
         {
             isInGravity = !isInGravity;
             TimeController.ChangeTimeScale(isInGravity?0.25f:1, isInGravity?0.35f:0.15f);
@@ -79,6 +74,7 @@ public class PlayerCtrl : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
+                OnShift = false;
                 Debug.Log("Shift+A 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Left
                 {
@@ -104,10 +100,10 @@ public class PlayerCtrl : MonoBehaviour
                     gravity = new Vector3(0, -10, 0);
                     transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                 }
-                
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
+                OnShift = false;
                 Debug.Log("Shift+D 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Right
                 {
@@ -193,8 +189,4 @@ public class PlayerCtrl : MonoBehaviour
         yield return new WaitForSeconds(cool);
         isCoolTime = false;
     }
-    
-    
-    
-    
 }
