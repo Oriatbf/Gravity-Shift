@@ -2,60 +2,47 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-public class DonutPrefabGridGenerator : EditorWindow
+public class PrefabGridGenerator : EditorWindow
 {
-    [Header("Square Donut Settings")]
-    public int outerSize = 5;        // 도넛 외부 크기 (한 변의 길이)
-    public int innerSize = 2;        // 도넛 내부 크기 (구멍 크기)
-    public int depth = 5;            // 도넛의 두께 (Z축 방향)
-    public GameObject prefab;        // 생성할 프리팹
-    public int holeCount = 0;        // 제거할 프리팹 개수
-    public float gap = 1.0f;         // 프리팹 간의 거리
-    
-    [Header("Rotation Settings")]
-    public Vector3 frontFaceRotation = new Vector3(0, 0, 0);      // 앞면 회전 (Z=0)
-    public Vector3 backFaceRotation = new Vector3(0, 180, 0);     // 뒷면 회전 (Z=depth-1)
-    public Vector3 outerWallRotation = new Vector3(0, 0, 90);     // 외벽 회전
-    public Vector3 innerWallRotation = new Vector3(0, 180, 90);   // 내벽 회전
+    [Header("Grid Settings")]
+    public int width = 5;           // 가로길이
+    public int height = 5;          // 높이
+    public int depth = 10;          // Z축 깊이
+    public GameObject prefab;       // 생성할 프리팹
+    public int holeCount = 0;       // 제거할 프리팹 개수
+    public float gap = 1.0f;        // 프리팹 간의 거리
     
     [Header("Generation Settings")]
-    public Transform parentObject;   // 부모 오브젝트 (선택사항)
-    public string generatedObjectName = "DonutGrid";
+    public Transform parentObject;  // 부모 오브젝트 (선택사항)
+    public string generatedObjectName = "GeneratedGrid";
     
     private Vector2 scrollPosition;
     
-    [MenuItem("Tools/Donut Prefab Grid Generator")]
+    [MenuItem("Tools/Prefab Grid Generator")]
     public static void ShowWindow()
     {
-        GetWindow<DonutPrefabGridGenerator>("Donut Prefab Grid Generator");
+        GetWindow<PrefabGridGenerator>("Prefab Grid Generator");
     }
     
     void OnGUI()
     {
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
         
-        GUILayout.Label("Square Donut Prefab Grid Generator", EditorStyles.boldLabel);
+        GUILayout.Label("Prefab Grid Generator", EditorStyles.boldLabel);
         GUILayout.Space(10);
         
-        // Square Donut Settings
-        GUILayout.Label("Square Donut Settings", EditorStyles.boldLabel);
-        outerSize = EditorGUILayout.IntField("외부 크기 (Outer Size)", outerSize);
-        innerSize = EditorGUILayout.IntField("내부 크기 (Inner Size)", innerSize);
-        depth = EditorGUILayout.IntField("두께 (Depth)", depth);
+        // Grid Settings
+        GUILayout.Label("Grid Settings", EditorStyles.boldLabel);
+        width = EditorGUILayout.IntField("가로길이 (Width)", width);
+        height = EditorGUILayout.IntField("높이 (Height)", height);
+        depth = EditorGUILayout.IntField("Z축 깊이 (Depth)", depth);
         
         GUILayout.Space(5);
         prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", prefab, typeof(GameObject), false);
+        
+        GUILayout.Space(5);
         gap = EditorGUILayout.FloatField("Gap (간격)", gap);
         holeCount = EditorGUILayout.IntField("Hole Count (구멍 개수)", holeCount);
-        
-        GUILayout.Space(10);
-        
-        // Rotation Settings
-        GUILayout.Label("Rotation Settings", EditorStyles.boldLabel);
-        frontFaceRotation = EditorGUILayout.Vector3Field("앞면 회전", frontFaceRotation);
-        backFaceRotation = EditorGUILayout.Vector3Field("뒷면 회전", backFaceRotation);
-        outerWallRotation = EditorGUILayout.Vector3Field("외벽 회전", outerWallRotation);
-        innerWallRotation = EditorGUILayout.Vector3Field("내벽 회전", innerWallRotation);
         
         GUILayout.Space(10);
         
@@ -67,44 +54,34 @@ public class DonutPrefabGridGenerator : EditorWindow
         GUILayout.Space(10);
         
         // Validation
-        bool canGenerate = prefab != null && outerSize > 0 && depth > 0 && innerSize >= 0 && innerSize < outerSize;
+        bool canGenerate = prefab != null && width > 0 && height > 0 && depth > 0;
         
         if (!canGenerate)
         {
-            if (prefab == null)
-                EditorGUILayout.HelpBox("프리팹을 설정해야 합니다.", MessageType.Warning);
-            else if (outerSize <= 0 || depth <= 0)
-                EditorGUILayout.HelpBox("외부 크기와 두께는 0보다 커야 합니다.", MessageType.Warning);
-            else if (innerSize >= outerSize)
-                EditorGUILayout.HelpBox("내부 크기는 외부 크기보다 작아야 합니다.", MessageType.Warning);
+            EditorGUILayout.HelpBox("프리팹을 설정하고 모든 크기 값이 0보다 커야 합니다.", MessageType.Warning);
         }
         
-        // HoleCount 검증
-        if (canGenerate)
+        if (holeCount >= (width * height * depth))
         {
-            int estimatedCount = CalculateEstimatedPrefabCount();
-            if (holeCount >= estimatedCount)
-            {
-                EditorGUILayout.HelpBox("Hole Count는 총 프리팹 개수보다 작아야 합니다.", MessageType.Warning);
-                canGenerate = false;
-            }
+            EditorGUILayout.HelpBox("Hole Count는 총 프리팹 개수보다 작아야 합니다.", MessageType.Warning);
+            canGenerate = false;
         }
         
         // Info
         if (canGenerate)
         {
-            int estimatedCount = CalculateEstimatedPrefabCount();
-            int finalPrefabCount = estimatedCount - holeCount;
-            EditorGUILayout.HelpBox($"총 {estimatedCount}개의 프리팹이 생성되고, {holeCount}개가 제거되어 최종 {finalPrefabCount}개가 남습니다.", MessageType.Info);
+            int totalPrefabs = width * height * depth;
+            int finalPrefabCount = totalPrefabs - holeCount;
+            EditorGUILayout.HelpBox($"총 {totalPrefabs}개의 프리팹이 생성되고, {holeCount}개가 제거되어 최종 {finalPrefabCount}개가 남습니다.", MessageType.Info);
         }
         
         GUILayout.Space(10);
         
         // Buttons
         GUI.enabled = canGenerate;
-        if (GUILayout.Button("네모 도넛 그리드 생성", GUILayout.Height(30)))
+        if (GUILayout.Button("프리팹 그리드 생성", GUILayout.Height(30)))
         {
-            GenerateSquareDonutGrid();
+            GeneratePrefabGrid();
         }
         GUI.enabled = true;
         
@@ -116,48 +93,7 @@ public class DonutPrefabGridGenerator : EditorWindow
         EditorGUILayout.EndScrollView();
     }
     
-    int CalculateEstimatedPrefabCount()
-    {
-        int count = 0;
-        int halfOuter = outerSize / 2;
-        int halfInner = innerSize / 2;
-        
-        for (int z = 0; z < depth; z++)
-        {
-            for (int x = -halfOuter; x <= halfOuter; x++)
-            {
-                for (int y = -halfOuter; y <= halfOuter; y++)
-                {
-                    // 외부 사각형 안에 있고 내부 사각형(구멍) 밖에 있는지 확인
-                    bool inOuterSquare = (Mathf.Abs(x) <= halfOuter && Mathf.Abs(y) <= halfOuter);
-                    bool inInnerSquare = (Mathf.Abs(x) <= halfInner && Mathf.Abs(y) <= halfInner);
-                    
-                    if (inOuterSquare && !inInnerSquare)
-                    {
-                        // 앞면과 뒷면
-                        if (z == 0 || z == depth - 1)
-                        {
-                            count++;
-                        }
-                        // 외벽과 내벽
-                        else if (IsOnSquareEdge(x, y, halfOuter) || IsOnSquareEdge(x, y, halfInner))
-                        {
-                            count++;
-                        }
-                    }
-                }
-            }
-        }
-        
-        return count;
-    }
-    
-    bool IsOnSquareEdge(int x, int y, int halfSize)
-    {
-        return (Mathf.Abs(x) == halfSize || Mathf.Abs(y) == halfSize);
-    }
-    
-    void GenerateSquareDonutGrid()
+    void GeneratePrefabGrid()
     {
         if (prefab == null) return;
         
@@ -172,166 +108,72 @@ public class DonutPrefabGridGenerator : EditorWindow
         }
         
         // Undo 등록
-        Undo.RegisterCreatedObjectUndo(gridParent, "Generate Square Donut Grid");
+        Undo.RegisterCreatedObjectUndo(gridParent, "Generate Prefab Grid");
         
+        List<Vector3> positions = new List<Vector3>();
         List<GameObject> createdObjects = new List<GameObject>();
-        int objectIndex = 0;
         
-        int halfOuter = outerSize / 2;
-        int halfInner = innerSize / 2;
-        
-        // 네모 도넛 형태로 프리팹 생성
+        // 모든 위치 계산
         for (int z = 0; z < depth; z++)
         {
-            for (int x = -halfOuter; x <= halfOuter; x++)
+            for (int y = 0; y < height; y++)
             {
-                for (int y = -halfOuter; y <= halfOuter; y++)
+                for (int x = 0; x < width; x++)
                 {
                     Vector3 position = new Vector3(x * gap, y * gap, z * gap);
-                    
-                    // 외부 사각형 안에 있고 내부 사각형(구멍) 밖에 있는지 확인
-                    bool inOuterSquare = (Mathf.Abs(x) <= halfOuter && Mathf.Abs(y) <= halfOuter);
-                    bool inInnerSquare = (Mathf.Abs(x) <= halfInner && Mathf.Abs(y) <= halfInner);
-                    
-                    if (inOuterSquare && !inInnerSquare)
-                    {
-                        SquareDonutFaceType faceType = GetSquareFaceType(x, y, z, halfOuter, halfInner);
-                        
-                        // 해당 면에 프리팹이 필요한지 확인
-                        if (ShouldPlaceSquarePrefab(faceType, x, y, z, halfOuter, halfInner))
-                        {
-                            GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                            instance.transform.position = position;
-                            instance.transform.SetParent(gridParent.transform);
-                            
-                            // 면에 따른 회전 적용
-                            ApplySquareRotationForFace(instance, faceType, x, y);
-                            
-                            instance.name = $"{prefab.name}_{GetSquareFaceTypeName(faceType)}_{objectIndex:000}";
-                            
-                            createdObjects.Add(instance);
-                            Undo.RegisterCreatedObjectUndo(instance, "Generate Square Donut Grid");
-                            objectIndex++;
-                        }
-                    }
+                    positions.Add(position);
                 }
             }
+        }
+        
+        // 프리팹 생성
+        for (int i = 0; i < positions.Count; i++)
+        {
+            GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+            instance.transform.position = positions[i];
+            instance.transform.SetParent(gridParent.transform);
+            instance.name = $"{prefab.name}_{i:000}";
+            
+            createdObjects.Add(instance);
+            Undo.RegisterCreatedObjectUndo(instance, "Generate Prefab Grid");
         }
         
         // 홀 생성 (랜덤하게 프리팹 제거)
         if (holeCount > 0)
         {
-            //CreateHoles(createdObjects);
+            CreateHoles(createdObjects);
         }
         
         // 생성된 그리드를 선택
         Selection.activeGameObject = gridParent;
         
-        Debug.Log($"네모 도넛 그리드 생성 완료! 총 {createdObjects.Count - holeCount}개의 프리팹이 생성되었습니다.");
+        Debug.Log($"프리팹 그리드 생성 완료! 총 {createdObjects.Count - holeCount}개의 프리팹이 생성되었습니다.");
     }
     
-    enum SquareDonutFaceType
+    void CreateHoles(List<GameObject> objects)
     {
-        Front,      // 앞면 (Z=0)
-        Back,       // 뒷면 (Z=depth-1)
-        OuterWall,  // 외벽
-        InnerWall   // 내벽
-    }
-    
-    SquareDonutFaceType GetSquareFaceType(int x, int y, int z, int halfOuter, int halfInner)
-    {
-        // 앞면과 뒷면 판단
-        if (z == 0) return SquareDonutFaceType.Front;
-        if (z == depth - 1) return SquareDonutFaceType.Back;
+        List<int> indicesToRemove = new List<int>();
         
-        // 외벽과 내벽 판단
-        bool onOuterEdge = (Mathf.Abs(x) == halfOuter || Mathf.Abs(y) == halfOuter);
-        bool onInnerEdge = (Mathf.Abs(x) == halfInner || Mathf.Abs(y) == halfInner);
-        
-        if (onOuterEdge) return SquareDonutFaceType.OuterWall;
-        if (onInnerEdge) return SquareDonutFaceType.InnerWall;
-        
-        return SquareDonutFaceType.OuterWall; // 기본값
-    }
-    
-    bool ShouldPlaceSquarePrefab(SquareDonutFaceType faceType, int x, int y, int z, int halfOuter, int halfInner)
-    {
-        switch (faceType)
+        // 랜덤하게 제거할 인덱스 선택
+        while (indicesToRemove.Count < holeCount && indicesToRemove.Count < objects.Count)
         {
-            case SquareDonutFaceType.Front:
-            case SquareDonutFaceType.Back:
-                return true; // 앞면과 뒷면은 모든 도넛 영역에 배치
-                
-            case SquareDonutFaceType.OuterWall:
-                // 외벽: 외부 사각형 가장자리에만 배치
-                return (Mathf.Abs(x) == halfOuter || Mathf.Abs(y) == halfOuter);
-                
-            case SquareDonutFaceType.InnerWall:
-                // 내벽: 내부 사각형 가장자리에만 배치
-                return (Mathf.Abs(x) == halfInner || Mathf.Abs(y) == halfInner);
-                
-            default:
-                return false;
-        }
-    }
-    
-    void ApplySquareRotationForFace(GameObject instance, SquareDonutFaceType faceType, int x, int y)
-    {
-        Vector3 rotation = Vector3.zero;
-        
-        switch (faceType)
-        {
-            case SquareDonutFaceType.Front:
-                rotation = frontFaceRotation;
-                break;
-                
-            case SquareDonutFaceType.Back:
-                rotation = backFaceRotation;
-                break;
-                
-            case SquareDonutFaceType.OuterWall:
-                rotation = outerWallRotation;
-                // 외벽의 경우 면 방향에 따른 추가 회전
-                if (Mathf.Abs(x) > Mathf.Abs(y))
-                {
-                    // 좌우 벽
-                    rotation.y += (x > 0) ? 90 : -90;
-                }
-                else
-                {
-                    // 상하 벽
-                    rotation.y += (y > 0) ? 0 : 180;
-                }
-                break;
-                
-            case SquareDonutFaceType.InnerWall:
-                rotation = innerWallRotation;
-                // 내벽의 경우 면 방향에 따른 추가 회전 (내부를 향하도록)
-                if (Mathf.Abs(x) > Mathf.Abs(y))
-                {
-                    // 좌우 벽
-                    rotation.y += (x > 0) ? -90 : 90;
-                }
-                else
-                {
-                    // 상하 벽
-                    rotation.y += (y > 0) ? 180 : 0;
-                }
-                break;
+            int randomIndex = Random.Range(0, objects.Count);
+            if (!indicesToRemove.Contains(randomIndex))
+            {
+                indicesToRemove.Add(randomIndex);
+            }
         }
         
-        instance.transform.rotation = Quaternion.Euler(rotation);
-    }
-    
-    string GetSquareFaceTypeName(SquareDonutFaceType faceType)
-    {
-        switch (faceType)
+        // 인덱스를 내림차순으로 정렬 (뒤에서부터 제거하기 위해)
+        indicesToRemove.Sort((a, b) => b.CompareTo(a));
+        
+        // 선택된 프리팹들 제거
+        foreach (int index in indicesToRemove)
         {
-            case SquareDonutFaceType.Front: return "Front";
-            case SquareDonutFaceType.Back: return "Back";
-            case SquareDonutFaceType.OuterWall: return "Outer";
-            case SquareDonutFaceType.InnerWall: return "Inner";
-            default: return "Unknown";
+            if (index < objects.Count && objects[index] != null)
+            {
+                Undo.DestroyObjectImmediate(objects[index]);
+            }
         }
     }
     
@@ -351,16 +193,10 @@ public class DonutPrefabGridGenerator : EditorWindow
     
     void OnValidate()
     {
-        outerSize = Mathf.Max(1, outerSize);
-        innerSize = Mathf.Max(0, innerSize);
+        width = Mathf.Max(1, width);
+        height = Mathf.Max(1, height);
         depth = Mathf.Max(1, depth);
         holeCount = Mathf.Max(0, holeCount);
         gap = Mathf.Max(0.1f, gap);
-        
-        // 내부 크기가 외부 크기보다 크거나 같으면 조정
-        if (innerSize >= outerSize)
-        {
-            innerSize = outerSize - 1;
-        }
     }
 }
