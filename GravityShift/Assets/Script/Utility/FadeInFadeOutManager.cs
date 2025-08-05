@@ -19,14 +19,15 @@ public class FadeInFadeOutManager : SingletonDontDestroyOnLoad<FadeInFadeOutMana
     //검은색 화면 해제
     public void FadeIn(bool useDotween = false, float dotweenTime = 0.2f, Action action = null)
     {
+        TimeController.ChangeTimeScale(1);
         Debug.Log("FadeIn");
         fadeImage.DOComplete();
         if (!useDotween)
         {
-            fadeImage.DOFade(0, 0);
+            fadeImage.DOFade(0, 0).SetUpdate(true);
             return;
         }
-        fadeImage.DOFade(0, dotweenTime).OnComplete(()=>action?.Invoke());
+        fadeImage.DOFade(0, dotweenTime).OnComplete(()=>action?.Invoke()).SetUpdate(true);
     }
 
     //검은색 화면 진입

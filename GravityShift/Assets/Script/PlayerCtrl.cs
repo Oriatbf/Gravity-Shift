@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     
     bool isInGravity = false;
     
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
