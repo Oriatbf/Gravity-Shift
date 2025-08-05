@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Numerics;
 using DG.Tweening;
 using UnityEngine;
@@ -19,7 +20,17 @@ public class PlayerCtrl : MonoBehaviour
     public int gravityStrength = 10;
     
     bool isInGravity = false;
+<<<<<<< Updated upstream
     [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
+=======
+
+    public bool OnShift;
+    public float cooltime;
+    public bool isCoolTime;
+    public bool isleftwall;
+    public bool isrightwall;
+
+>>>>>>> Stashed changes
     
     
     void Start()
@@ -27,6 +38,8 @@ public class PlayerCtrl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         idx = 1; //시작 위치 가운데로
+        OnShift = false;
+        isCoolTime = false;
 
     }
 
@@ -44,9 +57,26 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Move()
     {
-         // 캐릭터 중력 방향 전환
-        if (Input.GetKey(KeyCode.LeftShift))
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            Debug.Log("LS 눌렸습니다");
+            if (!OnShift)
+            {
+                if (isCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
+                OnShift = true;
+            }
+            else
+            {
+                OnShift = false;
+            }
+        }
+        
+         // 캐릭터 중력 방향 전환
+        if (OnShift)
+        {
+            Time.timeScale = 0.5f;
+            
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
                 Debug.Log("Shift+A 눌렸습니다");
@@ -108,6 +138,8 @@ public class PlayerCtrl : MonoBehaviour
         //캐릭터 좌우 이동 구현 (shift 안눌렸을때)
         else
         {
+            Time.timeScale = 1f;
+            
             if (Input.GetKeyDown(KeyCode.A))
             {
                 Debug.Log("A만 눌림");
@@ -153,4 +185,16 @@ public class PlayerCtrl : MonoBehaviour
         }
         rb.AddForce(gravity, ForceMode.Acceleration); //지정한 중력 방향으로 계속 힘 받기
     }
+    
+    IEnumerator setCoolTime(float cool)
+    {
+        OnShift = false;
+        isCoolTime = true;
+        yield return new WaitForSeconds(cool);
+        isCoolTime = false;
+    }
+    
+    
+    
+    
 }

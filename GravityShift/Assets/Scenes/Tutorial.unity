@@ -1935,7 +1935,7 @@ GameObject:
   - component: {fileID: 268049856}
   - component: {fileID: 268049855}
   m_Layer: 0
-  m_Name: TopLeft
+  m_Name: TopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6307,9 +6307,9 @@ MonoBehaviour:
   - {fileID: 517410916}
   - {fileID: 534531675}
   Top:
-  - {fileID: 268049853}
-  - {fileID: 930533267}
   - {fileID: 1547245600}
+  - {fileID: 930533267}
+  - {fileID: 268049853}
   Left:
   - {fileID: 330657840}
   - {fileID: 2070022364}
@@ -6317,9 +6317,17 @@ MonoBehaviour:
   idx: 0
   gravity: {x: 0, y: -10, z: 0}
   gravityStrength: 100
+<<<<<<< Updated upstream
   moveDuration: 0.1
   rotValue: 12
   rotDuration: 0.15
+=======
+  OnShift: 0
+  cooltime: 0
+  isCoolTime: 0
+  isleftwall: 0
+  isrightwall: 0
+>>>>>>> Stashed changes
 --- !u!1 &930533267
 GameObject:
   m_ObjectHideFlags: 0
@@ -10162,7 +10170,7 @@ GameObject:
   - component: {fileID: 1547245603}
   - component: {fileID: 1547245602}
   m_Layer: 0
-  m_Name: TopRight
+  m_Name: TopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12612,6 +12620,7 @@ GameObject:
   - component: {fileID: 915681049}
   - component: {fileID: 5866666021335499005}
   - component: {fileID: 5866666021335499004}
+  - component: {fileID: 5866666021335499006}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14877,6 +14886,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adArrowPanel: {fileID: 570856387}
   upArrowPanel: {fileID: 756593424}
+--- !u!114 &5866666021335499006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148655652923}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cbc14536035de40b3f68deb9e07238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: {x: 0, y: -10, z: 0}
+  gravityStrength: 10
+  OnShift: 0
+  cooltime: 0
+  isCoolTime: 0
+  isleftwall: 0
+  isrightwall: 0
+  boxSize: {x: 0.4, y: 0.9, z: 0.4}
+  maxDistance: 0.6
 --- !u!4 &5901452234762635266
 Transform:
   m_ObjectHideFlags: 0
