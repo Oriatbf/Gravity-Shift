@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -16,8 +17,8 @@ public class item2 : MonoBehaviour
         if (obj.gameObject.tag == "Player")
         {
             Debug.Log("item(adhesion) 디버그");
-
-            UImanager.Inst.ShowAdhesionitemUI();
+            Action action = () => Debug.Log("벽 점착 아이템 사용");
+            UImanager.Inst.ShowAdhesionitemUI(action);
             Destroy(gameObject);
 
         }

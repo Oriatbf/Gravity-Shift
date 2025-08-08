@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,10 @@ public class UImanager : Singleton<UImanager>
     //coin
     public TMP_Text coinnumber;
 
-
+    private Action curAction;
+    public Image invincibleItemImage;
+    public Image adhesionItemImage;
+    private bool havingItem = false;
 
     void Awake()
     {
@@ -56,30 +60,39 @@ public class UImanager : Singleton<UImanager>
         int coin = GameManager.Inst.GetCoin();
         coinnumber.text = $"코인 : {coin}";
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S) && havingItem)
+        {
+            UseItem();
+        }
+    }
     //coin
 
-    public Image invincibleItemImage;
-
-    public void ShowinvincibleitemUI()
+    public void ShowinvincibleitemUI(Action action)
     {
+        if (havingItem) return;
+        havingItem = true;
+        curAction = action;
         invincibleItemImage.enabled = true;
-    }
-    public void HideinvincibleitemUI()
-    {
-        invincibleItemImage.enabled = false;
     }
     //무적 아이템
 
-
-    public Image adhesionItemImage;
-
-    public void ShowAdhesionitemUI()
+    public void ShowAdhesionitemUI(Action action)
     {
+        if (havingItem) return;
+        havingItem = true;
+        curAction = action;
         adhesionItemImage.enabled = true;
     }
-    public void HideAdhesionitemUI()
+
+    public void UseItem()
     {
+        invincibleItemImage.enabled = false;
         adhesionItemImage.enabled = false;
+        curAction?.Invoke();
+        havingItem = false;
     }
     //벽 점착 아이템
 }

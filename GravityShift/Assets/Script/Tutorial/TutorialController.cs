@@ -6,11 +6,17 @@ using VInspector;
 
 public class TutorialController : MonoBehaviour
 {
+   [SerializeField] private bool startTutorial = false;
    public List<Tutorial> tutorials = new List<Tutorial>();
    [SerializeField] private int tutorialIndex = 0;
    [SerializeField] private PlayerKeyController _playerKeyController;
    public Transform map;
-   
+
+   private void Start()
+   {
+      if (startTutorial) DOVirtual.DelayedCall(5f, () => SpawnTutorial());
+   }
+
 
    [Button]
    public void SpawnTutorial()

@@ -3,7 +3,11 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public int coin;
-
+    public PlayerCtrl player;
+    void Start()
+    {
+        coin = 0;
+    }
     public void AddCoin()
     {
         coin++;
@@ -19,10 +23,7 @@ public class GameManager : Singleton<GameManager>
     {
         return coin;
     }
-    void Start()
-    {
-        coin = 0;
-    }
+
 
     // Update is called once per frame
     void Update()
