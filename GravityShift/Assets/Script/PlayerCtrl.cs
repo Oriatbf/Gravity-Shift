@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Numerics;
 using DG.Tweening;
@@ -21,33 +22,34 @@ public class PlayerCtrl : MonoBehaviour
     
     bool isInGravity = false;
     [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
-
+    
     public bool OnShift;
-    public float cooltime;
-    public bool isCoolTime;
+    public float shiftCoolTime;
+    public bool isshiftCoolTime;
     public bool isleftwall;
     public bool isrightwall;
-    
+
+    public bool OnMove;
+    public float moveCoolTime;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         idx = 1; //시작 위치 가운데로
         OnShift = false;
-        isCoolTime = false;
+        isshiftCoolTime = false;
 
+        OnMove = true;
     }
 
     void Update()
     {
         Move();
-        if (OnShift)
-        {
-            isInGravity = !isInGravity;
-            TimeController.ChangeTimeScale(isInGravity?0.25f:1, isInGravity?0.35f:0.15f);
-            VolumeController.Inst.GravityProduction(isInGravity);
-           
-        }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.AddForce(gravity, ForceMode.Acceleration); //지정한 중력 방향으로 계속 힘 받기
     }
 
     private void Move()
@@ -55,10 +57,11 @@ public class PlayerCtrl : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            
             Debug.Log("LS 눌렸습니다");
             if (!OnShift)
             {
-                if (isCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
+                if (isshiftCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
                 OnShift = true;
             }
             else
@@ -70,11 +73,14 @@ public class PlayerCtrl : MonoBehaviour
          // 캐릭터 중력 방향 전환
         if (OnShift)
         {
+            isInGravity = !isInGravity;
+            TimeController.ChangeTimeScale(isInGravity?0.25f:1, isInGravity?0.35f:0.15f);
+            VolumeController.Inst.GravityProduction(isInGravity);
             Time.timeScale = 0.5f;
             
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
-                OnShift = false;
+                StartCoroutine(setShiftCoolTime(shiftCoolTime));
                 Debug.Log("Shift+A 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Left
                 {
@@ -103,7 +109,7 @@ public class PlayerCtrl : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
-                OnShift = false;
+                StartCoroutine(setShiftCoolTime(shiftCoolTime));
                 Debug.Log("Shift+D 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Right
                 {
@@ -134,6 +140,8 @@ public class PlayerCtrl : MonoBehaviour
         //캐릭터 좌우 이동 구현 (shift 안눌렸을때)
         else
         {
+            if (!OnMove) return;
+            
             Time.timeScale = 1f;
             
             if (Input.GetKeyDown(KeyCode.A))
@@ -143,18 +151,15 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     idx -= 1;
                     if (gravity.y == -10) //중력 방향 Bottom
-                    {
-                        transform.DOMove(new Vector3(bottom[idx].transform.position.x, transform.position.y, 0), moveDuration);
-                        transform.DOLocalRotate(new Vector3(0,0,rotValue),rotDuration)
-                            .OnComplete(()=>transform.DOLocalRotate(Vector3.zero, rotDuration));
-                    }
-                        //transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                        transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
                         transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
                     else if (gravity.y == 10) //중력 방향 Top
                         transform.position = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == 10) //중력 방향 Right
                         transform.position = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
+                    
+                    StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }
             else if (Input.GetKeyDown(KeyCode.D))
@@ -164,29 +169,33 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     idx += 1;
                     if (gravity.y == -10) //중력 방향 Bottom
-                    {
-                        transform.DOMove(new Vector3(bottom[idx].transform.position.x, transform.position.y, 0), moveDuration);
-                        transform.DOLocalRotate(new Vector3(0,0,-rotValue),rotDuration)
-                            .OnComplete(()=>transform.DOLocalRotate(Vector3.zero, rotDuration));
-                    }
-                        //transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                        transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
                         transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
                     else if (gravity.y == 10) //중력 방향 Top
                         transform.position = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == 10) //중력 방향 Right
                         transform.position = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
+                    
+                    StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }  
         }
-        rb.AddForce(gravity, ForceMode.Acceleration); //지정한 중력 방향으로 계속 힘 받기
     }
     
-    IEnumerator setCoolTime(float cool)
+    IEnumerator setShiftCoolTime(float cool)
     {
         OnShift = false;
-        isCoolTime = true;
+        isshiftCoolTime = true;
+        Time.timeScale = 1f;
         yield return new WaitForSeconds(cool);
-        isCoolTime = false;
+        isshiftCoolTime = false;
+    }
+    
+    IEnumerator setMoveCoolTime(float cool)
+    {
+        OnMove = false;
+        yield return new WaitForSeconds(cool);
+        OnMove = true;
     }
 }

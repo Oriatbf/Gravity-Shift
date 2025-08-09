@@ -4258,15 +4258,16 @@ MonoBehaviour:
   idx: 0
   gravity: {x: 0, y: -10, z: 0}
   gravityStrength: 100
-  isInGravity: 0
   moveDuration: 0.15
   rotValue: 14
   rotDuration: 0.15
   OnShift: 0
-  cooltime: 0
-  isCoolTime: 0
+  shiftCoolTime: 5
+  isshiftCoolTime: 0
   isleftwall: 0
   isrightwall: 0
+  OnMove: 0
+  moveCoolTime: 3
 --- !u!1 &930533267
 GameObject:
   m_ObjectHideFlags: 0
