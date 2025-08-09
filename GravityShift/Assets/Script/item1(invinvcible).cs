@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
 
 public class item1 : MonoBehaviour
 {
+    
     private void Start()
     {
         transform.DOLocalMoveY(0.5f, 2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic);
@@ -17,8 +19,8 @@ public class item1 : MonoBehaviour
         if (obj.CompareTag("Player"))
         {
             Debug.Log("item1(invincible) 디버그");
-
-            UImanager.Inst.ShowinvincibleitemUI();
+            Action action = () => Debug.Log("무적 아이템 사용");
+            UImanager.Inst.ShowinvincibleitemUI(action);
             Destroy(gameObject);
 
         }

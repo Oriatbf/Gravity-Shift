@@ -49,7 +49,8 @@ MonoBehaviour:
   spawnTrans: {fileID: 769650474858080106}
   secPerRatio: 30
   startDotween: 1
-  blocksParent: {fileID: 6156030722322691880}
+  Objects:
+  - {fileID: 6156030722322691880}
   spawnBool: 1
 --- !u!1 &4749926619421588299
 GameObject:

@@ -10,7 +10,7 @@ public class CaveDotweenTest : MonoBehaviour
     private List<Transform> childs = new List<Transform>();
     [SerializeField] private float secPerRatio;
     [SerializeField] private bool startDotween = true;
-    [SerializeField] private Transform blocksParent;
+    [SerializeField] private List<Transform> Objects = new List<Transform>();
     private float count;
 
     private const float AnimPos = 14;
@@ -20,10 +20,13 @@ public class CaveDotweenTest : MonoBehaviour
     private void Start()
     {
         spawnBool = true;
-        foreach (Transform child in blocksParent)
+        foreach (Transform parent in Objects)
         {
-            childs.Add(child);
-            if(startDotween) child.transform.position -= new Vector3(0, AnimPos, 0);
+            foreach (Transform child in parent)
+            {
+                childs.Add(child);
+                if(startDotween) child.transform.position -= new Vector3(0, AnimPos, 0);   
+            }
         }
         childs.Shuffle();
         count = childs.Count *(secPerRatio/100f);
