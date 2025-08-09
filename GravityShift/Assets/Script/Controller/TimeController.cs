@@ -3,17 +3,25 @@ using UnityEngine;
 
 public static class TimeController
 {
-    public static void ChangeTimeScale(float _timeScale,float duration = 0)
+    private static Tween tween;
+    
+    public static void ChangeTimeScale(float _timeScale, float duration = 0)
     {
-        if (duration == 0)
+        tween?.Complete(); 
+        if (duration == 0f)
         {
             Time.timeScale = _timeScale;
+            Time.fixedDeltaTime = 0.02f * _timeScale;
         }
         else
         {
-            DOTween.To(()=>Time.timeScale, x => Time.timeScale = x, _timeScale, duration);
+            tween = DOTween.To(() => Time.timeScale, x =>
+            {
+                Time.timeScale = x;
+                Time.fixedDeltaTime = 0.02f * x;
+            }, _timeScale, duration);
         }
-        Time.fixedDeltaTime = 0.02f * _timeScale;
-        Debug.Log("현재 타일스케일 : "+Time.timeScale);
+  
+        Debug.Log("현재 타임스케일 : " + Time.timeScale);
     }
 }

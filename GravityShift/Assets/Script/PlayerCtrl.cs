@@ -31,9 +31,19 @@ public class PlayerCtrl : MonoBehaviour
 
     private bool OnMove;
     public float moveCoolTime;
+    
+    private PlayerGravity playerGravity = PlayerGravity.Down;
+    private PlayerEffection playerEffection;
+    private float curRot = 0;
+
+    private void Awake()
+    {
+        playerEffection = GetComponent<PlayerEffection>();
+        rb = GetComponent<Rigidbody>();
+    }
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         idx = 1; //시작 위치 가운데로
         OnShift = false;
@@ -63,11 +73,13 @@ public class PlayerCtrl : MonoBehaviour
             {
                 if (isshiftCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
                 TimeController.ChangeTimeScale(0.25f, 0.35f);
+                playerEffection.Show();
                 VolumeController.Inst.GravityProduction(true);
                 OnShift = true;
             }
             else
             {
+                playerEffection.Hide();
                 TimeController.ChangeTimeScale(1, 0.15f);
                 VolumeController.Inst.GravityProduction(false);
                 OnShift = false;
@@ -80,61 +92,69 @@ public class PlayerCtrl : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
-                StartCoroutine(setShiftCoolTime(shiftCoolTime));
                 Debug.Log("Shift+A 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Left
                 {
+                    playerGravity = PlayerGravity.Left;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
                     gravity = new Vector3(-10, 0, 0);
-                    transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
+                    transform.position = new Vector3( Left[idx].transform.position.x, Left[idx].transform.position.y, 0);
                 }
                 else if (gravity.x == -10) //중력 방향 Left -> Top
                 {
+                    playerGravity = PlayerGravity.Up;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
                     gravity = new Vector3(0, 10, 0);
-                    transform.position = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
+                    transform.position = new Vector3(Top[idx].transform.position.x, Top[idx].transform.position.y, 0);
                 }
                 else if (gravity.y == 10) //중력 방향 Top -> Right
                 {
+                    playerGravity = PlayerGravity.Right;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
                     gravity = new Vector3(10, 0, 0);
-                    transform.position = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
+                    transform.position = new Vector3(Right[idx].transform.position.x, Right[idx].transform.position.y, 0);
                 }
                 else if (gravity.x == 10) //중력 방향 Right -> Bottom
                 {
+                    playerGravity = PlayerGravity.Down;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     gravity = new Vector3(0, -10, 0);
-                    transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                    transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
                 }
+                StartCoroutine(setShiftCoolTime(shiftCoolTime)); //얘는 마지막 자리에 오게 해주세요 아니면 연출이 작동이 안돼요
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
-                StartCoroutine(setShiftCoolTime(shiftCoolTime));
                 Debug.Log("Shift+D 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Right
                 {
+                    playerGravity = PlayerGravity.Right;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
                     gravity = new Vector3(10, 0, 0);
-                    transform.position = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
+                    transform.position = new Vector3(Right[idx].transform.position.x, Right[idx].transform.position.y, 0);
                 }       
                 else if (gravity.x == 10) //중력 방향 Right -> Top
                 {
+                    playerGravity = PlayerGravity.Up;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
                     gravity = new Vector3(0, 10, 0);
-                    transform.position = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
+                    transform.position = new Vector3(Top[idx].transform.position.x, Top[idx].transform.position.y, 0);
                 }
                 else if (gravity.y == 10) //중력 방향 Top -> Left
                 {
+                    playerGravity = PlayerGravity.Left;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
                     gravity = new Vector3(-10, 0, 0);
-                    transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
+                    transform.position = new Vector3(Left[idx].transform.position.x, Left[idx].transform.position.y, 0);
                 }
                 else if (gravity.x == -10) //중력 방향 Left -> Bottom
                 {
+                    playerGravity = PlayerGravity.Down;
                     rb.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     gravity = new Vector3(0, -10, 0);
-                    transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                    transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
                 }
+                StartCoroutine(setShiftCoolTime(shiftCoolTime));//얘는 마지막 자리에 오게 해주세요 아니면 연출이 작동이 안돼요
             }
         }
         //캐릭터 좌우 이동 구현 (shift 안눌렸을때)
@@ -147,16 +167,20 @@ public class PlayerCtrl : MonoBehaviour
                 Debug.Log("A만 눌림");
                 if (idx != 0)
                 {
+                    Vector3 newPos = Vector3.zero;
                     idx -= 1;
                     if (gravity.y == -10) //중력 방향 Bottom
-                        transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                        newPos = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
-                        transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
+                        newPos = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
                     else if (gravity.y == 10) //중력 방향 Top
-                        transform.position = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
+                        newPos = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == 10) //중력 방향 Right
-                        transform.position = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
+                        newPos = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
                     
+                    transform.DOMove(newPos, moveDuration);
+                    transform.DOLocalRotate(new Vector3(0,0,curRot + rotValue),rotDuration)
+                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration));
                     StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }
@@ -165,16 +189,19 @@ public class PlayerCtrl : MonoBehaviour
                 Debug.Log("D만 눌림");
                 if (idx != 2)
                 {
+                    Vector3 newPos = Vector3.zero;
                     idx += 1;
                     if (gravity.y == -10) //중력 방향 Bottom
-                        transform.position = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
+                        newPos = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
-                        transform.position = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
+                        newPos = new Vector3(transform.position.x, Left[idx].transform.position.y, 0);
                     else if (gravity.y == 10) //중력 방향 Top
-                        transform.position = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
+                        newPos = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == 10) //중력 방향 Right
-                        transform.position = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
-                    
+                        newPos = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
+                    transform.DOMove(newPos, moveDuration);
+                    transform.DOLocalRotate(new Vector3(0,0,curRot-rotValue),rotDuration)
+                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration));
                     StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }  
@@ -185,10 +212,33 @@ public class PlayerCtrl : MonoBehaviour
     {
         OnShift = false;
         isshiftCoolTime = true;
+        SetCurRot();
+        playerEffection.Hide(playerGravity);
+        CameraController.Inst.MoveCamera(playerGravity);
         TimeController.ChangeTimeScale(1, 0.15f);
         VolumeController.Inst.GravityProduction(false);
         yield return new WaitForSeconds(cool);
         isshiftCoolTime = false;
+    }
+
+    private void SetCurRot()
+    {
+        switch (playerGravity)
+        {
+            case PlayerGravity.Down:
+                curRot = 0;
+                break;
+            case PlayerGravity.Right:
+                curRot = 90;
+                break;
+            case PlayerGravity.Up:
+                curRot = 180;
+                break;
+            case PlayerGravity.Left:
+                curRot = 270;
+                break;
+                
+        }
     }
     
     IEnumerator setMoveCoolTime(float cool)

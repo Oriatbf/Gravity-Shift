@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerIsHole : MonoBehaviour
@@ -7,10 +8,17 @@ public class PlayerIsHole : MonoBehaviour
 
     void Update()
     {
+        PlayerPos.position = new Vector3(PlayerPos.position.x, PlayerPos.position.y, PlayerPos.position.z);
         int layerMask = ~LayerMask.GetMask("Player");
         Collider[] colliders = Physics.OverlapBox(PlayerPos.position, halfBoxSize, Quaternion.identity, layerMask);
 
         if (colliders.Length == 0)
             Debug.Log("추락사!");
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, halfBoxSize*2);
     }
 }
