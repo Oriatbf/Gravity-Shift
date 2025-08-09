@@ -23,13 +23,13 @@ public class PlayerCtrl : MonoBehaviour
     bool isInGravity = false;
     [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
     
-    public bool OnShift;
+    private bool OnShift;
     public float shiftCoolTime;
-    public bool isshiftCoolTime;
-    public bool isleftwall;
-    public bool isrightwall;
+    private bool isshiftCoolTime;
+    private bool isleftwall;
+    private bool isrightwall;
 
-    public bool OnMove;
+    private bool OnMove;
     public float moveCoolTime;
     void Start()
     {
