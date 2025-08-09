@@ -8,6 +8,8 @@ public class Thorn : MonoBehaviour
     {
         if (obj.gameObject.tag == "Player")
         {
+           // PlayerCtrl playerCtrl = obj.GetComponent<PlayerCtrl>();
+
             SettingController.Inst.EndingUI(false);
             Debug.Log("가시 디버그");
         }
