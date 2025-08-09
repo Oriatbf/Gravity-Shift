@@ -4267,7 +4267,7 @@ MonoBehaviour:
   isleftwall: 0
   isrightwall: 0
   OnMove: 0
-  moveCoolTime: 3
+  moveCoolTime: 0.08
 --- !u!1 &930533267
 GameObject:
   m_ObjectHideFlags: 0
@@ -10276,6 +10276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adArrowPanel: {fileID: 570856387}
   upArrowPanel: {fileID: 756593424}
+  playerGravity: 0
 --- !u!4 &5901452234762635266
 Transform:
   m_ObjectHideFlags: 0

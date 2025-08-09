@@ -62,10 +62,14 @@ public class PlayerCtrl : MonoBehaviour
             if (!OnShift)
             {
                 if (isshiftCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
+                TimeController.ChangeTimeScale(0.25f, 0.35f);
+                VolumeController.Inst.GravityProduction(true);
                 OnShift = true;
             }
             else
             {
+                TimeController.ChangeTimeScale(1, 0.15f);
+                VolumeController.Inst.GravityProduction(false);
                 OnShift = false;
             }
         }
@@ -73,10 +77,6 @@ public class PlayerCtrl : MonoBehaviour
          // 캐릭터 중력 방향 전환
         if (OnShift)
         {
-            isInGravity = !isInGravity;
-            TimeController.ChangeTimeScale(isInGravity?0.25f:1, isInGravity?0.35f:0.15f);
-            VolumeController.Inst.GravityProduction(isInGravity);
-            Time.timeScale = 0.5f;
             
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
@@ -142,8 +142,6 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (!OnMove) return;
             
-            Time.timeScale = 1f;
-            
             if (Input.GetKeyDown(KeyCode.A))
             {
                 Debug.Log("A만 눌림");
@@ -187,7 +185,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         OnShift = false;
         isshiftCoolTime = true;
-        Time.timeScale = 1f;
+        TimeController.ChangeTimeScale(1, 0.15f);
+        VolumeController.Inst.GravityProduction(false);
         yield return new WaitForSeconds(cool);
         isshiftCoolTime = false;
     }
