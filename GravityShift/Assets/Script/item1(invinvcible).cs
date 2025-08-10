@@ -18,9 +18,9 @@ public class item1 : MonoBehaviour
     {
         if (obj.CompareTag("Player"))
         {
-            //PlayerCtrl playerCtrl = obj.GetComponent<PlayerCtrl>();
+            PlayerCtrl playerCtrl = obj.GetComponent<PlayerCtrl>();
             Debug.Log("item1(invincible) 디버그");
-            Action action = () => Debug.Log("ppp");
+            Action action = () => playerCtrl.ActiveInvincible(10f);
             UImanager.Inst.ShowinvincibleitemUI(action);
             Destroy(gameObject);
 

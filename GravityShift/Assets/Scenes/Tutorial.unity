@@ -4260,6 +4260,8 @@ MonoBehaviour:
   rotDuration: 0.15
   shiftCoolTime: 1
   moveCoolTime: 0.08
+  isInvincible: 0
+  isAdhesion: 0
 --- !u!1 &930533267
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,8 +16,9 @@ public class item2 : MonoBehaviour
     {
         if (obj.gameObject.tag == "Player")
         {
+            PlayerCtrl playerCtrl = obj.GetComponent<PlayerCtrl>();
             Debug.Log("item(adhesion) 디버그");
-            Action action = () => Debug.Log("벽 점착 아이템 사용");
+            Action action = () => playerCtrl.ActiveAdhesion();
             UImanager.Inst.ShowAdhesionitemUI(action);
             Destroy(gameObject);
 

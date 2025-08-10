@@ -36,6 +36,9 @@ public class PlayerCtrl : MonoBehaviour
     private PlayerEffection playerEffection;
     private float curRot = 0;
 
+    public bool isInvincible = false;
+    public bool isAdhesion = false;
+    
     private void Awake()
     {
         playerEffection = GetComponent<PlayerEffection>();
@@ -87,78 +90,36 @@ public class PlayerCtrl : MonoBehaviour
         }
         
          // 캐릭터 중력 방향 전환
-        if (OnShift)
+        if (OnShift&&!isAdhesion)
         {
             
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
-                Debug.Log("Shift+A 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Left
-                {
-                    playerGravity = PlayerGravity.Left;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
-                    gravity = new Vector3(-10, 0, 0);
-                    transform.position = new Vector3( Left[idx].transform.position.x, Left[idx].transform.position.y, 0);
-                }
+                    toGravityLeft();
                 else if (gravity.x == -10) //중력 방향 Left -> Top
-                {
-                    playerGravity = PlayerGravity.Up;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
-                    gravity = new Vector3(0, 10, 0);
-                    transform.position = new Vector3(Top[idx].transform.position.x, Top[idx].transform.position.y, 0);
-                }
+                    toGravityTop();
                 else if (gravity.y == 10) //중력 방향 Top -> Right
-                {
-                    playerGravity = PlayerGravity.Right;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
-                    gravity = new Vector3(10, 0, 0);
-                    transform.position = new Vector3(Right[idx].transform.position.x, Right[idx].transform.position.y, 0);
-                }
+                    toGravityRight();
                 else if (gravity.x == 10) //중력 방향 Right -> Bottom
-                {
-                    playerGravity = PlayerGravity.Down;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                    gravity = new Vector3(0, -10, 0);
-                    transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
-                }
+                    toGravityBottom();
                 StartCoroutine(setShiftCoolTime(shiftCoolTime)); //얘는 마지막 자리에 오게 해주세요 아니면 연출이 작동이 안돼요
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
-                Debug.Log("Shift+D 눌렸습니다");
                 if (gravity.y == -10) //중력 방향 Bottom -> Right
-                {
-                    playerGravity = PlayerGravity.Right;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
-                    gravity = new Vector3(10, 0, 0);
-                    transform.position = new Vector3(Right[idx].transform.position.x, Right[idx].transform.position.y, 0);
-                }       
+                    toGravityRight();
                 else if (gravity.x == 10) //중력 방향 Right -> Top
-                {
-                    playerGravity = PlayerGravity.Up;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
-                    gravity = new Vector3(0, 10, 0);
-                    transform.position = new Vector3(Top[idx].transform.position.x, Top[idx].transform.position.y, 0);
-                }
+                    toGravityTop();
                 else if (gravity.y == 10) //중력 방향 Top -> Left
-                {
-                    playerGravity = PlayerGravity.Left;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
-                    gravity = new Vector3(-10, 0, 0);
-                    transform.position = new Vector3(Left[idx].transform.position.x, Left[idx].transform.position.y, 0);
-                }
+                    toGravityLeft();
                 else if (gravity.x == -10) //중력 방향 Left -> Bottom
-                {
-                    playerGravity = PlayerGravity.Down;
-                    rb.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                    gravity = new Vector3(0, -10, 0);
-                    transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
-                }
+                    toGravityBottom();
                 StartCoroutine(setShiftCoolTime(shiftCoolTime));//얘는 마지막 자리에 오게 해주세요 아니면 연출이 작동이 안돼요
             }
         }
         //캐릭터 좌우 이동 구현 (shift 안눌렸을때)
-        else
+        else if (!OnShift && !isAdhesion)
         {
             if (!OnMove) return;
             
@@ -206,6 +167,52 @@ public class PlayerCtrl : MonoBehaviour
                 }
             }  
         }
+        else if (isAdhesion)
+        {
+            if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
+            {
+                if (gravity.y == -10) //중력 방향 Bottom -> Left
+                    toGravityLeft();
+                else if (gravity.x == -10) //중력 방향 Left -> Top
+                    toGravityTop();
+                else if (gravity.y == 10) //중력 방향 Top -> Right
+                    toGravityRight();
+                else if (gravity.x == 10) //중력 방향 Right -> Bottom
+                    toGravityBottom();
+                isAdhesion = false;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                if (gravity.y == -10) //중력 방향 Bottom -> Right
+                    toGravityRight();
+                else if (gravity.x == 10) //중력 방향 Right -> Top
+                    toGravityTop();
+                else if (gravity.y == 10) //중력 방향 Top -> Left
+                    toGravityLeft();
+                else if (gravity.x == -10) //중력 방향 Left -> Bottom
+                    toGravityBottom();
+                isAdhesion = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (gravity.y == -10) //중력 방향 Bottom -> top
+                    toGravityTop();
+                else if (gravity.x == 10) //중력 방향 Right -> Left
+                    toGravityLeft();
+                else if (gravity.y == 10) //중력 방향 Top -> Bottom
+                    toGravityBottom();
+                else if (gravity.x == -10) //중력 방향 Left -> Right
+                    toGravityRight();
+                isAdhesion = false;
+            }
+            
+        }
+    }
+
+    public void ActiveInvincible(float InvincibleTime)
+    {
+        StartCoroutine(InvincibleCoroutine(InvincibleTime));
     }
     
     IEnumerator setShiftCoolTime(float cool)
@@ -240,11 +247,55 @@ public class PlayerCtrl : MonoBehaviour
                 
         }
     }
+
+    public void ActiveAdhesion()
+    {
+        isAdhesion = true;
+    }
+    
+    private void toGravityLeft()
+    {
+        playerGravity = PlayerGravity.Left;
+        rb.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+        gravity = new Vector3(-10, 0, 0);
+        transform.position = new Vector3( Left[idx].transform.position.x, Left[idx].transform.position.y, 0);
+    }
+
+    private void toGravityRight()
+    {
+        playerGravity = PlayerGravity.Right;
+        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        gravity = new Vector3(10, 0, 0);
+        transform.position = new Vector3(Right[idx].transform.position.x, Right[idx].transform.position.y, 0);
+    }
+
+    private void toGravityTop()
+    {
+        playerGravity = PlayerGravity.Up;
+        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+        gravity = new Vector3(0, 10, 0);
+        transform.position = new Vector3(Top[idx].transform.position.x, Top[idx].transform.position.y, 0);
+    }
+
+    private void toGravityBottom()
+    {
+        playerGravity = PlayerGravity.Down;
+        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        gravity = new Vector3(0, -10, 0);
+        transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
+    }
     
     IEnumerator setMoveCoolTime(float cool)
     {
         OnMove = false;
         yield return new WaitForSeconds(cool);
         OnMove = true;
+    }
+
+    IEnumerator InvincibleCoroutine(float duration)
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(duration);
+        isInvincible = false;
     }
 }
