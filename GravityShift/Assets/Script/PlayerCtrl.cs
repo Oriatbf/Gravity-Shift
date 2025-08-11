@@ -75,16 +75,12 @@ public class PlayerCtrl : MonoBehaviour
             if (!OnShift)
             {
                 if (isshiftCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
-                TimeController.ChangeTimeScale(0.25f, 0.35f);
-                playerEffection.Show();
-                VolumeController.Inst.GravityProduction(true);
+                GravityEffect(true);
                 OnShift = true;
             }
             else
             {
-                playerEffection.Hide();
-                TimeController.ChangeTimeScale(1, 0.15f);
-                VolumeController.Inst.GravityProduction(false);
+                GravityEffect(false);
                 OnShift = false;
             }
         }
@@ -180,6 +176,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == 10) //중력 방향 Right -> Bottom
                     toGravityBottom();
                 isAdhesion = false;
+                GravityEffect(false);
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -192,6 +189,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == -10) //중력 방향 Left -> Bottom
                     toGravityBottom();
                 isAdhesion = false;
+                GravityEffect(false);
             }
 
             if (Input.GetKeyDown(KeyCode.W))
@@ -205,6 +203,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == -10) //중력 방향 Left -> Right
                     toGravityRight();
                 isAdhesion = false;
+                GravityEffect(false);
             }
             
         }
@@ -219,13 +218,26 @@ public class PlayerCtrl : MonoBehaviour
     {
         OnShift = false;
         isshiftCoolTime = true;
-        SetCurRot();
-        playerEffection.Hide(playerGravity);
-        CameraController.Inst.MoveCamera(playerGravity);
-        TimeController.ChangeTimeScale(1, 0.15f);
-        VolumeController.Inst.GravityProduction(false);
+        GravityEffect(false);
         yield return new WaitForSeconds(cool);
         isshiftCoolTime = false;
+    }
+
+    private void GravityEffect(bool isShow)
+    {
+        if (isShow)
+        {
+            playerEffection.Show();
+            TimeController.ChangeTimeScale(0.25f, 0.35f);
+        }
+        else
+        {
+            playerEffection.Hide(playerGravity);
+            TimeController.ChangeTimeScale(1, 0.15f);
+        }
+        SetCurRot();
+        CameraController.Inst.MoveCamera(playerGravity);
+        VolumeController.Inst.GravityProduction(isShow);
     }
 
     private void SetCurRot()
@@ -251,6 +263,7 @@ public class PlayerCtrl : MonoBehaviour
     public void ActiveAdhesion()
     {
         isAdhesion = true;
+        GravityEffect(true);
     }
     
     private void toGravityLeft()

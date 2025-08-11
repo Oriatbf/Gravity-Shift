@@ -8,14 +8,14 @@ public class CaveDotweenTest : MonoBehaviour
 {
     public Transform spawnTrans;
     private List<Transform> childs = new List<Transform>();
-    [SerializeField] private float secPerRatio;
+    [SerializeField] private float secPerRatio = 30;
     [SerializeField] private bool startDotween = true;
     [SerializeField] private List<Transform> Objects = new List<Transform>();
     private float count;
 
     private const float AnimPos = 14;
     private float spawnTransZ;
-    public bool spawnBool;
+    private bool spawnBool;
 
     private void Start()
     {

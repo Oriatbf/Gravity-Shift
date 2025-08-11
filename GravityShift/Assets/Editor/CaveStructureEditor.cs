@@ -98,8 +98,17 @@ public class CaveStructureEditor : EditorWindow
         // 기존 오브젝트들 삭제
         ClearGeneratedObjects();
         
-        // 부모 오브젝트 생성
+        // 부모 오브젝트들 생성
         GameObject parentObject = new GameObject("Cave Structure");
+        GameObject blocksParent = new GameObject("Blocks");
+        GameObject spawnTrans = new GameObject("SpawnTrans");
+        
+        // Blocks를 Cave Structure의 자식으로 설정
+        blocksParent.transform.SetParent(parentObject.transform);
+        
+        // SpawnTrans는 Cave Structure의 자식으로 설정하고 위치 설정
+        spawnTrans.transform.SetParent(parentObject.transform);
+        spawnTrans.transform.position = new Vector3(0, 0, z * size);
         
         // Z축 레이어별로 벽 위치 생성
         Dictionary<int, List<Vector3>> layerPositions = new Dictionary<int, List<Vector3>>();
@@ -127,17 +136,16 @@ public class CaveStructureEditor : EditorWindow
         // 연결성을 유지하며 홀 생성
         List<Vector3> finalPositions = CreateHolesWithConnectivity(layerPositions);
         
-        // 실제 오브젝트 생성 (랜덤 회전 적용)
+        // 실제 오브젝트 생성 (랜덤 회전 적용) - Blocks 부모 하위에 생성
         foreach (Vector3 position in finalPositions)
         {
             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(targetObject);
             instance.transform.position = position;
             instance.transform.rotation = GetRandomRotation(); // 랜덤 90도 회전 적용
-            instance.transform.SetParent(parentObject.transform);
-            generatedObjects.Add(instance);
+            instance.transform.SetParent(blocksParent.transform);
         }
         
-        // 부모 오브젝트도 관리 리스트에 추가
+        // 부모 오브젝트들을 관리 리스트에 추가
         generatedObjects.Add(parentObject);
         
         // 씬 저장 알림
@@ -148,6 +156,7 @@ public class CaveStructureEditor : EditorWindow
             totalWalls += layer.Count;
         
         Debug.Log($"Cave structure generated! Objects: {finalPositions.Count}/{totalWalls}, Holes: {totalWalls - finalPositions.Count}");
+        Debug.Log($"SpawnTrans created at position: {spawnTrans.transform.position}");
     }
     
     // 연결성을 유지하며 홀을 생성하는 함수

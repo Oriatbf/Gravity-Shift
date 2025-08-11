@@ -17,7 +17,7 @@ public class StageSelectController : MonoBehaviour
         if (isOnstage && Input.GetKeyDown(KeyCode.P))
         {
             string sceneName = "Stage" + (currentStageIndex + 1);
-            SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene("Tutorial");
         }
     }
     private Coroutine moveCoroutine;
