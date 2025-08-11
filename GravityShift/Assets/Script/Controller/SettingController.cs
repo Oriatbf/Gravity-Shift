@@ -43,6 +43,7 @@ public class SettingController : Singleton<SettingController>
     {
         resumeBtn.onClick.AddListener(()=>Hide());
         settingBtn.onClick.AddListener(()=>ShowSettingPanel());
+        menuBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut("MapSelect",true));
         restartBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut(SceneManager.GetActiveScene().buildIndex,true));
     }
 
