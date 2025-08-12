@@ -91,6 +91,7 @@ public class PlayerCtrl : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
+                transform.DOKill();
                 if (gravity.y == -10) //중력 방향 Bottom -> Left
                     toGravityLeft();
                 else if (gravity.x == -10) //중력 방향 Left -> Top
@@ -103,6 +104,7 @@ public class PlayerCtrl : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
+                transform.DOKill(); 
                 if (gravity.y == -10) //중력 방향 Bottom -> Right
                     toGravityRight();
                 else if (gravity.x == 10) //중력 방향 Right -> Top
@@ -135,9 +137,9 @@ public class PlayerCtrl : MonoBehaviour
                     else if (gravity.x == 10) //중력 방향 Right
                         newPos = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
                     
-                    transform.DOMove(newPos, moveDuration);
+                    transform.DOMove(newPos, moveDuration).SetUpdate(true);
                     transform.DOLocalRotate(new Vector3(0,0,curRot + rotValue),rotDuration)
-                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration));
+                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration)).SetUpdate(true);
                     StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }
@@ -156,9 +158,9 @@ public class PlayerCtrl : MonoBehaviour
                         newPos = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == 10) //중력 방향 Right
                         newPos = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
-                    transform.DOMove(newPos, moveDuration);
+                    transform.DOMove(newPos, moveDuration).SetUpdate(true);
                     transform.DOLocalRotate(new Vector3(0,0,curRot-rotValue),rotDuration)
-                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration));
+                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration)).SetUpdate(true);
                     StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }  
@@ -269,7 +271,7 @@ public class PlayerCtrl : MonoBehaviour
     private void toGravityLeft()
     {
         playerGravity = PlayerGravity.Left;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
         gravity = new Vector3(-10, 0, 0);
         transform.position = new Vector3( Left[idx].transform.position.x, Left[idx].transform.position.y, 0);
     }
@@ -277,7 +279,7 @@ public class PlayerCtrl : MonoBehaviour
     private void toGravityRight()
     {
         playerGravity = PlayerGravity.Right;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
         gravity = new Vector3(10, 0, 0);
         transform.position = new Vector3(Right[idx].transform.position.x, Right[idx].transform.position.y, 0);
     }
@@ -285,7 +287,7 @@ public class PlayerCtrl : MonoBehaviour
     private void toGravityTop()
     {
         playerGravity = PlayerGravity.Up;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
         gravity = new Vector3(0, 10, 0);
         transform.position = new Vector3(Top[idx].transform.position.x, Top[idx].transform.position.y, 0);
     }
@@ -293,7 +295,7 @@ public class PlayerCtrl : MonoBehaviour
     private void toGravityBottom()
     {
         playerGravity = PlayerGravity.Down;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         gravity = new Vector3(0, -10, 0);
         transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
     }
