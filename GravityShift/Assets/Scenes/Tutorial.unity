@@ -337,7 +337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &107562669
 Light:
   m_ObjectHideFlags: 0
@@ -1966,7 +1966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &391593170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2992,6 +2992,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1133665002}
     m_Modifications:
+    - target: {fileID: -1954336319225659598, guid: 23b1db0bac8c4194d969b0c233a4cc91, type: 3}
+      propertyPath: gravity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 734091256950586038, guid: 23b1db0bac8c4194d969b0c233a4cc91, type: 3}
       propertyPath: m_Name
       value: '[grft] shield'
@@ -5369,11 +5373,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1650955539754610465, guid: 55387d9b0d8853b43ba1bade71d5b64e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.73
+      value: -2.97
       objectReference: {fileID: 0}
     - target: {fileID: 1650955539754610465, guid: 55387d9b0d8853b43ba1bade71d5b64e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.34
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 1650955539754610465, guid: 55387d9b0d8853b43ba1bade71d5b64e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10635,6 +10639,7 @@ MonoBehaviour:
   rotDuration: 0.15
   shiftCoolTime: 1
   moveCoolTime: 0.08
+  curRot: 0
   isInvincible: 0
   isAdhesion: 0
 --- !u!1 &6722270836295338252
@@ -11461,7 +11466,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8529862256548140214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c75b5590bdc779642b1a051012b25eb7, type: 3}
   m_Name: 
