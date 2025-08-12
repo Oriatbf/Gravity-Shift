@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
@@ -8,7 +9,7 @@ public class MapSpawnController : Singleton<MapSpawnController>
     [SerializeField] private Transform spawnTrans;
     [SerializeField] private bool singleMap = false;
     private int curMapIndex = 0;
-
+    private bool isLastMap = false;
     [Button]
     public void SpawnMap()
     {
@@ -18,8 +19,23 @@ public class MapSpawnController : Singleton<MapSpawnController>
         {
             if (curMapIndex >= maps.Count) return;
             curMap = Instantiate(maps[curMapIndex],spawnTrans.position,maps[curMapIndex].transform.rotation,transform);
-            curMapIndex++;
+            curMapIndex+=1;
+            if (curMapIndex >= maps.Count) isLastMap = true;
+
         }
         spawnTrans = curMap?.spawnTrans;
+    }
+
+    private void Update()
+    {
+        if (isLastMap)
+        {
+            if(spawnTrans.position.z<=2.5f)
+            {
+                Debug.Log("맵 끝");
+                isLastMap=false;
+                SettingController.Inst.EndingUI(true);
+            }
+        }
     }
 }

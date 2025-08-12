@@ -5,11 +5,26 @@ using DG.Tweening;
 
 public class item1 : MonoBehaviour
 {
-    
+   public PlayerGravity gravity;
+
+   
     private void Start()
     {
-        transform.DOLocalMoveY(0.5f, 2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic);
-        transform.DORotate(new Vector3(0, 360, 0), 2f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+
+        switch (gravity)
+        {
+            case PlayerGravity.Down:
+                transform.DOLocalMoveY(transform.position.y+0.5f, 2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic);
+                transform.DORotate(new Vector3(0, 360, 0), 2f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+                break;
+            case PlayerGravity.Up:
+                break;
+            case PlayerGravity.Left:
+                break;
+            case PlayerGravity.Right:
+                break;
+        }
+       
     }
     //아이템 회전, 위아래
 
