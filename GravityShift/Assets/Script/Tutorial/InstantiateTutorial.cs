@@ -2,25 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
-
+[Serializable]
+public struct InstanceInfo
+{
+    public Vector3 position;
+    public GameObject instance;
+    public float delay;
+}
 public class InstantiateTutorial : Tutorial
 {
-    [Serializable]
-    public struct InstanceInfo
-    {
-        public Vector3 position;
-        public GameObject instance;
-        public float delay;
-    }
     
     public List<InstanceInfo> InstanceInfos = new List<InstanceInfo>();
     private List<GameObject> _instances = new List<GameObject>();
     protected override void Start()
     {
         isActive = false;
-        StartSet();
-        StartCoroutine(Action());
+        _tutorialController.ChanagePlayerState(_playerState);
+        DOVirtual.DelayedCall(tutorialDelay, () =>
+        {
+            StartSet();
+            StartCoroutine(Action());
+        } );
+        
     }
 
     IEnumerator Action()
@@ -28,7 +33,8 @@ public class InstantiateTutorial : Tutorial
         for (var i = 0; i < InstanceInfos.Count; i++)
         {
             yield return new WaitForSeconds(InstanceInfos[i].delay);
-            var a=Instantiate(InstanceInfos[i].instance,InstanceInfos[i].position, Quaternion.identity,_tutorialController.map);
+            var rot = InstanceInfos[i].instance.transform.rotation;
+            var a=Instantiate(InstanceInfos[i].instance,InstanceInfos[i].position,rot,_tutorialController.map);
             _instances.Add(a);
         }
         isActive = true;

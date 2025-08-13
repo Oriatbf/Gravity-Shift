@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +10,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private Panel panel;
     protected bool isActive = false;
      protected TutorialController _tutorialController;
-    [SerializeField] private PlayerState _playerState;
+    [SerializeField] protected PlayerState _playerState;
+    
+    protected const float tutorialDelay = 0.3f;
 
 
     public void Inject(TutorialController tutorialController)
@@ -19,13 +22,18 @@ public class Tutorial : MonoBehaviour
 
     protected virtual void Start()
     {
-        isActive = true;
-        StartSet();
+        _tutorialController.ChanagePlayerState(_playerState);
+        DOVirtual.DelayedCall(tutorialDelay, () =>
+        {
+            isActive = true;
+            StartSet();
+        } );
     }
 
     protected void StartSet()
     {
-        panel.SetPosition(PanelStates.Show,true,0.8f);
+        panel.DOComplete();
+        panel.SetPosition(PanelStates.Show,true,0.5f);
         _tutorialController.ChanagePlayerState(_playerState);
     }
 
@@ -42,9 +50,9 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    protected void FinishTutorial()
+    public void FinishTutorial()
     {
-        panel.SetPosition(PanelStates.Hide,true,0.8f);
+        panel.SetPosition(PanelStates.Hide,true,0.5f);
         _tutorialController.EndTutorial();
         Destroy(gameObject,1f);
     }

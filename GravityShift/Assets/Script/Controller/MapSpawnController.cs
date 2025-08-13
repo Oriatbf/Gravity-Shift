@@ -10,6 +10,14 @@ public class MapSpawnController : Singleton<MapSpawnController>
     [SerializeField] private bool singleMap = false;
     private int curMapIndex = 0;
     private bool isLastMap = false;
+    private MapMoving mapMoving;
+    private void Awake()
+    {
+        mapMoving = GetComponent<MapMoving>();
+    }
+    
+    public void StopMapMoving() => mapMoving.StopMoving();
+
     [Button]
     public void SpawnMap()
     {

@@ -55,11 +55,12 @@ public class Panel : MonoBehaviour
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _rect = GetComponent<RectTransform>();
+        SetPosition(positionList[0]);
     }
 
     private void Start()
     {
-        SetPosition(positionList[0]);
+        
     }
 
     public void SetPosition(PanelStates state, bool useDotween = false, float dotweenTime = 0.2f,Ease ease = Ease.Unset)

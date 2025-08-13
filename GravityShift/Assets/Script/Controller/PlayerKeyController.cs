@@ -2,19 +2,20 @@ using System;
 using UnityEngine;
 public enum PlayerState
 {
-    AllKey,OnlyLR,OnlyShift,NoneKey
+    AllKey,OnlyLR,OnlyShift,NoneKey,OnlyS
 }
 public class PlayerKeyController : MonoBehaviour
 {
-    PlayerCtrl playerCtrl;
     [SerializeField]private PlayerState curState;
 
-    private void Start()
+    public bool CheckCurState(PlayerState requireState)
     {
-        playerCtrl = GetComponent<PlayerCtrl>();
+        if (requireState == curState || curState == PlayerState.AllKey) return true;
+        else return false;
     }
+    
 
-    public void ChnageState(PlayerState state)
+    public void ChangeState(PlayerState state)
     {
         curState = state;
         switch (state)
