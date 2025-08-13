@@ -965,6 +965,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[grft] coin'
       objectReference: {fileID: 0}
+    - target: {fileID: 8223399469997159416, guid: 55387d9b0d8853b43ba1bade71d5b64e, type: 3}
+      propertyPath: gravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2994,7 +2998,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1954336319225659598, guid: 23b1db0bac8c4194d969b0c233a4cc91, type: 3}
       propertyPath: gravity
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 734091256950586038, guid: 23b1db0bac8c4194d969b0c233a4cc91, type: 3}
       propertyPath: m_Name
@@ -3006,11 +3010,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4300738153314977956, guid: 23b1db0bac8c4194d969b0c233a4cc91, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.13240612
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4300738153314977956, guid: 23b1db0bac8c4194d969b0c233a4cc91, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 33.304047
+      value: 136.6
       objectReference: {fileID: 0}
     - target: {fileID: 4300738153314977956, guid: 23b1db0bac8c4194d969b0c233a4cc91, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5562,6 +5566,10 @@ PrefabInstance:
     - target: {fileID: 3525630577249378959, guid: 0044ffb36955d044c98b8fe5a357c353, type: 3}
       propertyPath: m_Name
       value: '[grft] gravity_shift'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903016608617606477, guid: 0044ffb36955d044c98b8fe5a357c353, type: 3}
+      propertyPath: gravity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8743809499007615504, guid: 0044ffb36955d044c98b8fe5a357c353, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10639,7 +10647,6 @@ MonoBehaviour:
   rotDuration: 0.15
   shiftCoolTime: 1
   moveCoolTime: 0.08
-  curRot: 0
   isInvincible: 0
   isAdhesion: 0
 --- !u!1 &6722270836295338252
