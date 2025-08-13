@@ -1,13 +1,25 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
+using VInspector;
 
 public class MapMoving : MonoBehaviour
 {
     public int movespeed;
+    private bool isMoving = true;
 
+    [Button]
+    public void StopMoving()
+    {
+        isMoving = false;
+        DOVirtual.DelayedCall(2f,()=>SettingController.Inst.EndingUI(false));
+
+
+    }
 
     void Update()
     {
-        transform.Translate(-Vector3.forward*Time.deltaTime*movespeed, Space.World);
+        if(isMoving)
+            transform.Translate(-Vector3.forward*Time.deltaTime*movespeed, Space.World);
     }
 }

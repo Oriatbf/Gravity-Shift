@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -11,6 +12,13 @@ public class StageSelectController : MonoBehaviour
 
     private int currentStageIndex = 0;
     private bool isOnstage = false;
+    
+    Animator animator;
+
+    private void Awake()
+    {
+        animator = player.GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -24,6 +32,7 @@ public class StageSelectController : MonoBehaviour
 
     public void SelectStage(int targetStage)
     {
+        animator.SetBool("isWalk",true);
         targetStage = Mathf.Clamp(targetStage, 0, stagepoints.Count - 1); 
         StopAllCoroutines();
         StartCoroutine(MoveThroughStages(targetStage));
@@ -46,6 +55,7 @@ public class StageSelectController : MonoBehaviour
         }
 
         isOnstage = true;
+        animator.SetBool("isWalk",false);
     }
 
     private IEnumerator MovePlayerTo(Vector3 targetPos)

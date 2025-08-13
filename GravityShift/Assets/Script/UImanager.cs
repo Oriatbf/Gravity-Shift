@@ -16,6 +16,7 @@ public class UImanager : Singleton<UImanager>
     public Image invincibleItemImage;
     public Image adhesionItemImage;
     private bool havingItem = false;
+    [SerializeField]private PlayerKeyController playerKeyController;
 
     void Awake()
     {
@@ -63,7 +64,7 @@ public class UImanager : Singleton<UImanager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) && havingItem)
+        if (Input.GetKeyDown(KeyCode.S) && havingItem && playerKeyController.CheckCurState(PlayerState.OnlyS))
         {
             UseItem();
         }

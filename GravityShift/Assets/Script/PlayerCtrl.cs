@@ -34,6 +34,7 @@ public class PlayerCtrl : MonoBehaviour
     
     private PlayerGravity playerGravity = PlayerGravity.Down;
     private PlayerEffection playerEffection;
+    private PlayerKeyController playerKeyController;
     private float curRot = 0;
 
     public bool isInvincible = false;
@@ -43,6 +44,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         playerEffection = GetComponent<PlayerEffection>();
         rb = GetComponent<Rigidbody>();
+        playerKeyController = GetComponent<PlayerKeyController>();
     }
 
     void Start()
@@ -68,7 +70,7 @@ public class PlayerCtrl : MonoBehaviour
     private void Move()
     {
         
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && playerKeyController.CheckCurState(PlayerState.OnlyShift))
         {
             
             Debug.Log("LS 눌렸습니다");
@@ -84,6 +86,8 @@ public class PlayerCtrl : MonoBehaviour
                 OnShift = false;
             }
         }
+
+        if (!playerKeyController.CheckCurState(PlayerState.OnlyLR)) return;
         
          // 캐릭터 중력 방향 전환
         if (OnShift&&!isAdhesion)

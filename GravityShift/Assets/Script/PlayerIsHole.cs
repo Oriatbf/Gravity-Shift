@@ -15,8 +15,8 @@ public class PlayerIsHole : MonoBehaviour
 
         if (colliders.Length == 0 && !isDead)
         {
-            isDead = true;
-            SettingController.Inst.EndingUI(false);
+            MapSpawnController.Inst.StopMapMoving();
+            isDead = true; 
         }
             
     }

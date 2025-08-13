@@ -21,7 +21,6 @@ public class item2 : MonoBehaviour
             Action action = () => playerCtrl.ActiveAdhesion();
             UImanager.Inst.ShowAdhesionitemUI(action);
             Destroy(gameObject);
-
         }
     }
     //플레이어에 닿으면 디버그하고 UI창에 이미지 보이기
