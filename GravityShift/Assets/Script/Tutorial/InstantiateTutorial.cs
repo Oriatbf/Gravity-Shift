@@ -19,9 +19,11 @@ public class InstantiateTutorial : Tutorial
     protected override void Start()
     {
         isActive = false;
-        _tutorialController.ChanagePlayerState(_playerState);
+        _tutorialController.ChanagePlayerState(PlayerState.NoneKey);
+        
         DOVirtual.DelayedCall(tutorialDelay, () =>
         {
+            _tutorialController.ChanagePlayerState(_playerState);
             StartSet();
             StartCoroutine(Action());
         } );

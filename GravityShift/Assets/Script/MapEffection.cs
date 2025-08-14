@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using VInspector;
 
-public class CaveDotweenTest : MonoBehaviour
+public class MapEffection : MonoBehaviour
 {
     public Transform spawnTrans;
     private List<Transform> childs = new List<Transform>();
@@ -40,7 +40,6 @@ public class CaveDotweenTest : MonoBehaviour
         
         if (spawnTransZ < 0)
         {
-            Debug.Log("0보다 작아짐");
             MapSpawnController.Inst.SpawnMap();
             spawnBool = false;
             Destroy(gameObject,3);

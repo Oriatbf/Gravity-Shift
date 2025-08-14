@@ -12,7 +12,7 @@ public class Tutorial : MonoBehaviour
      protected TutorialController _tutorialController;
     [SerializeField] protected PlayerState _playerState;
     
-    protected const float tutorialDelay = 0.3f;
+    protected const float tutorialDelay = 0.5f;
 
 
     public void Inject(TutorialController tutorialController)
@@ -22,9 +22,10 @@ public class Tutorial : MonoBehaviour
 
     protected virtual void Start()
     {
-        _tutorialController.ChanagePlayerState(_playerState);
+        _tutorialController.ChanagePlayerState(PlayerState.NoneKey);
         DOVirtual.DelayedCall(tutorialDelay, () =>
         {
+            _tutorialController.ChanagePlayerState(_playerState);
             isActive = true;
             StartSet();
         } );
@@ -33,7 +34,7 @@ public class Tutorial : MonoBehaviour
     protected void StartSet()
     {
         panel.DOComplete();
-        panel.SetPosition(PanelStates.Show,true,0.5f);
+        panel.SetPosition(PanelStates.Show,true,0.25f);
         _tutorialController.ChanagePlayerState(_playerState);
     }
 
@@ -52,7 +53,7 @@ public class Tutorial : MonoBehaviour
 
     public void FinishTutorial()
     {
-        panel.SetPosition(PanelStates.Hide,true,0.5f);
+        panel.SetPosition(PanelStates.Hide,true,0.25f);
         _tutorialController.EndTutorial();
         Destroy(gameObject,1f);
     }

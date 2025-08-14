@@ -5,7 +5,7 @@ using VInspector;
 
 public class MapSpawnController : Singleton<MapSpawnController>
 {
-    [SerializeField] private List<CaveDotweenTest> maps;
+    [SerializeField] private List<MapEffection> maps;
     [SerializeField] private Transform spawnTrans;
     [SerializeField] private bool singleMap = false;
     private int curMapIndex = 0;
@@ -21,7 +21,7 @@ public class MapSpawnController : Singleton<MapSpawnController>
     [Button]
     public void SpawnMap()
     {
-        CaveDotweenTest curMap = null;
+        MapEffection curMap = null;
         if (singleMap) curMap = Instantiate(maps[0],spawnTrans.position,maps[curMapIndex].transform.rotation,transform);
         else
         {

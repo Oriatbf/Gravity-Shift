@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +12,7 @@ public class StageSelectController : MonoBehaviour
     public float moveSpeed = 3f;
 
     private int currentStageIndex = 0;
-    private bool isOnstage = false;
+    private bool isOnstage = true;
     
     Animator animator;
 
@@ -20,12 +21,17 @@ public class StageSelectController : MonoBehaviour
         animator = player.GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        player.position = stagepoints[currentStageIndex].position;
+    }
+
     void Update()
     {
         if (isOnstage && Input.GetKeyDown(KeyCode.P))
         {
             string sceneName = "Stage" + (currentStageIndex + 1);
-            SceneManager.LoadScene("Tutorial");
+            FadeInFadeOutManager.Inst.FadeOut(1,true);
         }
     }
     private Coroutine moveCoroutine;
@@ -49,7 +55,9 @@ public class StageSelectController : MonoBehaviour
             int nextIndex = i + step;
             if (nextIndex < 0 || nextIndex >= stagepoints.Count)
                 break;
-
+            Vector3 direction = (stagepoints[nextIndex].position - player.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            player.DOLocalRotate(targetRotation.eulerAngles, 1f);
             yield return StartCoroutine(MovePlayerTo(stagepoints[i + step].position));
             currentStageIndex = i + step;
         }

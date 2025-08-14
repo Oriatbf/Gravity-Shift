@@ -5690,7 +5690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3525630577249378959, guid: 0044ffb36955d044c98b8fe5a357c353, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8743809499007615504, guid: 0044ffb36955d044c98b8fe5a357c353, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6117,6 +6117,7 @@ MonoBehaviour:
   - {fileID: -7501028420289922100, guid: 847d918a09eaafb4aab3904d7a1f3135, type: 3}
   - {fileID: 5437083115581596716, guid: 59d19daeedbba7349ac06abf3e5eab76, type: 3}
   - {fileID: 3968245533746528377, guid: 979c5ef9134a45e41ae27040d2dd1c50, type: 3}
+  - {fileID: 7327945358838688903, guid: f6020b7d09ca3ed409c89298f775e79a, type: 3}
   tutorialIndex: 0
   _playerKeyController: {fileID: 9097971373374948813}
   map: {fileID: 1133665002}

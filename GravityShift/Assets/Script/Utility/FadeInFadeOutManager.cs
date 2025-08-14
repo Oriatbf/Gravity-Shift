@@ -11,17 +11,20 @@ public class FadeInFadeOutManager : SingletonDontDestroyOnLoad<FadeInFadeOutMana
 
     private void Start()
     {
-        FadeIn();
+        //FadeIn(true,0.5f);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => FadeIn(true,0.5f);
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        fadeImage.DOComplete();
+        FadeIn(true, 1.5f);
+    }
 
     //검은색 화면 해제
     public void FadeIn(bool useDotween = false, float dotweenTime = 0.2f, Action action = null)
     {
         TimeController.ChangeTimeScale(1);
-        Debug.Log("FadeIn");
-        fadeImage.DOComplete();
+        //fadeImage.DOComplete();
         if (!useDotween)
         {
             fadeImage.DOFade(0, 0).SetUpdate(true);
