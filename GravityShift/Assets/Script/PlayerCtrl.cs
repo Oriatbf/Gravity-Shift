@@ -11,51 +11,45 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerCtrl : MonoBehaviour
 {
     private Rigidbody rb;
-    
-    [Header("Map")]
     public GameObject[] bottom;
     public GameObject[] Right;
     public GameObject[] Top;
     public GameObject[] Left;
     public int idx;
     
-    
-    [Header("Gravity")]
     public Vector3 gravity = new Vector3(0, -10, 0);
     public int gravityStrength = 10;
+    
     bool isInGravity = false;
     [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
-    private PlayerGravity playerGravity = PlayerGravity.Down;
-    private PlayerEffection playerEffection;
-    private float curRot = 0;
     
+    [Header("Illusion")]
+    public bool isIllusion;
+
+    private int randomGravity;
     
-    [Header("Shift")]
     private bool OnShift;
     public float shiftCoolTime;
     private bool isshiftCoolTime;
     private bool isleftwall;
     private bool isrightwall;
 
-    
-    [Header("Move")]
     private bool OnMove;
     public float moveCoolTime;
     
+    private PlayerGravity playerGravity = PlayerGravity.Down;
+    private PlayerEffection playerEffection;
+    private PlayerKeyController playerKeyController;
+    private float curRot = 0;
 
-    [Header("Item")]
     public bool isInvincible = false;
     public bool isAdhesion = false;
-    
-    
-    [Header("Illusion")]
-    public bool isIllusion;
-    private int randomGravity;
     
     private void Awake()
     {
         playerEffection = GetComponent<PlayerEffection>();
         rb = GetComponent<Rigidbody>();
+        playerKeyController = GetComponent<PlayerKeyController>();
     }
 
     void Start()
@@ -71,7 +65,6 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         Move();
-        
     }
 
     private void FixedUpdate()
@@ -82,26 +75,24 @@ public class PlayerCtrl : MonoBehaviour
     private void Move()
     {
         
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && playerKeyController.CheckCurState(PlayerState.OnlyShift))
         {
             
             Debug.Log("LS 눌렸습니다");
             if (!OnShift)
             {
                 if (isshiftCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
-                TimeController.ChangeTimeScale(0.25f, 0.35f);
-                playerEffection.Show();
-                VolumeController.Inst.GravityProduction(true);
+                GravityEffect(true);
                 OnShift = true;
             }
             else
             {
-                playerEffection.Hide();
-                TimeController.ChangeTimeScale(1, 0.15f);
-                VolumeController.Inst.GravityProduction(false);
+                GravityEffect(false);
                 OnShift = false;
             }
         }
+
+        if (!playerKeyController.CheckCurState(PlayerState.OnlyLR)) return;
         
          // 캐릭터 중력 방향 전환
         if (OnShift&&!isAdhesion)
@@ -109,6 +100,7 @@ public class PlayerCtrl : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.A)) //왼쪽 벽으로 이동
             {
+                transform.DOKill();
                 if (gravity.y == -10) //중력 방향 Bottom -> Left
                     toGravityLeft();
                 else if (gravity.x == -10) //중력 방향 Left -> Top
@@ -121,6 +113,7 @@ public class PlayerCtrl : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
+                transform.DOKill(); 
                 if (gravity.y == -10) //중력 방향 Bottom -> Right
                     toGravityRight();
                 else if (gravity.x == 10) //중력 방향 Right -> Top
@@ -153,9 +146,9 @@ public class PlayerCtrl : MonoBehaviour
                     else if (gravity.x == 10) //중력 방향 Right
                         newPos = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
                     
-                    transform.DOMove(newPos, moveDuration);
+                    transform.DOMove(newPos, moveDuration).SetUpdate(true);
                     transform.DOLocalRotate(new Vector3(0,0,curRot + rotValue),rotDuration)
-                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration));
+                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration)).SetUpdate(true);
                     StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }
@@ -174,9 +167,9 @@ public class PlayerCtrl : MonoBehaviour
                         newPos = new Vector3(Top[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == 10) //중력 방향 Right
                         newPos = new Vector3(transform.position.x, Right[idx].transform.position.y, 0);
-                    transform.DOMove(newPos, moveDuration);
+                    transform.DOMove(newPos, moveDuration).SetUpdate(true);
                     transform.DOLocalRotate(new Vector3(0,0,curRot-rotValue),rotDuration)
-                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration));
+                        .OnComplete(()=>transform.DOLocalRotate(new Vector3(0,0,curRot),rotDuration)).SetUpdate(true);
                     StartCoroutine(setMoveCoolTime(moveCoolTime)); 
                 }
             }  
@@ -194,6 +187,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == 10) //중력 방향 Right -> Bottom
                     toGravityBottom();
                 isAdhesion = false;
+                GravityEffect(false);
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -206,6 +200,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == -10) //중력 방향 Left -> Bottom
                     toGravityBottom();
                 isAdhesion = false;
+                GravityEffect(false);
             }
 
             if (Input.GetKeyDown(KeyCode.W))
@@ -219,6 +214,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == -10) //중력 방향 Left -> Right
                     toGravityRight();
                 isAdhesion = false;
+                GravityEffect(false);
             }
             
         }
@@ -233,13 +229,47 @@ public class PlayerCtrl : MonoBehaviour
     {
         OnShift = false;
         isshiftCoolTime = true;
-        SetCurRot();
-        playerEffection.Hide(playerGravity);
-        CameraController.Inst.MoveCamera(playerGravity);
-        TimeController.ChangeTimeScale(1, 0.15f);
-        VolumeController.Inst.GravityProduction(false);
+        GravityEffect(false);
         yield return new WaitForSeconds(cool);
         isshiftCoolTime = false;
+    }
+
+    private void GravityEffect(bool isShow)
+    {
+        if (isShow)
+        {
+            playerEffection.Show();
+            TimeController.ChangeTimeScale(0.25f, 0.35f);
+        }
+        else
+        {
+            playerEffection.Hide(playerGravity);
+            TimeController.ChangeTimeScale(1, 0.15f);
+        }
+        SetCurRot();
+        CameraController.Inst.MoveCamera(playerGravity);
+        VolumeController.Inst.GravityProduction(isShow);
+    }
+    
+    public void RandomGravity()
+    {
+        randomGravity = UnityEngine.Random.Range(1, 4);
+        if(randomGravity == 1)
+            toGravityBottom();
+        else if (randomGravity == 2)
+            toGravityLeft();
+        else if (randomGravity == 3)
+            toGravityTop();
+        else if (randomGravity == 4)
+            toGravityRight();
+    }
+    private void OnTriggerEnter(Collider obj)
+    {
+        if (obj.gameObject.tag == "illusion")
+            isIllusion = true;
+
+        if (obj.gameObject.tag != "illusion")
+            isIllusion = false;
     }
 
     private void SetCurRot()
@@ -265,12 +295,13 @@ public class PlayerCtrl : MonoBehaviour
     public void ActiveAdhesion()
     {
         isAdhesion = true;
+        GravityEffect(true);
     }
     
     private void toGravityLeft()
     {
         playerGravity = PlayerGravity.Left;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
         gravity = new Vector3(-10, 0, 0);
         transform.position = new Vector3( Left[idx].transform.position.x, Left[idx].transform.position.y, 0);
     }
@@ -278,7 +309,7 @@ public class PlayerCtrl : MonoBehaviour
     private void toGravityRight()
     {
         playerGravity = PlayerGravity.Right;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
         gravity = new Vector3(10, 0, 0);
         transform.position = new Vector3(Right[idx].transform.position.x, Right[idx].transform.position.y, 0);
     }
@@ -286,7 +317,7 @@ public class PlayerCtrl : MonoBehaviour
     private void toGravityTop()
     {
         playerGravity = PlayerGravity.Up;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
         gravity = new Vector3(0, 10, 0);
         transform.position = new Vector3(Top[idx].transform.position.x, Top[idx].transform.position.y, 0);
     }
@@ -294,32 +325,11 @@ public class PlayerCtrl : MonoBehaviour
     private void toGravityBottom()
     {
         playerGravity = PlayerGravity.Down;
-        rb.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         gravity = new Vector3(0, -10, 0);
         transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
     }
-
-    public void RandomGravity()
-    {
-        randomGravity = UnityEngine.Random.Range(1, 4);
-        if(randomGravity == 1)
-            toGravityBottom();
-        else if (randomGravity == 2)
-            toGravityLeft();
-        else if (randomGravity == 3)
-            toGravityTop();
-        else if (randomGravity == 4)
-            toGravityRight();
-    }
-    private void OnTriggerEnter(Collider obj)
-    {
-        if (obj.gameObject.tag == "illusion")
-            isIllusion = true;
-
-        if (obj.gameObject.tag != "illusion")
-            isIllusion = false;
-    }
-
+    
     IEnumerator setMoveCoolTime(float cool)
     {
         OnMove = false;
