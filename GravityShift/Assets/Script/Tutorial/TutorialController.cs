@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using VInspector;
 
-public class TutorialController : MonoBehaviour
+public class TutorialController : Singleton<TutorialController>
 {
    [SerializeField] private bool startTutorial = false;
    public List<Tutorial> tutorials = new List<Tutorial>();
@@ -14,6 +14,7 @@ public class TutorialController : MonoBehaviour
 
    private void Start()
    {
+      _playerKeyController.ChangeState(PlayerState.NoneKey);
       if (startTutorial) DOVirtual.DelayedCall(5f, () => SpawnTutorial());
    }
 
@@ -30,10 +31,10 @@ public class TutorialController : MonoBehaviour
       }
    }
 
-   public void ChanagePlayerState(PlayerState state) => _playerKeyController.ChnageState(state);
+   public void ChanagePlayerState(PlayerState state) => _playerKeyController.ChangeState(state);
 
    public void EndTutorial()
    {
-      DOVirtual.DelayedCall(1f, () => SpawnTutorial());
+      SpawnTutorial();
    }
 }

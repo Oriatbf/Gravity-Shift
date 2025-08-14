@@ -21,7 +21,7 @@ public class SettingController : Singleton<SettingController>
     [SerializeField] private Ease ease;
     [SerializeField] private Button settingBtn,resumeBtn,menuBtn,restartBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
-    private bool isShow = false,isCounting = false;
+    private bool isShow = false,isCounting = false,isEnd = false;
     
     private const float leftPanelShow = 50, rightPanelShow = -50,leftPanelHide = -1000,rightPanelHide = 1500,settingPanelHide = 2000;
 
@@ -33,6 +33,7 @@ public class SettingController : Singleton<SettingController>
 
     public void EndingUI(bool isWin)
     {
+        isEnd = true;
         Show();
         endPanel.Show(isWin);
         if(!isWin)SetFailBtn();
@@ -43,13 +44,14 @@ public class SettingController : Singleton<SettingController>
     {
         resumeBtn.onClick.AddListener(()=>Hide());
         settingBtn.onClick.AddListener(()=>ShowSettingPanel());
+        menuBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut("MapSelect",true));
         restartBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut(SceneManager.GetActiveScene().buildIndex,true));
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !isCounting)SetUI();
+        if(Input.GetKeyDown(KeyCode.Escape) && !isCounting && !isEnd)SetUI();
     }
 
     void SetAllBtn()
