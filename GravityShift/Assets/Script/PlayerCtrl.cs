@@ -11,33 +11,46 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerCtrl : MonoBehaviour
 {
     private Rigidbody rb;
+    
+    [Header("Map")]
     public GameObject[] bottom;
     public GameObject[] Right;
     public GameObject[] Top;
     public GameObject[] Left;
     public int idx;
     
+    
+    [Header("Gravity")]
     public Vector3 gravity = new Vector3(0, -10, 0);
     public int gravityStrength = 10;
-    
     bool isInGravity = false;
     [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
+    private PlayerGravity playerGravity = PlayerGravity.Down;
+    private PlayerEffection playerEffection;
+    private float curRot = 0;
     
+    
+    [Header("Shift")]
     private bool OnShift;
     public float shiftCoolTime;
     private bool isshiftCoolTime;
     private bool isleftwall;
     private bool isrightwall;
 
+    
+    [Header("Move")]
     private bool OnMove;
     public float moveCoolTime;
     
-    private PlayerGravity playerGravity = PlayerGravity.Down;
-    private PlayerEffection playerEffection;
-    private float curRot = 0;
 
+    [Header("Item")]
     public bool isInvincible = false;
     public bool isAdhesion = false;
+    
+    
+    [Header("Illusion")]
+    public bool isIllusion;
+    private int randomGravity;
     
     private void Awake()
     {
@@ -58,6 +71,7 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         Move();
+        
     }
 
     private void FixedUpdate()
@@ -284,7 +298,28 @@ public class PlayerCtrl : MonoBehaviour
         gravity = new Vector3(0, -10, 0);
         transform.position = new Vector3(bottom[idx].transform.position.x, bottom[idx].transform.position.y, 0);
     }
-    
+
+    public void RandomGravity()
+    {
+        randomGravity = UnityEngine.Random.Range(1, 4);
+        if(randomGravity == 1)
+            toGravityBottom();
+        else if (randomGravity == 2)
+            toGravityLeft();
+        else if (randomGravity == 3)
+            toGravityTop();
+        else if (randomGravity == 4)
+            toGravityRight();
+    }
+    private void OnTriggerEnter(Collider obj)
+    {
+        if (obj.gameObject.tag == "illusion")
+            isIllusion = true;
+
+        if (obj.gameObject.tag != "illusion")
+            isIllusion = false;
+    }
+
     IEnumerator setMoveCoolTime(float cool)
     {
         OnMove = false;
