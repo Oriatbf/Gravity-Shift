@@ -23,6 +23,11 @@ public class PlayerCtrl : MonoBehaviour
     bool isInGravity = false;
     [SerializeField]private float moveDuration = 0.15f,rotValue = 14f,rotDuration = 0.15f;
     
+    [Header("Illusion")]
+    public bool isIllusion;
+
+    private int randomGravity;
+    
     private bool OnShift;
     public float shiftCoolTime;
     private bool isshiftCoolTime;
@@ -244,6 +249,27 @@ public class PlayerCtrl : MonoBehaviour
         SetCurRot();
         CameraController.Inst.MoveCamera(playerGravity);
         VolumeController.Inst.GravityProduction(isShow);
+    }
+    
+    public void RandomGravity()
+    {
+        randomGravity = UnityEngine.Random.Range(1, 4);
+        if(randomGravity == 1)
+            toGravityBottom();
+        else if (randomGravity == 2)
+            toGravityLeft();
+        else if (randomGravity == 3)
+            toGravityTop();
+        else if (randomGravity == 4)
+            toGravityRight();
+    }
+    private void OnTriggerEnter(Collider obj)
+    {
+        if (obj.gameObject.tag == "illusion")
+            isIllusion = true;
+
+        if (obj.gameObject.tag != "illusion")
+            isIllusion = false;
     }
 
     private void SetCurRot()
