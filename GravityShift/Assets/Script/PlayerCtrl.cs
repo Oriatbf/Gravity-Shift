@@ -25,7 +25,6 @@ public class PlayerCtrl : MonoBehaviour
     
     [Header("Illusion")]
     public bool isIllusion;
-
     private int randomGravity;
     
     private bool OnShift;
@@ -44,6 +43,8 @@ public class PlayerCtrl : MonoBehaviour
 
     public bool isInvincible = false;
     public bool isAdhesion = false;
+    
+
     
     private void Awake()
     {
@@ -253,25 +254,41 @@ public class PlayerCtrl : MonoBehaviour
     
     public void RandomGravity()
     {
-        randomGravity = UnityEngine.Random.Range(1, 4);
-        if(randomGravity == 1)
-            toGravityBottom();
-        else if (randomGravity == 2)
-            toGravityLeft();
-        else if (randomGravity == 3)
-            toGravityTop();
-        else if (randomGravity == 4)
-            toGravityRight();
+        randomGravity = UnityEngine.Random.Range(1, 5);
+
+        switch (randomGravity)
+        {
+            case 1:
+                toGravityBottom();
+                break;
+            case 2:
+                toGravityLeft();
+                break;
+            case 3:
+                toGravityTop();
+                break;
+            case 4:
+                toGravityRight();
+                break;
+        }
         SetCurRot();
         CameraController.Inst.MoveCamera(playerGravity);
+        Debug.Log(randomGravity + "로 중력변환 했습니다");
     }
-    private void OnTriggerEnter(Collider obj)
+    private void OnTriggerEnter(Collider other)
     {
-        if (obj.gameObject.tag == "illusion")
+        if (other.gameObject.tag == "illusion")
+        {
             isIllusion = true;
-
-        if (obj.gameObject.tag != "illusion")
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "illusion")
+        {
             isIllusion = false;
+        }
     }
 
     private void SetCurRot()

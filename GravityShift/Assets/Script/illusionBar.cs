@@ -29,8 +29,12 @@ public class illusionBar : MonoBehaviour
                 IllusionBar.value = 0;
             }
         }
-        else
+        else if (player.isIllusion == false)
+        {
+            IllusionBar.value = 0;
             IllusionBar.gameObject.SetActive(false); 
+        }
+            
     }
     
 }
