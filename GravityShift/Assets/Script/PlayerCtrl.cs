@@ -262,6 +262,8 @@ public class PlayerCtrl : MonoBehaviour
             toGravityTop();
         else if (randomGravity == 4)
             toGravityRight();
+        SetCurRot();
+        CameraController.Inst.MoveCamera(playerGravity);
     }
     private void OnTriggerEnter(Collider obj)
     {
