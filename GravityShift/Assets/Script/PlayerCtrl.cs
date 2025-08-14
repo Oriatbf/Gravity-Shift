@@ -281,6 +281,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (other.CompareTag("illusion"))
         {
+            Debug.Log("환각존입니다");
             isIllusion = true;
         }
     }

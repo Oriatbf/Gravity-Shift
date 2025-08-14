@@ -8,8 +8,8 @@ public class illusionBar : MonoBehaviour
     private int IllusionValue;
     private bool isIllusion;
 
-    private float now;
-    private float max;
+    public float now;
+    public float max;
     public PlayerCtrl player;
     
 
@@ -25,17 +25,19 @@ public class illusionBar : MonoBehaviour
         if (player.isIllusion == true)
         {
             IllusionBar.gameObject.SetActive(true);
-            now = 1 * Time.fixedDeltaTime;
-            IllusionBar.fillAmount += now;
-            if (now == max)
+            now += (1 * Time.fixedDeltaTime) / max;
+            IllusionBar.fillAmount = now;
+            if (now >= 1f)
             {
                 player.RandomGravity();
-                IllusionBar.fillAmount = 0;
+                now = 0f;
+                IllusionBar.fillAmount = now;
             }
         }
         else if (player.isIllusion == false)
         {
-            IllusionBar.fillAmount = 0;
+            now = 0f;
+            IllusionBar.fillAmount = now;
             IllusionBar.gameObject.SetActive(false); 
         }
             
