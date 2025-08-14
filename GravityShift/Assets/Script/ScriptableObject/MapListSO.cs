@@ -5,4 +5,5 @@ using UnityEngine;
 public class MapListSO : ScriptableObject
 {
     public List<MapEffection> MapEffections = new List<MapEffection>();
+    public bool isSingleMap = false;
 }

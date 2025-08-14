@@ -5,10 +5,17 @@ public class PlayerEffection : MonoBehaviour
 {
     [SerializeField] private Panel adArrowPanel, upArrowPanel;
     private bool isShow = false;
+    PlayerCtrl player;
+
+    private void Awake()
+    {
+        player = GetComponent<PlayerCtrl>();
+    }
 
     public void Show()
     {
         isShow = true;
+        SetRot(player.playerGravity);
         adArrowPanel.SetPosition(PanelStates.Show,true);
     }
 
@@ -20,7 +27,7 @@ public class PlayerEffection : MonoBehaviour
     public void Hide(PlayerGravity gravity)
     {
         adArrowPanel.SetPosition(PanelStates.Hide,true);
-        SetRot(gravity);
+        SetRot(player.playerGravity);
     }
 
     private void SetRot(PlayerGravity gravity)

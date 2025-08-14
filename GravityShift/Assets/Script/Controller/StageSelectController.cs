@@ -30,7 +30,7 @@ public class StageSelectController : MonoBehaviour
     {
         if (isOnstage && Input.GetKeyDown(KeyCode.P))
         {
-            string sceneName = "Stage" + (currentStageIndex + 1);
+            DataManager.Inst.SetStage(currentStageIndex);
             FadeInFadeOutManager.Inst.FadeOut(1,true);
         }
     }

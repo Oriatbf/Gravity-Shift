@@ -10,6 +10,7 @@ TagManager:
   - item2
   - Map
   - illusion
+  - thorn
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - NoVolume
   - 
   - 
   - 

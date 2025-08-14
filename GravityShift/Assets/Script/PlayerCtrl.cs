@@ -25,6 +25,7 @@ public class PlayerCtrl : MonoBehaviour
     
     [Header("Illusion")]
     public bool isIllusion;
+
     private int randomGravity;
     
     private bool OnShift;
@@ -36,15 +37,13 @@ public class PlayerCtrl : MonoBehaviour
     private bool OnMove;
     public float moveCoolTime;
     
-    private PlayerGravity playerGravity = PlayerGravity.Down;
+    public PlayerGravity playerGravity = PlayerGravity.Down;
     private PlayerEffection playerEffection;
     private PlayerKeyController playerKeyController;
     private float curRot = 0;
 
     public bool isInvincible = false;
     public bool isAdhesion = false;
-    
-
     
     private void Awake()
     {
@@ -83,12 +82,14 @@ public class PlayerCtrl : MonoBehaviour
             if (!OnShift)
             {
                 if (isshiftCoolTime) return; // 쿨타임 중이면 아무것도 하지 않음
+                SetDirEffction();
                 GravityEffect(true);
                 OnShift = true;
             }
             else
             {
                 GravityEffect(false);
+                GravityDirEffctionController.Inst.HideEffection();
                 OnShift = false;
             }
         }
@@ -244,6 +245,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else
         {
+            GravityDirEffctionController.Inst.HideEffection();
             playerEffection.Hide(playerGravity);
             TimeController.ChangeTimeScale(1, 0.15f);
         }
@@ -277,7 +279,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "illusion")
+        if (other.CompareTag("illusion"))
         {
             isIllusion = true;
         }
@@ -285,7 +287,7 @@ public class PlayerCtrl : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "illusion")
+        if (other.CompareTag("illusion"))
         {
             isIllusion = false;
         }
@@ -311,9 +313,16 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    private void SetDirEffction()
+    {
+        GravityDirEffctionController.Inst.ShowEffction(Top[idx].transform,bottom[idx].transform, 
+            Left[idx].transform,Right[idx].transform,playerGravity);
+    }
+
     public void ActiveAdhesion()
     {
         isAdhesion = true;
+        SetDirEffction();
         GravityEffect(true);
     }
     

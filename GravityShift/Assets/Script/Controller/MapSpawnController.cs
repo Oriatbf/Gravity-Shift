@@ -5,30 +5,38 @@ using VInspector;
 
 public class MapSpawnController : Singleton<MapSpawnController>
 {
-    [SerializeField] private List<MapEffection> maps;
-    [SerializeField] private Transform spawnTrans;
-    [SerializeField] private bool singleMap = false;
-    private int curMapIndex = 0;
+    [SerializeField] private List<MapListSO> mapListSOs = new List<MapListSO>();
+    [SerializeField]private MapListSO curListSO;
+    [SerializeField]private Transform spawnTrans;
+    private int curOrderIndex = 0;
     private bool isLastMap = false;
     private MapMoving mapMoving;
     private void Awake()
     {
         mapMoving = GetComponent<MapMoving>();
     }
-    
+
+    private void Start()
+    {
+        int index = DataManager.Inst.Data.curStage;
+        curListSO=mapListSOs[index];
+    }
+
     public void StopMapMoving() => mapMoving.StopMoving();
 
     [Button]
     public void SpawnMap()
     {
         MapEffection curMap = null;
-        if (singleMap) curMap = Instantiate(maps[0],spawnTrans.position,maps[curMapIndex].transform.rotation,transform);
+        if (curListSO.isSingleMap) 
+            curMap = Instantiate(curListSO.MapEffections[0],spawnTrans.position,curListSO.MapEffections[0].transform.rotation,transform);
         else
         {
-            if (curMapIndex >= maps.Count) return;
-            curMap = Instantiate(maps[curMapIndex],spawnTrans.position,maps[curMapIndex].transform.rotation,transform);
-            curMapIndex+=1;
-            if (curMapIndex >= maps.Count) isLastMap = true;
+            if (curOrderIndex >= curListSO.MapEffections.Count) return;
+            var map = curListSO.MapEffections[curOrderIndex];
+            curMap = Instantiate(map,spawnTrans.position,map.transform.rotation,transform);
+            curOrderIndex+=1;
+            if (curOrderIndex >= curListSO.MapEffections.Count) isLastMap = true;
 
         }
         spawnTrans = curMap?.spawnTrans;

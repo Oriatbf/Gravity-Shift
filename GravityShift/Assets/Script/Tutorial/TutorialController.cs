@@ -14,6 +14,11 @@ public class TutorialController : Singleton<TutorialController>
 
    private void Start()
    {
+      if (DataManager.Inst.Data.curStage != 0)
+      {
+         startTutorial = false;
+         gameObject.SetActive(false);
+      }
       _playerKeyController.ChangeState(PlayerState.NoneKey);
       if (startTutorial) DOVirtual.DelayedCall(5f, () => SpawnTutorial());
    }

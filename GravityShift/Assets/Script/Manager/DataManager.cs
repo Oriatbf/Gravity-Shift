@@ -7,18 +7,25 @@ using UnityEngine;
 public class GameData
 {
     public List<float> stageTimes = new List<float>();
+    public int curStage = 0;
 }
 public class DataManager : SingletonDontDestroyOnLoad<DataManager>
 {
     string path;
-    [SerializeField]private GameData Data;
+    public GameData Data;
     private string fileName = "GameData.json";
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         path = Path.Combine(Application.persistentDataPath, fileName);
         JsonLoad();
+    }
+
+    public void SetStage(int stage)
+    {
+        Data.curStage = stage;
     }
 
 
