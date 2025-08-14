@@ -9,6 +9,7 @@ TagManager:
   - item1
   - item2
   - Map
+  - illusion
   layers:
   - Default
   - TransparentFX
