@@ -22,6 +22,7 @@ public class MapSpawnController : Singleton<MapSpawnController>
         if(DataManager.Inst!=null)
             index = DataManager.Inst.Data.curStage;
         curListSO=mapListSOs[index];
+        SpawnMap();
     }
 
     public void StopMapMoving() => mapMoving.StopMoving();

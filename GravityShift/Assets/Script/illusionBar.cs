@@ -16,7 +16,6 @@ public class illusionBar : MonoBehaviour
     void Start()
     {
         IllusionBar.fillAmount = 0;
-        max = 1.5f;
         IllusionBar.gameObject.SetActive(false);
     }
 
