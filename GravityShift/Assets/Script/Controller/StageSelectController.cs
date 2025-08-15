@@ -4,6 +4,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class StageSelectController : MonoBehaviour
 {
@@ -13,8 +14,14 @@ public class StageSelectController : MonoBehaviour
 
     private int currentStageIndex = 0;
     private bool isOnstage = true;
+
+    private Stage currentGlowingStage;
     
     Animator animator;
+
+    [Header("UI")]
+    public TMP_Text stageMessageText;
+    
 
     private void Awake()
     {
@@ -24,6 +31,8 @@ public class StageSelectController : MonoBehaviour
     private void Start()
     {
         player.position = stagepoints[currentStageIndex].position;
+
+        if (stageMessageText != null) { stageMessageText.gameObject.SetActive(false); }
     }
 
     void Update()
@@ -40,9 +49,30 @@ public class StageSelectController : MonoBehaviour
     {
         animator.SetBool("isWalk",true);
         targetStage = Mathf.Clamp(targetStage, 0, stagepoints.Count - 1); 
+        
+        if(currentGlowingStage != null)
+        {
+            currentGlowingStage.ResetVisualState();
+        }
+
+        ShowStageMessage(targetStage);
+
+        currentGlowingStage = FindStageByNumber(targetStage);
+        if(currentGlowingStage != null) {currentGlowingStage.SetSelectedState(); }
+
         StopAllCoroutines();
         StartCoroutine(MoveThroughStages(targetStage));
     }
+
+    private void ShowStageMessage(int stageNumber)
+    {
+        if (stageMessageText != null)
+        {
+            stageMessageText.gameObject.SetActive(true);
+        }
+    }
+
+   
 
     private IEnumerator MoveThroughStages(int targetStage)
     {
@@ -75,7 +105,18 @@ public class StageSelectController : MonoBehaviour
         }
     }
 
+    private Stage FindStageByNumber(int stageNumber)
+    {
+        Stage[] stages = FindObjectsOfType<Stage>();
+        foreach (var s in stages)
+        {
+            if(s.stageNumber == stageNumber)
+                return s;
+        }
+        return null;
+    }
 
+    
 
 
 }
