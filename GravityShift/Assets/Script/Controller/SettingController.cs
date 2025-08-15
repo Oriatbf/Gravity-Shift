@@ -21,6 +21,8 @@ public class SettingController : Singleton<SettingController>
     [SerializeField] private Ease ease;
     [SerializeField] private Button settingBtn,resumeBtn,menuBtn,restartBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
+    [Foldout("Other")]
+    [SerializeField] private PlayerKeyController playerKeyController;
     private bool isShow = false,isCounting = false,isEnd = false;
     
     private const float leftPanelShow = 50, rightPanelShow = -50,leftPanelHide = -1000,rightPanelHide = 1500,settingPanelHide = 2000;
@@ -95,6 +97,7 @@ public class SettingController : Singleton<SettingController>
 
     private void Show()
     {
+        playerKeyController.ChangeState(PlayerState.NoneKey);
         TimeController.ChangeTimeScale(0);
         pausePanel.SetPosition(PanelStates.Show,true);
 
@@ -127,6 +130,7 @@ public class SettingController : Singleton<SettingController>
         countSeq.AppendCallback(() =>
         {
             countPanel.SetPosition(PanelStates.Hide,true,0.1f);
+            playerKeyController.ChangeState(PlayerState.AllKey);
             TimeController.ChangeTimeScale(1);
             isShow = false;
             isCounting = false;
