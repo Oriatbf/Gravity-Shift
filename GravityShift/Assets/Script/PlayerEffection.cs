@@ -12,11 +12,12 @@ public class PlayerEffection : MonoBehaviour
         player = GetComponent<PlayerCtrl>();
     }
 
-    public void Show()
+    public void Show(bool isItem)
     {
         isShow = true;
         SetRot(player.playerGravity);
         adArrowPanel.SetPosition(PanelStates.Show,true);
+        if(isItem)upArrowPanel.SetPosition(PanelStates.Show,true);
     }
 
     public void Hide()
@@ -27,6 +28,7 @@ public class PlayerEffection : MonoBehaviour
     public void Hide(PlayerGravity gravity)
     {
         adArrowPanel.SetPosition(PanelStates.Hide,true);
+        upArrowPanel.SetPosition(PanelStates.Hide,true);
         SetRot(player.playerGravity);
     }
 

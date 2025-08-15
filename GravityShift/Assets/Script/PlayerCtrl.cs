@@ -300,11 +300,11 @@ public class PlayerCtrl : MonoBehaviour
         isshiftCoolTime = false;
     }
 
-    private void GravityEffect(bool isShow)
+    private void GravityEffect(bool isShow,bool isItem = false)
     {
         if (isShow)
         {
-            playerEffection.Show();
+            playerEffection.Show(isItem);
             TimeController.ChangeTimeScale(0.25f, 0.35f);
         }
         else
@@ -379,17 +379,17 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    private void SetDirEffction()
+    private void SetDirEffction(bool isItem = false)
     {
         GravityDirEffctionController.Inst.ShowEffction(Top[idx].transform,bottom[idx].transform, 
-            Left[idx].transform,Right[idx].transform,playerGravity);
+            Left[idx].transform,Right[idx].transform,isItem,playerGravity);
     }
 
     public void ActiveAdhesion()
     {
         isAdhesion = true;
-        SetDirEffction();
-        GravityEffect(true);
+        SetDirEffction(true);
+        GravityEffect(true,true);
     }
     
     private void toGravityLeft()

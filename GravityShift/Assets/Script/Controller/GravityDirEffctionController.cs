@@ -16,10 +16,10 @@ public class GravityDirEffctionController : Singleton<GravityDirEffctionControll
         subCam.enabled = false;
     }
     
-    public void ShowEffction(Transform upPos,Transform bottomPos,Transform leftPos,Transform rightPos,PlayerGravity gravity)
+    public void ShowEffction(Transform upPos,Transform bottomPos,Transform leftPos,Transform rightPos,bool isItem,PlayerGravity gravity)
     {
         subCam.enabled = true;
-        up.gameObject.SetActive(true);
+        up.gameObject.SetActive(isItem);
         bottom.gameObject.SetActive(true);
         left.gameObject.SetActive(true);
         right.gameObject.SetActive(true);
