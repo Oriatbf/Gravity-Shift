@@ -23,6 +23,11 @@ public class DataManager : SingletonDontDestroyOnLoad<DataManager>
         JsonLoad();
     }
 
+    private void Start()
+    {
+        StickyKeysBlocker.Enable();
+    }
+
     public void SetStage(int stage)
     {
         Data.curStage = stage;

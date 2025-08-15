@@ -12,9 +12,6 @@ public class MapMoving : MonoBehaviour
     public void StopMoving()
     {
         isMoving = false;
-        DOVirtual.DelayedCall(2f,()=>SettingController.Inst.EndingUI(false));
-
-
     }
 
     void Update()

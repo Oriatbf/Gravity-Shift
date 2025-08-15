@@ -15,6 +15,7 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject[] Right;
     public GameObject[] Top;
     public GameObject[] Left;
+    [SerializeField] private Transform mark;
     public int idx;
     
     public Vector3 gravity = new Vector3(0, -10, 0);
@@ -35,11 +36,14 @@ public class PlayerCtrl : MonoBehaviour
     private bool isrightwall;
 
     private bool OnMove;
+    private Vector3 rayDirVector;
+    private Vector3 markSize;
     public float moveCoolTime;
     
     public PlayerGravity playerGravity = PlayerGravity.Down;
     private PlayerEffection playerEffection;
     private PlayerKeyController playerKeyController;
+    private Animator animator;
     private float curRot = 0;
 
     public bool isInvincible = false;
@@ -50,6 +54,9 @@ public class PlayerCtrl : MonoBehaviour
         playerEffection = GetComponent<PlayerEffection>();
         rb = GetComponent<Rigidbody>();
         playerKeyController = GetComponent<PlayerKeyController>();
+        animator = GetComponent<Animator>();
+        markSize = mark.localScale;
+        mark.localScale = Vector3.zero;
     }
 
     void Start()
@@ -64,7 +71,65 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
+        if (!OnMove) return;
         Move();
+    }
+
+    public void PlayerDead(bool isFall)
+    {
+        gravityStrength = 0;
+        gravity = Vector3.zero;
+       // rb.mass = 0;
+        animator.enabled = false;
+        transform.DOKill();
+        playerKeyController.ChangeState(PlayerState.NoneKey);
+        VolumeController.Inst.GravityProduction(false);
+        playerEffection.Hide(playerGravity);
+        if (isFall)
+        {
+            d();
+            Debug.Log("바닥이 없음");
+        }
+        else
+        {
+            Debug.Log("가시에 걸림");
+            SettingController.Inst.EndingUI(false);
+        }
+       
+    }
+
+    private void d()
+    {
+        SetRayDir();
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(0.1f);
+        seq.Append(mark.DOScale(markSize,0.1f));
+        seq.AppendInterval(0.5f);
+        seq.Append(transform.DOMove(transform.position + (rayDirVector * 10), 0.5f));
+        seq.AppendInterval(0.7f);
+        seq.AppendCallback(()=>SettingController.Inst.EndingUI(false));
+        seq.SetUpdate(true);
+        seq.Play();
+
+    }
+    
+    void SetRayDir()
+    {
+        switch (playerGravity)
+        {
+            case PlayerGravity.Down:
+                rayDirVector = Vector3.down;
+                break;
+            case PlayerGravity.Up:
+                rayDirVector = Vector3.up;
+                break;
+            case PlayerGravity.Right:
+                rayDirVector = Vector3.right;
+                break;
+            case PlayerGravity.Left:
+                rayDirVector = Vector3.left;
+                break;
+        }
     }
 
     private void FixedUpdate()
@@ -130,7 +195,6 @@ public class PlayerCtrl : MonoBehaviour
         //캐릭터 좌우 이동 구현 (shift 안눌렸을때)
         else if (!OnShift && !isAdhesion)
         {
-            if (!OnMove) return;
             
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -236,11 +300,11 @@ public class PlayerCtrl : MonoBehaviour
         isshiftCoolTime = false;
     }
 
-    private void GravityEffect(bool isShow)
+    private void GravityEffect(bool isShow,bool isItem = false)
     {
         if (isShow)
         {
-            playerEffection.Show();
+            playerEffection.Show(isItem);
             TimeController.ChangeTimeScale(0.25f, 0.35f);
         }
         else
@@ -256,6 +320,7 @@ public class PlayerCtrl : MonoBehaviour
     
     public void RandomGravity()
     {
+        transform.DOKill();
         randomGravity = UnityEngine.Random.Range(1, 5);
 
         switch (randomGravity)
@@ -277,10 +342,11 @@ public class PlayerCtrl : MonoBehaviour
         CameraController.Inst.MoveCamera(playerGravity);
         Debug.Log(randomGravity + "로 중력변환 했습니다");
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("illusion"))
         {
+            Debug.Log("환각존입니다");
             isIllusion = true;
         }
     }
@@ -313,17 +379,17 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    private void SetDirEffction()
+    private void SetDirEffction(bool isItem = false)
     {
         GravityDirEffctionController.Inst.ShowEffction(Top[idx].transform,bottom[idx].transform, 
-            Left[idx].transform,Right[idx].transform,playerGravity);
+            Left[idx].transform,Right[idx].transform,isItem,playerGravity);
     }
 
     public void ActiveAdhesion()
     {
         isAdhesion = true;
-        SetDirEffction();
-        GravityEffect(true);
+        SetDirEffction(true);
+        GravityEffect(true,true);
     }
     
     private void toGravityLeft()

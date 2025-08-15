@@ -3,20 +3,35 @@ using UnityEngine;
 
 public class PlayerIsHole : MonoBehaviour
 {
-    public Transform PlayerPos;
-    private Vector3 halfBoxSize = new Vector3(0.4f, 0.4f, 0.4f); // 크기는 상황에 맞게 조절하세요
+    [SerializeField] private Vector3 offset;
+    private Vector3 halfBoxSize = new Vector3(0.2f, .5f, 0.2f); // 크기는 상황에 맞게 조절하세요
     private bool isDead = false;
+    private PlayerCtrl playerCtrl;
+
+    private void Awake()
+    {
+        playerCtrl = GetComponent<PlayerCtrl>();
+    }
 
     void Update()
     {
-        PlayerPos.position = new Vector3(PlayerPos.position.x, PlayerPos.position.y, PlayerPos.position.z);
-        int layerMask = ~LayerMask.GetMask("Player");
-        Collider[] colliders = Physics.OverlapBox(PlayerPos.position, halfBoxSize, Quaternion.identity, layerMask);
+        Collider[] colliders = Physics.OverlapBox(transform.position , halfBoxSize, Quaternion.identity);
 
         if (colliders.Length == 0 && !isDead)
         {
             MapSpawnController.Inst.StopMapMoving();
             isDead = true; 
+            playerCtrl.PlayerDead(true);
+        }
+        else if (colliders.Length <= 1&& !isDead)
+        {
+            if (colliders[0].CompareTag("Player"))
+            {
+                MapSpawnController.Inst.StopMapMoving();
+                isDead = true; 
+                playerCtrl.PlayerDead(true);
+            }
+                
         }
             
     }
@@ -24,6 +39,6 @@ public class PlayerIsHole : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, halfBoxSize*2);
+        Gizmos.DrawWireCube(transform.position+ offset, halfBoxSize*2);
     }
 }

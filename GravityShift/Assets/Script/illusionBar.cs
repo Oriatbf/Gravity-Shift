@@ -4,16 +4,18 @@ using UnityEngine.UI;
 
 public class illusionBar : MonoBehaviour
 {
-    public Slider IllusionBar;
+    public Image IllusionBar;
     private int IllusionValue;
     private bool isIllusion;
+
+    public float now;
+    public float max;
     public PlayerCtrl player;
     
 
     void Start()
     {
-        IllusionBar.value = 0;
-        IllusionBar.maxValue = 5;
+        IllusionBar.fillAmount = 0;
         IllusionBar.gameObject.SetActive(false);
     }
 
@@ -22,16 +24,19 @@ public class illusionBar : MonoBehaviour
         if (player.isIllusion == true)
         {
             IllusionBar.gameObject.SetActive(true);
-            IllusionBar.value += 1 * Time.fixedDeltaTime;
-            if (IllusionBar.value == IllusionBar.maxValue)
+            now += (1 * Time.fixedDeltaTime) / max;
+            IllusionBar.fillAmount = now;
+            if (now >= 1f)
             {
                 player.RandomGravity();
-                IllusionBar.value = 0;
+                now = 0f;
+                IllusionBar.fillAmount = now;
             }
         }
         else if (player.isIllusion == false)
         {
-            IllusionBar.value = 0;
+            now = 0f;
+            IllusionBar.fillAmount = now;
             IllusionBar.gameObject.SetActive(false); 
         }
             
