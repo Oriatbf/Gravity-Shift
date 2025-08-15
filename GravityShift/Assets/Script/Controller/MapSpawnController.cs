@@ -18,7 +18,9 @@ public class MapSpawnController : Singleton<MapSpawnController>
 
     private void Start()
     {
-        int index = DataManager.Inst.Data.curStage;
+        int index = 0; 
+        if(DataManager.Inst!=null)
+            index = DataManager.Inst.Data.curStage;
         curListSO=mapListSOs[index];
     }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TutorialItem: MonoBehaviour
 {
-    Tutorial tutorial;
+    protected Tutorial tutorial;
     public void Init(Tutorial tutorial) => this.tutorial = tutorial;
 
     private void Update()

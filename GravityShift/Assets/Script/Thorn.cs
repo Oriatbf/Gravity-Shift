@@ -19,7 +19,7 @@ public class Thorn : MonoBehaviour
 
            if (!playerCtrl.isInvincible)
            {
-               SettingController.Inst.EndingUI(false);
+               playerCtrl.PlayerDead(false);
                Debug.Log("가시 디버그");
            }
         }

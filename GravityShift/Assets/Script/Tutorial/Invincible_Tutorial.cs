@@ -5,9 +5,7 @@ using UnityEngine;
 public class Invincible_Tutorial : TutorialItem
 {
     public PlayerGravity gravity;
-    Tutorial tutorial;
-
-   public void Init(Tutorial tutorial) => this.tutorial = tutorial;
+    
     private void Start()
     {
 

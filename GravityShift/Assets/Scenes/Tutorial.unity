@@ -367,7 +367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6334256d5b987847b1cffe4cbc81cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IllusionBar: {fileID: 1297823070}
+  IllusionBar: {fileID: 0}
+  now: 0
+  max: 0
   player: {fileID: 6670183688635770236}
 --- !u!114 &93716849
 MonoBehaviour:
@@ -4100,7 +4102,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 50
+  field of view: 19.2
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4127,7 +4129,7 @@ Transform:
   m_GameObject: {fileID: 872604085}
   serializedVersion: 2
   m_LocalRotation: {x: 0.058696523, y: -0, z: -0, w: 0.9982759}
-  m_LocalPosition: {x: 0, y: 4.1, z: -13}
+  m_LocalPosition: {x: 0, y: 4.1, z: -24.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -8779,6 +8781,7 @@ MonoBehaviour:
   - {fileID: 330657840}
   - {fileID: 2070022364}
   - {fileID: 1123348967}
+  mark: {fileID: 0}
   idx: 0
   gravity: {x: 0, y: -10, z: 0}
   gravityStrength: 100
@@ -8788,6 +8791,7 @@ MonoBehaviour:
   isIllusion: 0
   shiftCoolTime: 1
   moveCoolTime: 0.08
+  playerGravity: 0
   isInvincible: 0
   isAdhesion: 0
 --- !u!224 &6908960116314109962
@@ -9137,7 +9141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75b5590bdc779642b1a051012b25eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPos: {fileID: 3808405919181405462}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &8136005827141997248
 GameObject:
   m_ObjectHideFlags: 0
