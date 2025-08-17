@@ -37,7 +37,7 @@ public class StageSelectController : MonoBehaviour
 
     void Update()
     {
-        if (isOnstage && Input.GetKeyDown(KeyCode.P))
+        if (isOnstage && Input.GetKeyDown(KeyCode.Return))
         {
             DataManager.Inst.SetStage(currentStageIndex);
             FadeInFadeOutManager.Inst.FadeOut(1,true);
