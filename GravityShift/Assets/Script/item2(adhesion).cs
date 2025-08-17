@@ -36,6 +36,7 @@ public class item2 : MonoBehaviour
         if (obj.gameObject.tag == "Player")
         {
             PlayerCtrl playerCtrl = obj.GetComponent<PlayerCtrl>();
+            SoundManager.Instance.PlaySound("getItem");
             Debug.Log("item(adhesion) 디버그");
             Action action = () => playerCtrl.ActiveAdhesion();
             UImanager.Inst.ShowAdhesionitemUI(action);

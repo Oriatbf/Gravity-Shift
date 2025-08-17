@@ -29,6 +29,7 @@ public class PlayerIsHole : MonoBehaviour
             {
                 MapSpawnController.Inst.StopMapMoving();
                 isDead = true; 
+                SoundManager.Instance.PlaySound("fallDIe");
                 playerCtrl.PlayerDead(true);
             }
                 

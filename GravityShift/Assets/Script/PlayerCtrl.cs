@@ -203,6 +203,7 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     Vector3 newPos = Vector3.zero;
                     idx -= 1;
+                    SoundManager.Instance.PlaySound("playerLRmove");
                     if (gravity.y == -10) //중력 방향 Bottom
                         newPos = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
@@ -225,6 +226,7 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     Vector3 newPos = Vector3.zero;
                     idx += 1;
+                    SoundManager.Instance.PlaySound("playerLRmove");
                     if (gravity.y == -10) //중력 방향 Bottom
                         newPos = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left

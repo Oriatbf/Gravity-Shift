@@ -1307,8 +1307,8 @@ MonoBehaviour:
   fallDieClip: {fileID: 8300000, guid: c79cb60ec6ed4e949bfc2570673b55e9, type: 3}
   getCoinClip: {fileID: 8300000, guid: f323f615f7f04194fb78bbbcd8d165e8, type: 3}
   getItemClip: {fileID: 8300000, guid: 718162c770bc0b5468bd5a19dc8439e1, type: 3}
-  illusionChangeClip: {fileID: 0}
-  useItemClip: {fileID: 0}
+  illusionChangeClip: {fileID: 8300000, guid: 0a3a3c0bab8ee9646af98d7e77677cf7, type: 3}
+  useItemClip: {fileID: 8300000, guid: 0a3a3c0bab8ee9646af98d7e77677cf7, type: 3}
 --- !u!1 &268049853
 GameObject:
   m_ObjectHideFlags: 0
