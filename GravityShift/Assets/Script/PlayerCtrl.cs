@@ -290,6 +290,7 @@ public class PlayerCtrl : MonoBehaviour
 
     public void ActiveInvincible(float InvincibleTime)
     {
+        SoundManager.Instance.PlaySound("useItem");
         StartCoroutine(InvincibleCoroutine(InvincibleTime));
     }
     
@@ -390,6 +391,7 @@ public class PlayerCtrl : MonoBehaviour
     public void ActiveAdhesion()
     {
         isAdhesion = true;
+        SoundManager.Instance.PlaySound("useItem");
         SetDirEffction(true);
         GravityEffect(true,true);
     }
