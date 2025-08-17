@@ -1266,7 +1266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 253205514}
-  - component: {fileID: 253205513}
+  - component: {fileID: 253205515}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1274,21 +1274,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &253205513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253205512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b2b6ebd2ae91a4086d884bdc68fd2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: c87c5b507c9718c40842a72a0ba60107, type: 2}
-  bgmScrollbar: {fileID: 0}
-  sfxScrollbar: {fileID: 0}
 --- !u!4 &253205514
 Transform:
   m_ObjectHideFlags: 0
@@ -1304,6 +1289,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &253205515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253205512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8341a4769f6855f46ae0bd75eb935d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundsoundClip: {fileID: 8300000, guid: e60906396dd27a44d93d0ed9b60f71a4, type: 3}
+  playerLRmoveClip: {fileID: 8300000, guid: 34ba95a797f69c14f9255fb984e02551, type: 3}
+  thornDieClip: {fileID: 8300000, guid: 0a3a3c0bab8ee9646af98d7e77677cf7, type: 3}
+  fallDieClip: {fileID: 8300000, guid: c79cb60ec6ed4e949bfc2570673b55e9, type: 3}
+  getCoinClip: {fileID: 8300000, guid: f323f615f7f04194fb78bbbcd8d165e8, type: 3}
+  getItemClip: {fileID: 8300000, guid: 718162c770bc0b5468bd5a19dc8439e1, type: 3}
+  illusionChangeClip: {fileID: 0}
+  useItemClip: {fileID: 0}
 --- !u!1 &268049853
 GameObject:
   m_ObjectHideFlags: 0

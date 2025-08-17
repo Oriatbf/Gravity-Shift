@@ -1,30 +1,43 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 
-public class SoundManager : SingletonDontDestroyOnLoad<SoundManager>
+public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Scrollbar bgmScrollbar,sfxScrollbar;
+    public static SoundManager Instance;
     
+    private Dictionary<string, AudioClip> soundDictionary;
+    
+    private AudioSource audioSource;
 
-    public void ChangeScrollbar(Scrollbar _bgmScrollbar, Scrollbar _sfxScrollbar)
+    public AudioClip backgroundsoundClip;
+    public AudioClip playerLRmoveClip;
+    public AudioClip thornDieClip;
+    public AudioClip fallDieClip;
+    public AudioClip getCoinClip;
+    public AudioClip getItemClip;
+    public AudioClip illusionChangeClip;
+    public AudioClip useItemClip;
+
+    private void Awake()
     {
-        bgmScrollbar = _bgmScrollbar;
-        sfxScrollbar = _sfxScrollbar;
-        bgmScrollbar?.onValueChanged.AddListener(ChangeBGMVolume);
-        sfxScrollbar?.onValueChanged.AddListener(ChangeSFXVolume);
+        Instance = this;
+        
+        soundDictionary = new Dictionary<string, AudioClip>();
+        
+        audioSource = GetComponent<AudioSource>();
+
+        soundDictionary.Add("background", backgroundsoundClip);
+        soundDictionary.Add("playerLRmove", playerLRmoveClip);
+        soundDictionary.Add("thornDie", thornDieClip);
+        soundDictionary.Add("fallDie", fallDieClip);
+        soundDictionary.Add("getCoin", getCoinClip);
+        soundDictionary.Add("getItem", getItemClip);
+        soundDictionary.Add("illusionChange", illusionChangeClip);
+        soundDictionary.Add("useItem", useItemClip);
     }
     
-    private void ChangeBGMVolume(float value)
+    public void PlaySound(string soundName)
     {
-        float _volume = value == 0 ? -80f : Mathf.Log10(value) * 20;
-        audioMixer.SetFloat("BGM", _volume);
-    }
-    
-    private void ChangeSFXVolume(float value)
-    {
-        float _volume = value == 0 ? -80f : Mathf.Log10(value) * 20;
-        audioMixer.SetFloat("SFX", _volume);
+        audioSource.PlayOneShot(soundDictionary[soundName]);
     }
 }
