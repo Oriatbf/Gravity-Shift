@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public int coin;
+    public int coin = 0;
     public PlayerCtrl player;
     void Start()
     {

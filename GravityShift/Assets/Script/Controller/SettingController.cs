@@ -36,6 +36,7 @@ public class SettingController : Singleton<SettingController>
 
     public void EndingUI(bool isWin)
     {
+        UImanager.Inst.SetCoinUI();
         isEnd = true;
         Show();
         endPanel.Show(isWin);
