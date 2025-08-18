@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     stageTimes: []
-    curStage: 1
+    curStage: 4
 --- !u!4 &99803133
 Transform:
   m_ObjectHideFlags: 0
@@ -1303,13 +1303,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundsoundClip: {fileID: 8300000, guid: e60906396dd27a44d93d0ed9b60f71a4, type: 3}
-  playerLRmoveClip: {fileID: 8300000, guid: 62386ebd45ea2a145bbf8cbe8751c70e, type: 3}
+  playerLRmoveClip: {fileID: 8300000, guid: f3a1dfe1741c5da4292c5bdaa50d5c71, type: 3}
   thornDieClip: {fileID: 8300000, guid: 0a3a3c0bab8ee9646af98d7e77677cf7, type: 3}
   fallDieClip: {fileID: 8300000, guid: c79cb60ec6ed4e949bfc2570673b55e9, type: 3}
   getCoinClip: {fileID: 8300000, guid: f323f615f7f04194fb78bbbcd8d165e8, type: 3}
   getItemClip: {fileID: 8300000, guid: 718162c770bc0b5468bd5a19dc8439e1, type: 3}
-  illusionChangeClip: {fileID: 0}
-  useItemClip: {fileID: 0}
+  illusionChangeClip: {fileID: 8300000, guid: 263578226b3c20d47ade52d6b9d9b373, type: 3}
+  useItemClip: {fileID: 8300000, guid: a2c5360d4895c664fac2d9adc8874436, type: 3}
 --- !u!82 &253205516
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1320,8 +1320,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e60906396dd27a44d93d0ed9b60f71a4, type: 3}
+  m_Resource: {fileID: 8300000, guid: e60906396dd27a44d93d0ed9b60f71a4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4977,10 +4977,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapListSOs:
   - {fileID: 11400000, guid: f56270a314c86604b98fcace24a6ead3, type: 2}
-  - {fileID: 11400000, guid: f83e95c2bcb4ac54fa50a6bcf43944b9, type: 2}
   - {fileID: 11400000, guid: 01ad22de9af0d334fa25dc90f8a57b87, type: 2}
-  - {fileID: 11400000, guid: 4b853b7ba87a0f8488fd5d5e9fcabf59, type: 2}
+  - {fileID: 11400000, guid: f83e95c2bcb4ac54fa50a6bcf43944b9, type: 2}
   - {fileID: 11400000, guid: 19792bd7c0289ae41baf506a206a43a0, type: 2}
+  - {fileID: 11400000, guid: 4b853b7ba87a0f8488fd5d5e9fcabf59, type: 2}
   curListSO: {fileID: 0}
   spawnTrans: {fileID: 719567284}
 --- !u!4 &1145580010 stripped
@@ -9347,7 +9347,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2.6021094
   m_Direction: 1
-  m_Center: {x: 0, y: 1.337259, z: 0}
+  m_Center: {x: 0, y: 1.337259, z: 0.66}
 --- !u!222 &7872050693235184623
 CanvasRenderer:
   m_ObjectHideFlags: 0

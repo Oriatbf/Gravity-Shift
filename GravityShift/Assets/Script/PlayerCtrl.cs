@@ -325,7 +325,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         transform.DOKill();
         randomGravity = UnityEngine.Random.Range(1, 5);
-
+        SoundManager.Instance.PlaySound("illusionChange");
         switch (randomGravity)
         {
             case 1:
