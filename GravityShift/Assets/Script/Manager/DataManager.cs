@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameData
 {
     public List<float> stageTimes = new List<float>();
-    public int curStage = 0;
+    public int curStage = 1;
 }
 public class DataManager : SingletonDontDestroyOnLoad<DataManager>
 {

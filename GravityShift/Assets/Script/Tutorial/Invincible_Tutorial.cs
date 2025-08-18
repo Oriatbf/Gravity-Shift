@@ -33,7 +33,7 @@ public class Invincible_Tutorial : TutorialItem
         {
             PlayerCtrl playerCtrl = obj.GetComponent<PlayerCtrl>();
             Debug.Log("item1(invincible) 디버그");
-            Action action = () => playerCtrl.ActiveInvincible(10f);
+            Action action = () => playerCtrl.ActiveInvincible(3f);
             UImanager.Inst.ShowinvincibleitemUI(action);
             EndTutorial();
             Destroy(gameObject);

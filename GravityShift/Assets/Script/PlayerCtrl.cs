@@ -15,7 +15,7 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject[] Right;
     public GameObject[] Top;
     public GameObject[] Left;
-    [SerializeField] private Transform mark;
+    [SerializeField] private Transform mark,shield;
     public int idx;
     
     public Vector3 gravity = new Vector3(0, -10, 0);
@@ -65,7 +65,7 @@ public class PlayerCtrl : MonoBehaviour
         idx = 1; //시작 위치 가운데로
         OnShift = false;
         isshiftCoolTime = false;
-
+        shield.gameObject.SetActive(false);
         OnMove = true;
     }
 
@@ -438,7 +438,9 @@ public class PlayerCtrl : MonoBehaviour
     IEnumerator InvincibleCoroutine(float duration)
     {
         isInvincible = true;
+        shield.gameObject.SetActive(true);
         yield return new WaitForSeconds(duration);
+        shield.gameObject.SetActive(false);
         isInvincible = false;
     }
 }
