@@ -8,6 +8,7 @@ public class GameData
 {
     public List<float> stageTimes = new List<float>();
     public int curStage = 1;
+    public float sfxVolume = 0.5f,bgmVolume = 0.5f;
 }
 public class DataManager : SingletonDontDestroyOnLoad<DataManager>
 {
@@ -48,7 +49,7 @@ public class DataManager : SingletonDontDestroyOnLoad<DataManager>
         }
     }
 
-    private void JsonSave()
+    public void JsonSave()
     {
         string json = JsonUtility.ToJson(Data, true);
         File.WriteAllText(path, json);

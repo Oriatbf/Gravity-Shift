@@ -203,7 +203,7 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     Vector3 newPos = Vector3.zero;
                     idx -= 1;
-                    SoundManager.Instance.PlaySound("playerLRmove");
+                    SFXManager.Inst.PlaySound("playerLRmove");
                     if (gravity.y == -10) //중력 방향 Bottom
                         newPos = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
@@ -226,7 +226,7 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     Vector3 newPos = Vector3.zero;
                     idx += 1;
-                    SoundManager.Instance.PlaySound("playerLRmove");
+                    SFXManager.Inst.PlaySound("playerLRmove");
                     if (gravity.y == -10) //중력 방향 Bottom
                         newPos = new Vector3(bottom[idx].transform.position.x, transform.position.y, 0);
                     else if (gravity.x == -10) //중력 방향 Left
@@ -290,7 +290,7 @@ public class PlayerCtrl : MonoBehaviour
 
     public void ActiveInvincible(float InvincibleTime)
     {
-        SoundManager.Instance.PlaySound("useItem");
+        SFXManager.Inst.PlaySound("useItem");
         StartCoroutine(InvincibleCoroutine(InvincibleTime));
     }
     
@@ -325,7 +325,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         transform.DOKill();
         randomGravity = UnityEngine.Random.Range(1, 5);
-        SoundManager.Instance.PlaySound("illusionChange");
+        SFXManager.Inst.PlaySound("illusionChange");
         switch (randomGravity)
         {
             case 1:
@@ -391,7 +391,7 @@ public class PlayerCtrl : MonoBehaviour
     public void ActiveAdhesion()
     {
         isAdhesion = true;
-        SoundManager.Instance.PlaySound("useItem");
+        SFXManager.Inst.PlaySound("useItem");
         SetDirEffction(true);
         GravityEffect(true,true);
     }

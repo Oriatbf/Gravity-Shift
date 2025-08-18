@@ -38,7 +38,7 @@ public class Coin : MonoBehaviour
         Debug.Log($"Trigger Enter : {obj} - {obj.tag}");
         if (obj.gameObject.tag == "Player")
         {
-            SoundManager.Instance.PlaySound("getCoin");
+            SFXManager.Inst.PlaySound("getCoin");
             Debug.Log("코인디버그");
             UImanager.Inst.SetCoinUI();
             Destroy(gameObject);

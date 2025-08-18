@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SFXManager : Singleton<SFXManager>
 {
-    public static SoundManager Instance;
-    
     private Dictionary<string, AudioClip> soundDictionary;
     
     private AudioSource audioSource;
-
-    public AudioClip backgroundsoundClip;
+    
     public AudioClip playerLRmoveClip;
     public AudioClip thornDieClip;
     public AudioClip fallDieClip;
@@ -20,13 +17,11 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
         
         soundDictionary = new Dictionary<string, AudioClip>();
         
         audioSource = GetComponent<AudioSource>();
-
-        soundDictionary.Add("background", backgroundsoundClip);
+        
         soundDictionary.Add("playerLRmove", playerLRmoveClip);
         soundDictionary.Add("thornDie", thornDieClip);
         soundDictionary.Add("fallDie", fallDieClip);

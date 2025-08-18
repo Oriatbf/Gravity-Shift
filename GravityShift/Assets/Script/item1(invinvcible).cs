@@ -40,7 +40,7 @@ public class item1 : MonoBehaviour
         if (obj.CompareTag("Player"))
         {
             PlayerCtrl playerCtrl = obj.GetComponent<PlayerCtrl>();
-            SoundManager.Instance.PlaySound("getItem");
+            SFXManager.Inst.PlaySound("getItem");
             Debug.Log("item1(invincible) 디버그");
             Action action = () => playerCtrl.ActiveInvincible(3f);
             UImanager.Inst.ShowinvincibleitemUI(action);

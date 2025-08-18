@@ -21,7 +21,7 @@ public class SettingController : Singleton<SettingController>
     [SerializeField] private Ease ease;
     [SerializeField] private Button settingBtn,resumeBtn,menuBtn,restartBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
-    [Foldout("Other")]
+    [Foldout("Other")] [SerializeField] private Scrollbar sfxScroll, bgmScroll;
     [SerializeField] private PlayerKeyController playerKeyController;
     private bool isShow = false,isCounting = false,isEnd = false;
     
@@ -29,6 +29,7 @@ public class SettingController : Singleton<SettingController>
 
     private void Start()
     {
+        AudioManager.Inst.ChangeScrollbar(bgmScroll,sfxScroll);
         BtnSetting();
         HidePanels();
     }
@@ -46,6 +47,7 @@ public class SettingController : Singleton<SettingController>
     {
         resumeBtn.onClick.AddListener(()=>Hide());
         settingBtn.onClick.AddListener(()=>ShowSettingPanel());
+        settingBtn.onClick.AddListener(()=>AudioManager.Inst.SetScrollbar());
         menuBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut("MapSelect",true));
         restartBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut(SceneManager.GetActiveScene().buildIndex,true));
     }

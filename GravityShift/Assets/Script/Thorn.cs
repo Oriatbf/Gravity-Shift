@@ -17,7 +17,7 @@ public class Thorn : MonoBehaviour
 
            if (!playerCtrl.isInvincible)
            {
-               SoundManager.Instance.PlaySound("thornDie");
+               SFXManager.Inst.PlaySound("thornDie");
                playerCtrl.PlayerDead(false);
                Debug.Log("가시 디버그");
            }
