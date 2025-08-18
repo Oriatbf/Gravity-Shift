@@ -21,6 +21,7 @@ public class PlayerIsHole : MonoBehaviour
         {
             MapSpawnController.Inst.StopMapMoving();
             isDead = true; 
+            
             playerCtrl.PlayerDead(true);
         }
         else if (colliders.Length <= 1&& !isDead)
@@ -29,7 +30,6 @@ public class PlayerIsHole : MonoBehaviour
             {
                 MapSpawnController.Inst.StopMapMoving();
                 isDead = true; 
-                SFXManager.Inst.PlaySound("fallDie");
                 playerCtrl.PlayerDead(true);
             }
                 

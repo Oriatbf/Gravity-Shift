@@ -106,6 +106,7 @@ public class PlayerCtrl : MonoBehaviour
         seq.Append(mark.DOScale(markSize,0.1f));
         seq.AppendInterval(0.5f);
         seq.Append(transform.DOMove(transform.position + (rayDirVector * 10), 0.5f));
+        seq.JoinCallback(()=>SFXManager.Inst.PlaySound("fallDie"));
         seq.AppendInterval(0.7f);
         seq.AppendCallback(()=>SettingController.Inst.EndingUI(false));
         seq.SetUpdate(true);
