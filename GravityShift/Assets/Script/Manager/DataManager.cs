@@ -15,6 +15,7 @@ public class DataManager : SingletonDontDestroyOnLoad<DataManager>
     string path;
     public GameData Data;
     private string fileName = "GameData.json";
+    public bool isOpening = true;
 
 
     protected override void Awake()

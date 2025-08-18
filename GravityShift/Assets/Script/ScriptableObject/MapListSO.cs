@@ -6,4 +6,5 @@ public class MapListSO : ScriptableObject
 {
     public List<MapEffection> MapEffections = new List<MapEffection>();
     public bool isSingleMap = false;
+    public bool isInfinity = false;
 }

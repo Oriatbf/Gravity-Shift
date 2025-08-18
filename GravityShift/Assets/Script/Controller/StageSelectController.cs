@@ -37,12 +37,15 @@ public class StageSelectController : MonoBehaviour
 
     void Update()
     {
-        if (isOnstage && Input.GetKeyDown(KeyCode.Return))
-        {
-            DataManager.Inst.SetStage(currentStageIndex);
-            FadeInFadeOutManager.Inst.FadeOut(1,true);
-        }
+
     }
+
+    public void SetStage()
+    {
+        DataManager.Inst.SetStage(currentStageIndex);
+        FadeInFadeOutManager.Inst.FadeOut(1,true);
+    }
+    
     private Coroutine moveCoroutine;
 
     public void SelectStage(int targetStage)
