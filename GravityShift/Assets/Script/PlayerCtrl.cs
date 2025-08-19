@@ -398,6 +398,7 @@ public class PlayerCtrl : MonoBehaviour
     public void ActiveAdhesion()
     {
         isAdhesion = true;
+        OnShift = false;
         SFXManager.Inst.PlaySound("useItem");
         SetDirEffction(true);
         GravityEffect(true,true);
