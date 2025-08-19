@@ -17,7 +17,8 @@ public class PlayerEffection : MonoBehaviour
         isShow = true;
         SetRot(player.playerGravity);
         adArrowPanel.SetPosition(PanelStates.Show,true);
-        if(isItem)upArrowPanel.SetPosition(PanelStates.Show,true);
+        var upArrowState = isItem?PanelStates.Show:PanelStates.Hide;
+        upArrowPanel.SetPosition( upArrowState,true);
     }
 
     public void Hide()
@@ -51,6 +52,7 @@ public class PlayerEffection : MonoBehaviour
                 break;
         }
         adArrowPanel.transform.rotation = Quaternion.Euler(rot);
+        upArrowPanel.transform.rotation = Quaternion.Euler(rot);
     }
 
  

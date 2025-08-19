@@ -32,7 +32,7 @@ public class ProgressController : MonoBehaviour
     [Button]
     public void StopTimer()
     {
-        if(checkingFinshTimer)DataManager.Inst.AddStageTime(curTimer);
+        //if(checkingFinshTimer)DataManager.Inst.AddStageTime(curTimer);
         inTimer = false;
     }
 }

@@ -8,7 +8,7 @@ public class UImanager : Singleton<UImanager>
 {
     public List<GameObject> coinImage;
     private List<Image> _image = new();
-    private int currentCoinCount = 0;
+    public int currentCoinCount = 0;
     //coin
     public TMP_Text coinnumber;
 

@@ -37,12 +37,10 @@ public class StageSelectController : MonoBehaviour
 
     
 
-    public void SetStage()
+    public void SetStage() //스테이지 이동
     {
-       
-            DataManager.Inst.SetStage(currentStageIndex);
-            FadeInFadeOutManager.Inst.FadeOut(1, true);
-        
+        DataManager.Inst.SetStage(currentStageIndex);
+        FadeInFadeOutManager.Inst.FadeOut(1, true);
     }
     
     private Coroutine moveCoroutine;
@@ -96,6 +94,8 @@ public class StageSelectController : MonoBehaviour
 
         isOnstage = true;
         animator.SetBool("isWalk",false);
+        ScoreController.Inst.SetPos(stagepoints[currentStageIndex],currentStageIndex);
+        
     }
 
     private IEnumerator MovePlayerTo(Vector3 targetPos)
