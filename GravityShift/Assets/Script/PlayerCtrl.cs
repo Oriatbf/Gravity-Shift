@@ -152,6 +152,7 @@ public class PlayerCtrl : MonoBehaviour
                 SetDirEffction();
                 GravityEffect(true);
                 OnShift = true;
+                isAdhesion = false;
             }
             else
             {
