@@ -349,6 +349,7 @@ MonoBehaviour:
     curStage: 2
     sfxVolume: 0.5
     bgmVolume: 0.5
+  isOpening: 1
 --- !u!4 &99803133
 Transform:
   m_ObjectHideFlags: 0

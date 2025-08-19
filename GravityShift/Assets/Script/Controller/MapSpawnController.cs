@@ -11,6 +11,7 @@ public class MapSpawnController : Singleton<MapSpawnController>
     private int curOrderIndex = 0;
     private bool isLastMap = false;
     private MapMoving mapMoving;
+    private int randomMapIndex;
     private void Awake()
     {
         mapMoving = GetComponent<MapMoving>();
@@ -23,6 +24,7 @@ public class MapSpawnController : Singleton<MapSpawnController>
             index = DataManager.Inst.Data.curStage;
         curListSO=mapListSOs[index];
         SpawnMap();
+        
     }
 
     public void StopMapMoving() => mapMoving.StopMoving();
@@ -33,6 +35,13 @@ public class MapSpawnController : Singleton<MapSpawnController>
         MapEffection curMap = null;
         if (curListSO.isSingleMap) 
             curMap = Instantiate(curListSO.MapEffections[0],spawnTrans.position,curListSO.MapEffections[0].transform.rotation,transform);
+        else if (curListSO.isInfinity)
+        {
+            isLastMap = false;
+            randomMapIndex = UnityEngine.Random.Range(0, curListSO.MapEffections.Count);
+            var map = curListSO.MapEffections[randomMapIndex];
+            curMap = Instantiate(map, spawnTrans.position, map.transform.rotation, transform);
+        }
         else
         {
             if (curOrderIndex >= curListSO.MapEffections.Count) return;
