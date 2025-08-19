@@ -35,15 +35,14 @@ public class StageSelectController : MonoBehaviour
         if (stageMessageText != null) { stageMessageText.gameObject.SetActive(false); }
     }
 
-    void Update()
-    {
-
-    }
+    
 
     public void SetStage()
     {
-        DataManager.Inst.SetStage(currentStageIndex);
-        FadeInFadeOutManager.Inst.FadeOut(1,true);
+       
+            DataManager.Inst.SetStage(currentStageIndex);
+            FadeInFadeOutManager.Inst.FadeOut(1, true);
+        
     }
     
     private Coroutine moveCoroutine;
