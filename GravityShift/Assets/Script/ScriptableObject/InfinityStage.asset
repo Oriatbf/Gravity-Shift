@@ -37,7 +37,5 @@ MonoBehaviour:
   - {fileID: -1110049667065226943, guid: c1a4421ec6466a7419f41b794ee782bc, type: 3}
   - {fileID: 2500127845678861888, guid: aa655a1e8b4a56348839b1c4362b6ebf, type: 3}
   - {fileID: 119901209725339137, guid: 6a45e07c7efe5984e9741d000e270ff6, type: 3}
-  - {fileID: 5450078693908474458, guid: 05ae23308d06d2f48832edb5f93ee64c, type: 3}
-  - {fileID: 2159859380729174528, guid: 6dd4158b667df8f48b7e072bb32c8cab, type: 3}
   isSingleMap: 0
   isInfinity: 1

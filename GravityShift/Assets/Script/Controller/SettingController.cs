@@ -19,7 +19,7 @@ public class SettingController : Singleton<SettingController>
     [SerializeField] private RectTransform leftPanel,rightPanel,settingPanel;
     [Foldout("UI")]
     [SerializeField] private Ease ease;
-    [SerializeField] private Button settingBtn,resumeBtn,menuBtn,restartBtn;
+    [SerializeField] private Button settingBtn,resumeBtn,menuBtn,restartBtn,nextBtn;
     [SerializeField] private TextMeshProUGUI countTxt;
     [Foldout("Other")] [SerializeField] private Scrollbar sfxScroll, bgmScroll;
     [SerializeField] private PlayerKeyController playerKeyController;
@@ -51,6 +51,13 @@ public class SettingController : Singleton<SettingController>
         settingBtn.onClick.AddListener(()=>AudioManager.Inst.SetScrollbar());
         menuBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut("MapSelect",true));
         restartBtn.onClick.AddListener(()=>FadeInFadeOutManager.Inst.FadeOut(SceneManager.GetActiveScene().buildIndex,true));
+        nextBtn.onClick.AddListener(()=>NextStage());
+    }
+
+    private void NextStage()
+    {
+        DataManager.Inst.Data.curStage += 1;
+        FadeInFadeOutManager.Inst.FadeOut(SceneManager.GetActiveScene().buildIndex, true);
     }
 
     // Update is called once per frame
@@ -78,6 +85,7 @@ public class SettingController : Singleton<SettingController>
     void SetWinBtn()
     {
         settingBtn.gameObject.SetActive(false);
+        nextBtn.gameObject.SetActive(DataManager.Inst.Data.curStage <= 3);
         resumeBtn.gameObject.SetActive(false);
         menuBtn.gameObject.SetActive(true);
         restartBtn.gameObject.SetActive(true);

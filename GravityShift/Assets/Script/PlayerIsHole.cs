@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerIsHole : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;
-    private Vector3 halfBoxSize = new Vector3(0.2f, .5f, 0.2f); // 크기는 상황에 맞게 조절하세요
+   [SerializeField] private Vector3 halfBoxSize = new Vector3(0.2f, .5f, 0.2f); // 크기는 상황에 맞게 조절하세요
     private bool isDead = false;
     private PlayerCtrl playerCtrl;
 
@@ -15,7 +15,7 @@ public class PlayerIsHole : MonoBehaviour
 
     void Update()
     {
-        Collider[] colliders = Physics.OverlapBox(transform.position , halfBoxSize, Quaternion.identity);
+        Collider[] colliders = Physics.OverlapBox(transform.position+ offset , halfBoxSize, Quaternion.identity);
 
         if (colliders.Length == 0 && !isDead)
         {

@@ -309,6 +309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 0
+  child: {fileID: 6342122686563963433}
+  originalPos: {x: 0, y: 0, z: 0}
 --- !u!65 &8669964873611735373
 BoxCollider:
   m_ObjectHideFlags: 0

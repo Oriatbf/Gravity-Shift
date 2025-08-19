@@ -12,6 +12,7 @@ public class MapSpawnController : Singleton<MapSpawnController>
     private bool isLastMap = false;
     private MapMoving mapMoving;
     private int randomMapIndex;
+    private int infinityCount = 0;
     private void Awake()
     {
         mapMoving = GetComponent<MapMoving>();
@@ -41,6 +42,12 @@ public class MapSpawnController : Singleton<MapSpawnController>
             randomMapIndex = UnityEngine.Random.Range(0, curListSO.MapEffections.Count);
             var map = curListSO.MapEffections[randomMapIndex];
             curMap = Instantiate(map, spawnTrans.position, map.transform.rotation, transform);
+            infinityCount+=1;
+            if (infinityCount >= 4)
+            {
+                mapMoving.SpeedUp();
+                infinityCount = 0;
+            }
         }
         else
         {

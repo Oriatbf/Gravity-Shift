@@ -19,4 +19,9 @@ public class MapMoving : MonoBehaviour
         if(isMoving)
             transform.Translate(-Vector3.forward*Time.deltaTime*movespeed, Space.World);
     }
+
+    public void SpeedUp()
+    {
+        movespeed += 1;
+    }
 }
