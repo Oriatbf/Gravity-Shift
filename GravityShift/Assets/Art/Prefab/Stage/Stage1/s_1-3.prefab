@@ -9722,6 +9722,10 @@ PrefabInstance:
       propertyPath: gravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8223399469997159416, guid: 55387d9b0d8853b43ba1bade71d5b64e, type: 3}
+      propertyPath: originalPos.y
+      value: 9.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

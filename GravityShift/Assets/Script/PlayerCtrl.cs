@@ -79,7 +79,6 @@ public class PlayerCtrl : MonoBehaviour
     {
         gravityStrength = 0;
         gravity = Vector3.zero;
-       // rb.mass = 0;
         animator.enabled = false;
         transform.DOKill();
         playerKeyController.ChangeState(PlayerState.NoneKey);
@@ -87,18 +86,20 @@ public class PlayerCtrl : MonoBehaviour
         playerEffection.Hide(playerGravity);
         if (isFall)
         {
-            d();
+            Falling();
             Debug.Log("바닥이 없음");
         }
         else
         {
             Debug.Log("가시에 걸림");
-            SettingController.Inst.EndingUI(false);
+            mark.DOScale(markSize, 0.1f).OnComplete(() =>
+               SettingController.Inst.EndingUI(false)).SetUpdate(true);
+
         }
        
     }
 
-    private void d()
+    private void Falling()
     {
         SetRayDir();
         Sequence seq = DOTween.Sequence();
@@ -177,6 +178,7 @@ public class PlayerCtrl : MonoBehaviour
                     toGravityRight();
                 else if (gravity.x == 10) //중력 방향 Right -> Bottom
                     toGravityBottom();
+                SFXManager.Inst.PlaySound("gravity");
                 StartCoroutine(setShiftCoolTime(shiftCoolTime)); //얘는 마지막 자리에 오게 해주세요 아니면 연출이 작동이 안돼요
             }
             if (Input.GetKeyDown(KeyCode.D))
@@ -190,6 +192,7 @@ public class PlayerCtrl : MonoBehaviour
                     toGravityLeft();
                 else if (gravity.x == -10) //중력 방향 Left -> Bottom
                     toGravityBottom();
+                SFXManager.Inst.PlaySound("gravity");
                 StartCoroutine(setShiftCoolTime(shiftCoolTime));//얘는 마지막 자리에 오게 해주세요 아니면 연출이 작동이 안돼요
             }
         }
@@ -256,6 +259,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == 10) //중력 방향 Right -> Bottom
                     toGravityBottom();
                 isAdhesion = false;
+                SFXManager.Inst.PlaySound("gravity");
                 GravityEffect(false);
             }
             if (Input.GetKeyDown(KeyCode.D))
@@ -269,6 +273,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == -10) //중력 방향 Left -> Bottom
                     toGravityBottom();
                 isAdhesion = false;
+                SFXManager.Inst.PlaySound("gravity");
                 GravityEffect(false);
             }
 
@@ -283,6 +288,7 @@ public class PlayerCtrl : MonoBehaviour
                 else if (gravity.x == -10) //중력 방향 Left -> Right
                     toGravityRight();
                 isAdhesion = false;
+                SFXManager.Inst.PlaySound("gravity");
                 GravityEffect(false);
             }
             

@@ -14,11 +14,9 @@ public class Coin : ItemTurn
         {
             SFXManager.Inst.PlaySound("getCoin");
             Debug.Log("코인디버그");
-            UImanager.Inst.SetCoinUI();
+            UImanager.Inst.GetCoin();
             Destroy(gameObject);
-            coin += 1;
-
-            GameManager.Inst.AddCoin();
+            
 
         }
         //코인 닿으면 디버그, 사라짐

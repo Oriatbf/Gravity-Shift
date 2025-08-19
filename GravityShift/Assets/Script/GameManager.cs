@@ -4,10 +4,6 @@ public class GameManager : Singleton<GameManager>
 {
     public int coin = 0;
     public PlayerCtrl player;
-    void Start()
-    {
-        coin = 0;
-    }
     public void AddCoin()
     {
         coin++;

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f87b3b27417acf48907e2282247642c, type: 3}
+  m_Name: InfinityStage
+  m_EditorClassIdentifier: 
+  MapEffections:
+  - {fileID: 999503996827109357, guid: f0ea1acb044f54146a664446af993c72, type: 3}
+  - {fileID: 1563557534868772729, guid: 0a005c746be0e3149a9441a22c40d987, type: 3}
+  - {fileID: -1030053112885447872, guid: b5ae3fdbe35ed9b4396d1f278cda268c, type: 3}
+  - {fileID: 5307766732119069010, guid: 0a6ce5c7aefe32948a70733b15b36657, type: 3}
+  - {fileID: 6178408940303466305, guid: 3b23b055d356a114b85c9b465fc9d5f7, type: 3}
+  - {fileID: 3779491788110237235, guid: be288f337aaf8944fa772cd599ca084e, type: 3}
+  - {fileID: 7938746064283937036, guid: 65a0c70d4affaa0468e127124110e2b3, type: 3}
+  - {fileID: 2909483472270664036, guid: 3edb3b5ff1821cc48bdef88686ae766f, type: 3}
+  - {fileID: 3244354386242506000, guid: 776d569a374c4ee4c99938e8e6b8910d, type: 3}
+  - {fileID: 3779491788110237235, guid: 1f3611337bf09d2419f08b52ed795ea4, type: 3}
+  - {fileID: 1545945407787400574, guid: ec81723f8f8315c4081354ad29561116, type: 3}
+  - {fileID: 1252419743201724598, guid: b3ecf6b82b17ac94397996e7377580e8, type: 3}
+  - {fileID: 6760547548661059322, guid: e022f2444ac6c664ca9905cc5732cc3e, type: 3}
+  - {fileID: 1413863938423695905, guid: c62c6184382094a4a9241dcd0459923b, type: 3}
+  - {fileID: 2546102026622932921, guid: fd5cde85d350af740850b11ad5f73b41, type: 3}
+  - {fileID: 3218378737102347827, guid: 08a0ddd7e2fe8924e8737056b32a2370, type: 3}
+  - {fileID: 316524120525016462, guid: ec67f285bee8ecb478b771d4db379a5b, type: 3}
+  - {fileID: 44290537660233774, guid: b868415f02ea60941bfda693042540b3, type: 3}
+  - {fileID: 7103764573015759301, guid: e83435d95c7e2494fa4801fcfb129459, type: 3}
+  - {fileID: 5373765963089702409, guid: 7affef4dba39a5c4d97d6696319b1965, type: 3}
+  - {fileID: 2837463085429454890, guid: 3056f9881691ebd4a9e88abbd671fedf, type: 3}
+  - {fileID: -1110049667065226943, guid: c1a4421ec6466a7419f41b794ee782bc, type: 3}
+  - {fileID: 2500127845678861888, guid: aa655a1e8b4a56348839b1c4362b6ebf, type: 3}
+  - {fileID: 119901209725339137, guid: 6a45e07c7efe5984e9741d000e270ff6, type: 3}
+  - {fileID: 5450078693908474458, guid: 05ae23308d06d2f48832edb5f93ee64c, type: 3}
+  - {fileID: 2159859380729174528, guid: 6dd4158b667df8f48b7e072bb32c8cab, type: 3}
+  isSingleMap: 0
+  isInfinity: 1

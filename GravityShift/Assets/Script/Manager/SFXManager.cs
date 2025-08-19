@@ -14,6 +14,7 @@ public class SFXManager : Singleton<SFXManager>
     public AudioClip getItemClip;
     public AudioClip illusionChangeClip;
     public AudioClip useItemClip;
+    public AudioClip gravityClip;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class SFXManager : Singleton<SFXManager>
         soundDictionary.Add("getItem", getItemClip);
         soundDictionary.Add("illusionChange", illusionChangeClip);
         soundDictionary.Add("useItem", useItemClip);
+        soundDictionary.Add("gravity", gravityClip);
     }
     
     public void PlaySound(string soundName)

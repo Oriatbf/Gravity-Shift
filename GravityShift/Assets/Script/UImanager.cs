@@ -41,7 +41,8 @@ public class UImanager : Singleton<UImanager>
 
     // Update is called once per frame
 
-    public void SetCoinUI()
+
+    public void GetCoin()
     {
         if (currentCoinCount >= 3)
         {
@@ -50,6 +51,11 @@ public class UImanager : Singleton<UImanager>
 
         _image[currentCoinCount].color = Color.yellow;
         currentCoinCount++;
+        SetCoinUI();
+    }
+    public void SetCoinUI()
+    {
+       
 
         GameManager.Inst.SetCoin(currentCoinCount);
         UpdateCoinText();
