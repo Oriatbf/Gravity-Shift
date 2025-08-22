@@ -1,1 +1,5 @@
-# Gravity-Shift
+# Gravity Shift
+중력기믹을 이용한 러닝 퍼즐 게임
+
+# 게임 다운로드
+[링크](https://drive.google.com/drive/folders/1lR8r_KZymIpdiAPgk449641Bb4Fg627G?usp=sharing)
